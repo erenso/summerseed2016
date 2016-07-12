@@ -5,7 +5,6 @@ NICK=$(echo $PACKET | cut -d ',' -f2)
 echo "IP ADDRESS = $IPADDR"
 echo "NICK = $NICK"
 echo "172.16.5.103,ahmet" | nc $IPADDR 10001
-echo ""
 if grep -cq "$IPADDR" addressBook.txt
 then
 	echo "$NICK is already added."
@@ -13,5 +12,6 @@ else
 	echo "$IPADDR,$NICK" >> addressBook.txt
 	echo "$NICK is added."
 fi
+echo ""
 done
 
