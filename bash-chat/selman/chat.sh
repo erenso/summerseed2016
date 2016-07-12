@@ -17,9 +17,6 @@ function init(){
 
 	
 
-   	mkfifo $PIDFIFO
-
-
 	trap exit_handler INT
 	trap exit_handler EXIT
 }
@@ -29,13 +26,6 @@ function init(){
 function exit_handler(){
 	rm $PIDFIFO
 	exit
-	#kill_em_all  
-}
-
-function kill_em_all(){
-	while read -r pid ; do
-		kill $pid
-	done
 }
 
 
@@ -56,10 +46,6 @@ function listen_hello_req(){
 			continue
 		fi
 
-		# if [ "$NICK" == "özgün" ];then
-		# 	continue
-		# fi
-
 		RESPONSE="$MYIP,$USER"
 
 		if  ! grep -q "$IPADDR,$NICK" known_hosts; then
@@ -67,14 +53,7 @@ function listen_hello_req(){
 		fi
 
 		RESPONSE_RESULT=$(echo $RESPONSE | netcat $IPADDR 10001; echo $?)
-		#echo $RESPONSE_RESULT
-
-		# if [ $RESPONSE_RESULT -ne 1 ] ; then
-		# 	echo "$IPADDR => $NICK"
-
-
-		# fi
-
+		
 		echo "$(clock) $PACKET => $RESPONSE_RESULT" >> log
 		
 	done
@@ -104,13 +83,6 @@ function listen_hello_resp(){
 			echo "$IPADDR,$NICK" >> known_hosts
 		fi
 
-
-
-		#RESPONSE_RESULT=$(echo $RESPONSE | netcat -w 2 $IPADDR 10000; echo $?)
-
-
-		#echo "$(clock) $PACKET => $RESPONSE_RESULT" >> log
-		
 	done
 		
 }
@@ -135,10 +107,11 @@ function ping_it(){
 	if [ "$IP" ==  "$MYIP" ]; then
 		return
 	fi
-	#result=$(timeout 3 ping -c 2 $IP > /dev/null 2>&1; echo $?)
 
 	RESULT=$(echo "$MYIP,$USER" | netcat -w 2 "$IP" 10000)
 
+
+	#result=$(timeout 3 ping -c 2 $IP > /dev/null 2>&1; echo $?)
 	# if [ $result -eq 0 ]; then
 	# 	RESULT=$(echo "$MYIP,$USER" | netcat -w 2 $IP 10000)
 		
@@ -175,9 +148,10 @@ function message_handler(){
 		fi
 	done
 }
-
+#	$1 => IP
+#	$2 => NICK
+#	$3 => MESSAGE
 function send_message(){
-	# $1 => IP, $2 => NICK, $3, => MESSAGE 
 	RESULT=$(echo "$USER,$3" | netcat -w 2 $1 10002; echo $?)
 	if [ $RESULT -ne 0 ]; then
 		echo "$(clock) SEND FAILED $2 : $3" >> log
@@ -196,8 +170,6 @@ function send_all(){
 }
 
 function listen_messsage(){
-
-
 	while true; do
 		PACKET=$(nc -l 10002)
 		if [ "$PACKET" == "" ];then
