@@ -4,7 +4,7 @@ do
 	IP=$(echo $PACKET | cut -d ',' -f1)
 	NICK=$(echo $PACKET | cut -d ',' -f2)
 
-	if ! grep -q "$IP" people.txt
+	if ! grep -q "$IP" class.txt
 	then
 		echo "$IP	$NICK" >> class.txt
 		echo "$IP,$NICK added successfully."
