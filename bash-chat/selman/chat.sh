@@ -105,7 +105,7 @@ function discover(){
                ping_it $i &
        done 
        echo "Refreshing known_hosts" >> log
-       sleep 120
+       #sleep 120
    done
 }
 
@@ -148,10 +148,10 @@ function message_handler(){
 		fi
 
 
-		EXISTS=$(grep "$NICK" known_hosts )
+		EXISTS=$(grep "$NICK" known_hosts | cut -d ',' -f1 | head -n 1 )
 		if [ $EXISTS ]; then
-			IP=$(echo $EXISTS | cut -d ',' -f1)
-			send_message $IP "$NICK" "$MESSAGE" &
+			IP=$(echo $EXISTS )
+			send_message $IP "$NICK" "$MESSAGE" true &
 		else
 			echo -e "$ERRORBG$NICK does not exist.$DEFAULTBG"
 		fi
@@ -160,11 +160,22 @@ function message_handler(){
 #	$1 => IP
 #	$2 => NICK
 #	$3 => MESSAGE
+#	$4 => echo?
 function send_message(){
 	RESULT=$(echo "$USER,$3" | netcat -w 2 $1 10002; echo $?)
 	if [ $RESULT -ne 0 ]; then
+
+		if [ "$4" = true ]; then
+			echo -e "\n$YELLOW $USER $DEFAULT:$3"
+		fi
+
 		echo "$(clock) SEND FAILED $2 : $3" >> log
 	else
+
+		if [ "$4" = true ]; then
+			echo -e "\n$ERRORBG $USER :$3$DEFAULTBG"
+		fi
+
 		echo "$(clock) SEND SUCCESS $2 : $3" >> log
 	fi
 
@@ -178,7 +189,7 @@ function send_all(){
 			continue
 		fi
 
-	    send_message "172.16.5.$i" "/all" "$1" &
+	    send_message "172.16.5.$i" "/all" "$1" false &
 	done
 	echo -e "\n$YELLOW $USER $DEFAULT:$1"
 
