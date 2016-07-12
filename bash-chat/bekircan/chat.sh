@@ -27,7 +27,7 @@ read name
 echo "message"
 read message
 
-sh send_msg.sh $name $message
+sh send_msg.sh $name "$message"
 
 echo "0 for exit, 1 for continue"
 read d

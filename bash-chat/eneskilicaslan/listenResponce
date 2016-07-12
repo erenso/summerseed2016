@@ -1,0 +1,14 @@
+#!/bin/bash
+while true; do
+
+responce=$(nc -l 10001)
+
+ipAddr="$(echo $responce | cut -d ',' -f1)"
+
+if !(grep -q "$ip" adressBook.txt)
+then
+
+fi
+	echo "$responce" >> "adressBook.txt"
+	
+done
