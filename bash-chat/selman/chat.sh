@@ -4,11 +4,18 @@
 
 
 MYIP=$(ifconfig | grep "inet addr" | tail -n 1 | cut -d ':' -f2 | awk '{print $1}')
-PIDFIFO="/tmp/chat-pids-fifo"
+ME=$(echo $MYIP | awk -F '[.]' '{print $4}')
 
 DEFAULT="\e[39m"
 GREEN="\e[32m"
 YELLOW="\e[93m"
+ERRORBG="\e[41m"
+DEFAULTBG="\e[49m"
+
+
+#
+#	TODO: Active users pipe
+#
 
 function init(){
 	if [ ! -f ./known_hosts ]; then
@@ -24,7 +31,8 @@ function init(){
 
 
 function exit_handler(){
-	rm $PIDFIFO
+	# OTHER STUFF
+	echo 
 	exit
 }
 
@@ -50,6 +58,7 @@ function listen_hello_req(){
 
 		if  ! grep -q "$IPADDR,$NICK" known_hosts; then
 			echo "$IPADDR,$NICK" >> known_hosts
+			echo "Added $NICK to known_hosts" >> log
 		fi
 
 		RESPONSE_RESULT=$(echo $RESPONSE | netcat $IPADDR 10001; echo $?)
@@ -96,7 +105,7 @@ function discover(){
                ping_it $i &
        done 
        echo "Refreshing known_hosts" >> log
-       sleep 10
+       sleep 120
    done
 }
 
@@ -144,7 +153,7 @@ function message_handler(){
 			IP=$(echo $EXISTS | cut -d ',' -f1)
 			send_message $IP "$NICK" "$MESSAGE" &
 		else
-			echo "$NICK does not exist."
+			echo -e "$ERRORBG$NICK does not exist.$DEFAULTBG"
 		fi
 	done
 }
@@ -162,10 +171,16 @@ function send_message(){
 }
 
 function send_all(){
-	   for i in `seq 1 254`; do
-            send_message "172.16.5.$i" "/all" "$1" &
-       done
-   		echo -e "\n$YELLOW $USER $DEFAULT:$1"
+
+	for i in `seq 1 254`; do
+
+		if [ $i -eq $ME ];then
+			continue
+		fi
+
+	    send_message "172.16.5.$i" "/all" "$1" &
+	done
+	echo -e "\n$YELLOW $USER $DEFAULT:$1"
 
 }
 
