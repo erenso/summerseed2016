@@ -18,7 +18,18 @@ while true; do
 	then
 		kill $(jobs -p)
 		break
-	else
+	fi
+	if [ $(echo "$mesaj" | cut -d ' ' -f1) = "/w" ]
+	then
+		ip=$(echo $(grep $(echo $mesaj | cut -d ' ' -f2) people.txt | cut -d ',' -f1))
+		echo "ip: $ip"
+		gnome-terminal -x sh -c "./whisper.sh $ip; bash" &
+		break
+	fi
+	if [ $(echo "$mesaj" | cut -d ' ' -f1) = "/spam" ]
+	then
+		gnome-terminal -x sh -c "./whisper.sh $ip; bash" &
+	else	
 		./msg_send.sh "$mesaj"
 	fi
 done
