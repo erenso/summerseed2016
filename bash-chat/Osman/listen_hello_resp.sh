@@ -7,7 +7,7 @@ while true ; do
 	echo "MY_NICK_NAME : $MY_NICK_NAME"
 	echo "I am waiting a host request"
 	
-	PACKET=$(nc -l 10000)
+	PACKET=$(nc -l 10001)
 	ADDRESS=$(echo $PACKET | cut -d ',' -f1)
 	NICK=$(echo $PACKET | cut -d ',' -f2)
 	
@@ -23,7 +23,7 @@ while true ; do
 	fi
 	
 
-	echo "$MY_IP,$MY_NICK_NAME" | nc $ADDRESS 10001
+	echo "$MY_IP,$MY_NICK_NAME" | nc $ADDRESS 10000
 	echo "Accept request"
 	echo "----------------------------"
 	echo ""
