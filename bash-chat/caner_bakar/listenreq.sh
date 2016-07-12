@@ -12,8 +12,12 @@ while true;
 		
 		echo "IP ADRRESS: $IPADDR"
 		echo "NICK: $NICK "
+
+		CURRENT=`pwd`
+		CURRENT="$PWD/bookmark.txt"
+		echo CURRENT
 		
-		if grep -q $PACKET_REQ '/home/caner/Desktop/bookmark.txt' ; then
+		if grep -q $PACKET_REQ $CURRENT ; then
 			
 			echo "Same nick, not written to file"
 		
