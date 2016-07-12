@@ -1,0 +1,11 @@
+#input format: nickname,massage
+#addr book= nickname,IP
+#usage ./snd @
+
+NICK=$(echo $@ | cut -d ',' -f1)
+MSG=$(echo $@ | cut -d ',' -f2-)
+ADDR=$(cat Addr_Book.txt | grep $NICK | cut -d ',' -f2)
+
+
+echo "ys,$MSG" | nc $ADDR 10002
+
