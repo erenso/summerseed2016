@@ -1,19 +1,53 @@
 #!/bin/bash
 
+#set -x
+
+
 MYIP=$(ifconfig | grep "inet addr" | tail -n 1 | cut -d ':' -f2 | awk '{print $1}')
+PIDFIFO="/tmp/chat-pids-fifo"
+
+DEFAULT="\e[39m"
+GREEN="\e[32m"
+YELLOW="\e[93m"
 
 function init(){
 	if [ ! -f ./known_hosts ]; then
 	    touch known_hosts
 	fi
+
+	
+
+   	mkfifo $PIDFIFO
+
+
+	trap exit_handler INT
+	trap exit_handler EXIT
 }
 
 
-function listen(){
+
+function exit_handler(){
+	rm $PIDFIFO
+	exit
+	#kill_em_all  
+}
+
+function kill_em_all(){
+	while read -r pid ; do
+		kill $pid
+	done
+}
+
+
+function listen_hello_req(){
 
 
 	while true; do
 		PACKET=$(nc -l 10000)
+		if [ "$PACKET" == "" ];then
+			continue
+		fi
+
 		IPADDR=$(echo $PACKET | cut -d ',' -f1  | sed 's/ //g')
 		NICK=$(echo $PACKET | cut -d ',' -f2)
 
@@ -22,37 +56,76 @@ function listen(){
 			continue
 		fi
 
+		# if [ "$NICK" == "özgün" ];then
+		# 	continue
+		# fi
+
 		RESPONSE="$MYIP,$USER"
 
-
-
-		RESPONSE_RESULT=$(echo $RESPONSE | netcat -w 2 $IPADDR 10001; echo $?)
-		echo $RESPONSE_RESULT
-
-		if [ $RESPONSE_RESULT -eq 1 ] ; then
-			echo "Can not send response $RESPONSE to $IPADDR, user $NICK"
-				
-		else
-			echo "$IPADDR => $NICK"
-			if  ! grep -q "$IPADDR,$NICK" known_hosts; then
-				echo "$IPADDR,$NICK" >> known_hosts
-			fi
-
+		if  ! grep -q "$IPADDR,$NICK" known_hosts; then
+			echo "$IPADDR,$NICK" >> known_hosts
 		fi
 
-		echo "$(clock) $PACKET => $RESPONSE_RESULT" >> log &
+		RESPONSE_RESULT=$(echo $RESPONSE | netcat $IPADDR 10001; echo $?)
+		#echo $RESPONSE_RESULT
+
+		# if [ $RESPONSE_RESULT -ne 1 ] ; then
+		# 	echo "$IPADDR => $NICK"
+
+
+		# fi
+
+		echo "$(clock) $PACKET => $RESPONSE_RESULT" >> log
+		
+	done
+		
+}
+function listen_hello_resp(){
+
+
+	while true; do
+		PACKET=$(nc -l 10001)
+		if [ "$PACKET" == "" ];then
+			continue
+		fi
+
+		IPADDR=$(echo $PACKET | cut -d ',' -f1  | sed 's/ //g')
+		NICK=$(echo $PACKET | cut -d ',' -f2)
+
+		if [ "$IPADDR" ==  "$MYIP" ]; then
+			echo "You can't send request to yourself"
+			continue
+		fi
+
+
+		RESPONSE="$MYIP,$USER"
+
+		if  ! grep -q "$IPADDR,$NICK" known_hosts; then
+			echo "$IPADDR,$NICK" >> known_hosts
+		fi
+
+
+
+		#RESPONSE_RESULT=$(echo $RESPONSE | netcat -w 2 $IPADDR 10000; echo $?)
+
+
+		#echo "$(clock) $PACKET => $RESPONSE_RESULT" >> log
 		
 	done
 		
 }
 
-
 function discover(){
+
+	while true; do
 
 	   for i in `seq 1 254`;
        do
                ping_it $i &
        done 
+       echo "Refreshing known_hosts" >> log
+       sleep 10
+   done
 }
 
 
@@ -62,24 +135,93 @@ function ping_it(){
 	if [ "$IP" ==  "$MYIP" ]; then
 		return
 	fi
-	result=$(timeout 3 ping -c 2 $IP > /dev/null 2>&1; echo $?)
-	if [ $result -eq 0 ]; then
-		echo "$MYIP:$USER" | netcat -w 2 $IP 10000
-		#echo "yep $IP"
-	fi
+	#result=$(timeout 3 ping -c 2 $IP > /dev/null 2>&1; echo $?)
+
+	RESULT=$(echo "$MYIP,$USER" | netcat -w 2 "$IP" 10000)
+
+	# if [ $result -eq 0 ]; then
+	# 	RESULT=$(echo "$MYIP,$USER" | netcat -w 2 $IP 10000)
+		
+	# fi
+
+	#echo "$IP => $result"
 }
 
 
-# function message_handler(){
-# 	while true; then
-# 		read input
-# 		parsed_input=$(echo $input | cut -d ',' -f1 )
-# }
+function message_handler(){
+	while true; do
+		printf "\n[nick:message] :  "
+		read input
+
+		if [ "$input" == "" ]; then 
+			continue
+		fi
+
+		NICK=$(echo $input | cut -d ',' -f1 | sed 's/ //g')
+		MESSAGE=$(echo $input | cut -d ',' -f2 )
+
+		if [ "$NICK" == "/all" ]; then
+			send_all "$MESSAGE" &
+			continue
+		fi
+
+
+		EXISTS=$(grep "$NICK" known_hosts )
+		if [ $EXISTS ]; then
+			IP=$(echo $EXISTS | cut -d ',' -f1)
+			send_message $IP "$NICK" "$MESSAGE" &
+		else
+			echo "$NICK does not exist."
+		fi
+	done
+}
+
+function send_message(){
+	# $1 => IP, $2 => NICK, $3, => MESSAGE 
+	RESULT=$(echo "$USER,$3" | netcat -w 2 $1 10002; echo $?)
+	if [ $RESULT -ne 0 ]; then
+		echo "$(clock) SEND FAILED $2 : $3" >> log
+	else
+		echo "$(clock) SEND SUCCESS $2 : $3" >> log
+	fi
+
+}
+
+function send_all(){
+	   for i in `seq 1 254`; do
+            send_message "172.16.5.$i" "/all" "$1" &
+       done
+   		echo -e "\n$YELLOW $USER $DEFAULT:$1"
+
+}
+
+function listen_messsage(){
+
+
+	while true; do
+		PACKET=$(nc -l 10002)
+		if [ "$PACKET" == "" ];then
+			continue
+		fi
+
+		NICK=$(echo $PACKET | cut -d ',' -f1  | sed 's/ //g')
+		MESSAGE=$(echo $PACKET | cut -d ',' -f2)
+
+		echo -e "\n$GREEN $NICK $DEFAULT: $(echo -e $MESSAGE)"
+
+		echo "$(clock) $RECEIVED => $NICK": $MESSAGE >> log
+		
+	done
+		
+}
 
 init
 
 discover &
 
-listen
+listen_hello_req &
 
+listen_messsage &
+
+message_handler
 
