@@ -1,0 +1,16 @@
+#usage ./setup
+#execute one file to set up
+./listen_hello_re.sh &  #start listen for requests
+he_re=$!
+
+./responseCatch.sh &   #start listen for responses
+PIDkill=$!
+./listen_msg.sh &  #start listn for messeges
+
+msg_ls=$!
+
+
+#./requestSender.sh  #send requests
+
+#sleep 2
+kill $PIDkill
