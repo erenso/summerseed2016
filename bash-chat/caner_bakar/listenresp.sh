@@ -5,7 +5,7 @@ while true;
 	
 	do
 		
-		PACKET_RESP=$(nc -l 10000)
+		PACKET_RESP=$(nc -l 10001)
 		
 		IPADDR=$(echo $PACKET_RESP | cut -d ',' -f1)
 		NICK=$(echo $PACKET_RESP | cut -d ',' -f2)
@@ -13,7 +13,10 @@ while true;
 		echo "IP ADRRESS: $IPADDR"
 		echo "NICK: $NICK "
 
-		if grep -q $PACKET_REQ '/home/caner/Desktop/bookmark.txt' ; then
+		CURRENT=`pwd`
+		CURRENT="$PWD/bookmark.txt"
+
+		if grep -q $PACKET_REQ $CURRENT ; then
 			
 			echo "Duplicate, not written to file"
 		
@@ -23,6 +26,5 @@ while true;
 		
 		fi
 
-		echo "Request is acceptted" | nc $IPADDR 10001
 	
 	done

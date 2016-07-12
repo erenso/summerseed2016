@@ -2,7 +2,7 @@
 
 while  true ; do
 	echo "Osman Request"
-	PACKET=$(nc -l 10001)
+	PACKET=$(nc -l 10000)
 	ADDRESS=$(echo $PACKET | cut -d ',' -f1)
 	NICK=$(echo $PACKET |cut -d ',' -f2)
 	echo "ADDRESS = $ADDRESS"
