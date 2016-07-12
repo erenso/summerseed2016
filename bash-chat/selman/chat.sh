@@ -59,7 +59,7 @@ function listen_hello_req(){
 
 		if  ! grep -q "$IPADDR,$NICK" known_hosts; then
 			echo "$IPADDR,$NICK" >> known_hosts
-			echo "Added $NICK to known_hosts" >> log
+			log "Added $NICK, $IPADDR to known_hosts"
 		fi
 
 		RESPONSE_RESULT=$(echo $RESPONSE | netcat $IPADDR 10001; echo $?)
@@ -105,7 +105,7 @@ function discover(){
        do
                ping_it $i &
        done 
-       echo "Refreshing known_hosts" >> log
+       log "Refreshing known_hosts"
        sleep 120
    done
 }
