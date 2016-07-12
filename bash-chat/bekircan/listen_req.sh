@@ -13,6 +13,6 @@ then
 echo "$str" >> "adressbook.txt"
 fi
 
-echo "$host,$my_nick" | nc $ip 10001 &
+echo "$host,$my_nick" | nc $ip 10001 -w 3&
 
 done
