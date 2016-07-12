@@ -1,0 +1,82 @@
+#!/bin/bash
+#hello_req & hello_resp
+#no senkron no message.
+#inaf ya inaf
+function listen_req(){
+###########################
+
+	#listen_req
+	PACKET=$(nc -l 10000)
+	echo $PACKET
+
+	IPADDR=$(echo $PACKET | cut -d ',' -f1)
+	NICK=$(echo $PACKET | cut -d ',' -f2)
+	
+	if !(grep -cq "$IPADDR" table.txt)
+	then
+		echo "$IPADDR,$NICK" >> table.txt
+	fi
+
+	echo "IP :  $IPADDR"
+	echo "NICK: $NICK"
+	
+#############
+	#send_resp	
+	#echo "$MYIP,$MYNICK" | nc $IPADDR 10001
+
+}
+
+function listen_resp(){	
+
+	#listen_resp
+	PACKET=$(nc -l 10001)
+	echo $PACKET
+
+	IPADDR=$(echo $PACKET | cut -d ',' -f1)
+	NICK=$(echo $PACKET | cut -d ',' -f2)
+	
+	if	cat table.txt | grep "$IPADDR,$NICK";then
+		echo "$IPADDR,$NICK" >> table.txt
+	fi
+
+	echo "respIP :  $IPADDR"
+	echo "NICK: $NICK"
+
+	####################
+}
+
+
+#######  START  #########
+#create table.txt if not exist
+#IP and nick table
+if [ ! -f table.txt ];then
+	touch table.txt
+fi
+
+#Find myip
+MYIP=$( ifconfig | grep "Bcast" | cut -d ':' -f2 | cut -d ' ' -f1 )
+MYIP=$( echo "$MYIP" | cut -d ':' -f1)
+echo "MYIP: $MYIP"
+MYNICK="byzTS"
+
+F1=$(echo $MYIP | cut -d '.' -f1)
+F2=$(echo $MYIP | cut -d '.' -f2)
+F3=$(echo $MYIP | cut -d '.' -f3)
+#Create subset
+IP="$F1.$F2.$F3."
+
+#send_request
+for i in {0..254}
+	do
+	   IP="$IP$i"
+	   echo "IP: $IP"
+	   echo "$MYIP,$MYNICK" | nc $IP 10000 -w 1 &
+	   IP="$F1.$F2.$F3."	
+	done
+
+#while true; do	
+listen_req 
+#var=$!
+listen_resp 
+#var2=$!
+#done
