@@ -1,0 +1,7 @@
+IP ADDRESS = 172.16.5.103 / NICK = ahmet
+
+
+172.16.5.203,berke
+172.16.5.233,bekircan
+172.16.5.133 ,seyfullah
+172.16.5.146:selman,172.16.5.146:selman
