@@ -9,9 +9,9 @@ while true; do
 
 	if grep -cq "$IP" people.txt
 	then
-		echo "$IP $NICK zaten kisilerde mevcut."
+		echo -e "\033[0;33m$IP $NICK zaten kisilerde mevcut."
 	else 
-		echo "$IP,$NICK" >> people.txt
-		echo "$IP $NICK kisilere eklendi."
+		echo -e "\033[0;33m$IP,$NICK" >> people.txt
+		echo -e "\033[0;33m$IP $NICK kisilere eklendi."
 	fi	
 done
