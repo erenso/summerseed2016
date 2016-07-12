@@ -13,7 +13,11 @@ while true;
 		echo "IP ADRRESS: $IPADDR"
 		echo "NICK: $NICK "
 
-		if grep -q $PACKET_REQ '/home/caner/Desktop/bookmark.txt' ; then
+		CURRENT=`pwd`
+		CURRENT="$PWD/bookmark.txt"
+		echo CURRENT
+
+		if grep -q $PACKET_REQ $CURRENT ; then
 			
 			echo "Duplicate, not written to file"
 		
@@ -22,5 +26,6 @@ while true;
 			echo "$PACKET_REQ" >> bookmark.txt
 		
 		fi
+
 	
 	done
