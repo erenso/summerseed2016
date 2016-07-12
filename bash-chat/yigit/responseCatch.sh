@@ -6,14 +6,14 @@ PACKT=$(nc -l 10001) #wait for packet
 IPADD=$(echo "$PACKT" | cut -d ',' -f1) #cut IP from packet
 NIC=$(echo "$PACKT" | cut -d ',' -f2) #cut nickname from packet
 
-touch Addr_Book.txt   #address book
 
-echo "$NIC ($IPADD) Added"
+echo "$NIC ($IPADD) Responded"
 
+cat Addr_Book.txt > log.txt
 
-echo "$NICK,$IPADDR" >> Addr_Book
+echo "$NIC,$IPADD" >> log.txt
 
-sort Addr_Book | uniq  > Addr_Book
+sort log.txt | uniq  > Addr_Book.txt
 
 done
 

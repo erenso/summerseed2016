@@ -1,16 +1,18 @@
 #usage ./setup
 #execute one file to set up
 ./listen_hello_re.sh &  #start listen for requests
-he_re=$!
-
+lhe=$!
 ./responseCatch.sh &   #start listen for responses
 PIDkill=$!
 ./listen_msg.sh &  #start listn for messeges
+lme=$!
 
-msg_ls=$!
 
+./requestSender.sh  #send requests
 
-#./requestSender.sh  #send requests
-
-#sleep 2
+sleep 2
 kill $PIDkill
+sleep 0.5
+clear
+echo "process code of listen hello: $lhe"
+echo "process code of listen mssg: $lme"

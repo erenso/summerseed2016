@@ -12,7 +12,8 @@ ADDRS=$(echo "$hAD.$i") #get .x part of IP
 echo "$MYIP,ys" | nc $ADDRS 10000 &
 PID=$!
 sleep 0.01
-kill $PID
+kill $PID &
 done
+clear
 
 echo "All requests send"

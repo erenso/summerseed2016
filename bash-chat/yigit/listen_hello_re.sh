@@ -9,10 +9,13 @@ NICK=$(echo "$PACKET" | cut -d ',' -f2) #cut nickname from packet
 MYIP=$(ipconfig getifaddr en0) #get this machines IP (works only on MacOS)
 echo "$MYIP,ys" | nc $IPADDR 10001  #send response
 
+echo "$NICK ($IPADDR) connected"
 
-echo "$NICK,$IPADDR" >> Addr_Book
+cat Addr_Book.txt > log.txt
 
-sort Addr_Book | uniq  > Addr_Book
+echo "$NICK,$IPADDR" >> log.txt
+
+sort log.txt | uniq  > Addr_Book.txt
 
 done
 
