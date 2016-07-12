@@ -24,7 +24,7 @@ while true; do
 		ip=$(echo $(grep $(echo $mesaj | cut -d ' ' -f2) people.txt | cut -d ',' -f1))
 		echo "ip: $ip"
 		gnome-terminal -x sh -c "./whisper.sh $ip; bash" &
-		break
+		continue
 	fi
 	if [ $(echo "$mesaj" | cut -d ' ' -f1) = "/spam" ]
 	then
