@@ -1,3 +1,6 @@
+# Kapandiginda arkaplanda calisan uygulamalari sonlandiracak sekilde ayarla
+trap 'kill $(jobs -p)' SIGHUP SIGINT SIGTERM
+
 # Gelen mesajlari dinle
 ./listen_hello_req.sh &
 ./listen_hello_resp.sh &

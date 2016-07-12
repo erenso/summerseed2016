@@ -11,7 +11,7 @@ while true; do
 	then
 		echo -e "\033[0;33m$IP $NICK zaten kisilerde mevcut."
 	else 
-		echo -e "\033[0;33m$IP,$NICK" >> people.txt
+		echo -e "$IP,$NICK" >> people.txt
 		echo -e "\033[0;33m$IP $NICK kisilere eklendi."
 	fi	
 done
