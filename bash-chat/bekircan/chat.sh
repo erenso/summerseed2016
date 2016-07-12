@@ -2,8 +2,17 @@ rm -f adressbook.txt
 touch adressbook.txt
 
 sh listen_req.sh &
+
+pid1=$!
+
 sh listen_resp.sh &
+
+pid2=$!
+
 sh refresh.sh &
+
+pid3=$!
+
 sh discover.sh
  
 sleep 3 #wait for responds
@@ -31,7 +40,6 @@ fi
 
 done
 
-killall sh listen_req.sh
-killall sh listen_resp.sh
-killall sh refresh.sh
-killall nc
+kill $pid1
+kill $pid2
+kill $pid3
