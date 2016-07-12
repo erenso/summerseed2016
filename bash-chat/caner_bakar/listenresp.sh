@@ -22,7 +22,5 @@ while true;
 			echo "$PACKET_REQ" >> bookmark.txt
 		
 		fi
-
-		echo "Request is acceptted" | nc $IPADDR 10001
 	
 	done
