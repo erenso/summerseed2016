@@ -5,6 +5,7 @@
 
 MYIP=$(ifconfig | grep "inet addr" | tail -n 1 | cut -d ':' -f2 | awk '{print $1}')
 ME=$(echo $MYIP | awk -F '[.]' '{print $4}')
+LOGFILE="log"
 
 DEFAULT="\e[39m"
 GREEN="\e[32m"
@@ -32,7 +33,7 @@ function init(){
 
 function exit_handler(){
 	# OTHER STUFF
-	echo 
+	echo "C ya!"
 	exit
 }
 
@@ -63,7 +64,7 @@ function listen_hello_req(){
 
 		RESPONSE_RESULT=$(echo $RESPONSE | netcat $IPADDR 10001; echo $?)
 		
-		echo "$(clock) $PACKET => $RESPONSE_RESULT" >> log
+		log "$PACKET => $RESPONSE_RESULT"
 		
 	done
 		
@@ -105,7 +106,7 @@ function discover(){
                ping_it $i &
        done 
        echo "Refreshing known_hosts" >> log
-       #sleep 120
+       sleep 120
    done
 }
 
@@ -169,14 +170,14 @@ function send_message(){
 			echo -e "\n$YELLOW $USER $DEFAULT:$3"
 		fi
 
-		echo "$(clock) SEND FAILED $2 : $3" >> log
+		log "SEND FAILED $2 : $3"
 	else
 
 		if [ "$4" = true ]; then
 			echo -e "\n$ERRORBG $USER :$3$DEFAULTBG"
 		fi
 
-		echo "$(clock) SEND SUCCESS $2 : $3" >> log
+		log "SEND SUCCESS $2 : $3"
 	fi
 
 }
@@ -207,10 +208,14 @@ function listen_messsage(){
 
 		echo -e "\n$GREEN $NICK $DEFAULT: $(echo -e $MESSAGE)"
 
-		echo "$(clock) $RECEIVED => $NICK": $MESSAGE >> log
+		log "$RECEIVED => $NICK: $MESSAGE"
 		
 	done
 		
+}
+
+function log(){
+	echo "$(clock) $1" >> $LOGFILE 
 }
 
 init
