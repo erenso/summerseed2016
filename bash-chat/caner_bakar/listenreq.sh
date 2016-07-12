@@ -15,7 +15,6 @@ while true;
 
 		CURRENT=`pwd`
 		CURRENT="$PWD/bookmark.txt"
-		echo CURRENT
 		
 		if grep -q $PACKET_REQ $CURRENT ; then
 			
