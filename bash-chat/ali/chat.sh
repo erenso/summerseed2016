@@ -9,4 +9,16 @@ trap 'kill $(jobs -p)' SIGHUP SIGINT SIGTERM
 ./sendall.sh &
 
 # Gelen mesajlari dinle ekrana yaz
-./msg_recv.sh
+./msg_recv.sh &
+
+# kullanicinn yazdiklarini okuyup mesaja donusturme
+while true; do
+	read mesaj
+	if [ "$mesaj" = "/exit" ] # eger mesaj /exit ise cik
+	then
+		kill $(jobs -p)
+		break
+	else
+		./msg_send.sh "$mesaj"
+	fi
+done
