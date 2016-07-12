@@ -5,7 +5,7 @@ while true;
 	
 	do
 		
-		PACKET_REQ=$(nc -l 10001)
+		PACKET_REQ=$(nc -l 10000)
 		
 		IPADDR=$(echo $PACKET_REQ | cut -d ',' -f1)
 		NICK=$(echo $PACKET_REQ | cut -d ',' -f2)
