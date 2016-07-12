@@ -5,7 +5,7 @@ while true;
 	
 	do
 		
-		PACKET_RESP=$(nc -l 10000)
+		PACKET_RESP=$(nc -l 10001)
 		
 		IPADDR=$(echo $PACKET_RESP | cut -d ',' -f1)
 		NICK=$(echo $PACKET_RESP | cut -d ',' -f2)
