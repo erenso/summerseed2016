@@ -5,12 +5,14 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/types.h>
+
+#define MAXLEN 2000
  
 int main(int argc , char *argv[])
 {
     int sock;
     struct sockaddr_in server;
-    char server_reply[2000];
+    char server_reply[MAXLEN];
      
     //Create socket
     sock = socket(AF_INET , SOCK_STREAM , 0);
@@ -34,16 +36,19 @@ int main(int argc , char *argv[])
     }
      
     puts("Connected\n");
+
+    char* mes = argv[3];
+    strcat(mes,"\t");
      
     //Send some data
-    if( send(sock , argv[3] , strlen(argv[3]) , 0) < 0)
+    if(send(sock , mes , strlen(mes) , 0) < 0)
     {
         puts("Send failed");
         return 1;
     }
      
     //Receive a reply from the server
-    if( recv(sock , server_reply , 2000 , 0) < 0)
+    if(recv(sock , server_reply , MAXLEN , 0) < 0)
     {
         puts("recv failed");
         return 1;
@@ -51,6 +56,7 @@ int main(int argc , char *argv[])
      
     puts("Server reply :");
     puts(server_reply);
+    puts("\n");
     
      
     close(sock);
