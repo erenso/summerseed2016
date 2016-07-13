@@ -1,2 +1,2 @@
 all:
-	gcc nc_send.c -o nc
+	gcc nc.c -o nc
