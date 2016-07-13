@@ -13,8 +13,6 @@
 
 #define AZAMIUZUNLUK 1024
 
-#include "common.c"
-
 void nclisten(int port);
 void ncsend(char *ip, int port, char *mesaj);
 
