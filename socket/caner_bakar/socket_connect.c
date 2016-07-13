@@ -45,7 +45,8 @@ int main(int argc , char *argv[]){
     }
 
     write(sock,&message[counter-1],sizeof(char)*(counter-1));
-    fprintf(stderr, "%d\n",counter );
+
+    
     
 
     close(sock);
