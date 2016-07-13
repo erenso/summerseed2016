@@ -52,11 +52,6 @@ int main(int argc , char *argv[]){
     close(sock);
 }
 
-
-
-
-
-
 int callSocket(char *hostname, unsigned short portnum,char ip[128]) {
     struct sockaddr_in sa;
     struct hostent *hp;
