@@ -1,14 +1,16 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <errno.h>
-#include <arpa/inet.h>
-#include <unistd.h>
+#include "netcat.h"
 
-#define AZAMIUZUNLUK 1024
+int main(int argc, char *argv[] ){
+	// parse arguments
+	if(strcmp(argv[1], "-l") == 0){
+		nclisten(atoi(argv[2]));
+	}else{
+		char mesaj[AZAMIUZUNLUK];
+		scanf("%s", mesaj);
+		strcat(mesaj, "\t");
+		ncsend(argv[1], atoi(argv[2]), mesaj);
+	}
+}
 
 void nclisten(int port){
 	int sockfd, newfd; 
@@ -92,16 +94,4 @@ void ncsend(char *ip, int port, char *mesaj){
     printf("%d bayt gönderdim:\t%s\n", gidenBayt, mesaj);
 
     close(sockfd);
-}
-
-int main(int argc, char *argv[] ){
-	// parse arguments
-	if(strcmp(argv[1], "-l") == 0){
-		nclisten(atoi(argv[2]));
-	}else{
-		char mesaj[AZAMIUZUNLUK];
-		scanf("%s", mesaj);
-		strcat(mesaj, "\t");
-		ncsend(argv[1], atoi(argv[2]), mesaj);
-	}
 }
