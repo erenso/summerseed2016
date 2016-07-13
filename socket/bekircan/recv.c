@@ -5,18 +5,20 @@
 #include <netdb.h>
 #include <netinet/in.h>
 #include <dirent.h>
+#include "StringBuilder.h"
 
 #ifndef MAXHOSTNAME
 #define MAXHOSTNAME 256
 #endif
 
-int main(){
+void recv_msg(int port){
 	
-	int socketServer, socketClient, i, numClients = 0, clientLen;
+	int socketServer, socketClient, clientLen;
     struct sockaddr_in serverAddr, clientAddr;
 	struct hostent *hp;
-	char myname[MAXHOSTNAME+1], buf[10];
-
+	char myname[MAXHOSTNAME+1], buf[1];
+	StringBuilder str;
+		
 	 /* create socket */
     if((socketServer = socket(AF_INET , SOCK_STREAM , 0)) == -1){
         
@@ -36,7 +38,7 @@ int main(){
 	}
 	
 	serverAddr.sin_family= hp->h_addrtype;
-	serverAddr.sin_port= htons(8888);
+	serverAddr.sin_port= htons(port);
      
     /* bind */
     if(bind(socketServer, (struct sockaddr *)&serverAddr , sizeof(serverAddr)) == -1){
@@ -59,14 +61,20 @@ int main(){
 		exit(1);
 	}
 	
-	recv(socketClient, buf, 6, 0);
+	SBinitilize(&str);
+	
+	while(recv(socketClient, buf, 1, 0)){
 		
-	buf[6] = '\0';
+		if(*buf == '\t')
+			
+			break;
+			
+		SBaddChar(&str, *buf);		
+	}
 		
-	puts(buf);
+	puts(str.str);
 	
 	close(socketServer);
 	close(socketClient);
-	
-	return 0;
+	SBclear(&str);
 }

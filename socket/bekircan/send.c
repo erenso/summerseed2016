@@ -5,9 +5,8 @@
 #include <netdb.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-#include <pthread.h>
 
-int main(){
+void send_msg(const char* ip, int port, const char* msg){
 	
 	struct sockaddr_in server_addr;
 	int fdSocket;
@@ -20,12 +19,11 @@ int main(){
 		exit(1);
 	}
 	
-	
 	memset(&server_addr, 0, sizeof(server_addr));
     
-	server_addr.sin_addr.s_addr = inet_addr("127.0.0.1");
+	server_addr.sin_addr.s_addr = inet_addr(ip);
     server_addr.sin_family = AF_INET;
-	server_addr.sin_port = htons(8888);
+	server_addr.sin_port = htons(port);
   
 	
 	 if (connect(fdSocket , (struct sockaddr*)&server_addr , sizeof(server_addr)) < 0){
@@ -35,9 +33,8 @@ int main(){
          exit(1);
      }
 	
-	send(fdSocket, "hello\n", 6, 0);
+	send(fdSocket, msg, strlen(msg), 0);
+	send(fdSocket, "\t", 1, 0);
 	
 	close(fdSocket);
-		
-	return 0;
 }

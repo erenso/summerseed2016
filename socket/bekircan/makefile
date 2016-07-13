@@ -1,7 +1,6 @@
 all:
-	gcc -o send send.c
-	gcc -o recv recv.c
+	gcc -o nc_socket nc_socket.c recv.c send.c StringBuilder.c -Wall -pedantic-errors
 	
 clean:
 
-	rm send recv
+	rm nc_socket
