@@ -2,12 +2,14 @@
 
 int main(){
 	char ip[50] = "172.16.5.";
-	int i = 0;
+	int i;
 	for(i = 0; i < 256; i++){
-		char newip[50];
-		sprintf(newip, "%s%d", ip, i);
-		printf("%s", newip);
-		/*static char *argv[]={"172.16.5.61","10000",NULL};
-		execv("./nc &", argv);*/
+		char command[50];
+		sprintf(command, "echo \"172.16.5.179,ali\t\" | ./nc %s%d 10000 &", ip, i);
+		//printf("%s\n", command);
+		//static char *argv[]={NULL};
+		system(command);
 	}
+	sleep(1);
+	system("killall nc");
 }

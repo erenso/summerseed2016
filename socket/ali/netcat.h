@@ -7,6 +7,7 @@
 #include <errno.h>
 #include <arpa/inet.h>
 #include <unistd.h>
+#include <signal.h>
 
 #define AZAMIUZUNLUK 1024
 
