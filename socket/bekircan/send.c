@@ -1,68 +1,43 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>  
+#include <string.h>
 #include <unistd.h>  
 #include <netdb.h>
 #include <netinet/in.h>
-#include <dirent.h>
-
-#ifndef MAXHOSTNAME
-#define MAXHOSTNAME 256
-#endif
+#include <arpa/inet.h>
+#include <pthread.h>
 
 int main(){
 	
-	int socketServer, socketClient, i, numClients = 0, clientLen;
-    struct sockaddr_in serverAddr, clientAddr;
-	struct hostent *hp;
-	char myname[MAXHOSTNAME+1];
-
-	 /* create socket */
-    if((socketServer = socket(AF_INET , SOCK_STREAM , 0)) == -1){
-        
-		perror("Couldn't create a socket.");
-		exit(1);
-    }
-    
-    memset(&serverAddr, 0, sizeof(struct sockaddr_in));
-    
-	gethostname(myname, MAXHOSTNAME);
+	struct sockaddr_in server_addr;
+	int fdSocket;
 	
-	if((hp = gethostbyname(myname)) == NULL){
-		
-		perror("Couldn't get hostname");
-		close(socketServer);
+    /* Create socket */
+	
+	if((fdSocket = socket(AF_INET , SOCK_STREAM , 0)) == -1){
+		 
+		perror("Socket couldn't create");
 		exit(1);
 	}
 	
-	serverAddr.sin_family= hp->h_addrtype;
-	serverAddr.sin_port= htons(1234);
-     
-    /* bind */
-    if(bind(socketServer, (struct sockaddr *)&serverAddr , sizeof(serverAddr)) == -1){
+	
+	memset(&server_addr, 0, sizeof(server_addr));
+    
+	server_addr.sin_addr.s_addr = inet_addr("127.0.0.1");
+    server_addr.sin_family = AF_INET;
+	server_addr.sin_port = htons(888);
+  
+	
+	 if (connect(fdSocket , (struct sockaddr*)&server_addr , sizeof(server_addr)) < 0){
+         
+		 perror("Couldn't connect server");
+		 close(fdSocket);
+         exit(1);
+     }
+	
+	send(fdSocket, "hello\n", 6, 0);
+	
+	close(fdSocket);
 		
-        perror("Couldn't bind socket");
-		close(socketServer);
-        exit(1);
-    }
- 
-	listen(socketServer , 3);
-	
-	clientLen = sizeof(clientAddr);
-			
-	/* accept calls */
-		
-	if((socketClient = accept(socketServer, (struct sockaddr *)&clientAddr, (socklen_t *)&clientLen)) < 0){
-	
-		perror("Client couldn't accept");
-
-		exit(1);
-	}
-	
-	send(socketClient, "hello\n", 6, 0);
-	
-	close(socketServer);
-	close(socketClient);
-	
 	return 0;
 }
