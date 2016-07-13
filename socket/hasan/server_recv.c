@@ -64,7 +64,7 @@ int main(int argc , char *argv[])
      
     if(read_size == 0)
     {
-        puts("Client disconnected");
+        puts("Client disconnected\n\n");
         fflush(stdout);
     }
     else if(read_size == -1)
