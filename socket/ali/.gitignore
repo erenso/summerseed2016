@@ -1,7 +1,3 @@
-nc
-listen
-discovery
-
 # Prerequisites
 *.d
 
@@ -38,3 +34,8 @@ discovery
 # Debug files
 *.dSYM/
 *.su
+nc
+listen
+discovery
+.idea/
+CMakeLists.txt

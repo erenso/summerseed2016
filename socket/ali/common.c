@@ -23,7 +23,7 @@ int nclisten(int port){
     
 	// sockaddr_in is the simplified form of sockaddr
     serverAddr.sin_family = AF_INET;		// sin_family is address family, in this case IPv4
-    serverAddr.sin_port = htons(port);		// sin_port means port, duh. htons is a function used in converting
+    serverAddr.sin_port = htons((uint16_t)port);		// sin_port means port, duh. htons is a function used in converting
     										// port host to network short, it converts the little endian format to
     										// big endian if needed
     serverAddr.sin_addr.s_addr = INADDR_ANY;// address, INADDR_ANY is address of the working computer
@@ -55,7 +55,7 @@ int nclisten(int port){
     // it's parameters are:		1: socket number
     						//	2: struct sockaddr* client socket address (it changes the value, cus it's pointer)
     						// 	3: size_t size of the client address struct
-    newfd = accept(sockfd, (struct sockaddr *)&clientAddr, &structSize);
+    newfd = accept(sockfd, (struct sockaddr *)&clientAddr, (socklen_t*)&structSize);
     if(-1 == newfd){
         perror("accept");	// perror
     }
@@ -99,7 +99,7 @@ int ncsend(char *ip, int port, char *message){
 	}
 	int sockfd; // our socket
     struct sockaddr_in serverAddr;	// server address
-    int sentByte, structSize;		// sentByte is length of our sent message and we check if it's -1 it means message didn't send
+    ssize_t sentByte;		// sentByte is length of our sent message and we check if it's -1 it means message didn't send
 
     sockfd = socket(AF_INET, SOCK_STREAM, 0);	// create a new IPv4, TCP, IP Protocol socket
     if(-1 == sockfd){
@@ -108,7 +108,7 @@ int ncsend(char *ip, int port, char *message){
 
 	// create server address
     serverAddr.sin_family = AF_INET;	// IPv4
-    serverAddr.sin_port = htons(port);	// port number, converted from little endian to big endian
+    serverAddr.sin_port = htons((uint16_t)port);	// port number, converted from little endian to big endian
     // The inet_addr() function shall convert the string pointed to by cp, in the standard IPv4 dotted decimal notation, 
     // to an integer value suitable for use as an Internet address.
     serverAddr.sin_addr.s_addr = inet_addr(ip); // we convert the string ip to IPv4 dotted decimal notation
@@ -125,7 +125,7 @@ int ncsend(char *ip, int port, char *message){
     }
     
     // first we translate our message from the form "xxxx\0???" to "xxxx\t\0??", so we add the end of line character
-    int length = strlen(message);	// length of our current string
+    size_t length = strlen(message);	// length of our current string
     if(message[length-1] == '\n'){
     	message[length-1] = '\t';
     }else{
@@ -147,9 +147,9 @@ int ncsend(char *ip, int port, char *message){
     	// then there's something terrible happened
     	// just print the numbers, we're not going to do anything here other than hoping something terrible didn't happen
     	// on the transmitted side
-        printf("Something happended while transmitting!\nMessage length: %d\tTransmitted Length: %d\n", (int)strlen(message), sentByte);
+        printf("Something happended while transmitting!\nMessage length: %d\tTransmitted Length: %d\n", (int)strlen(message), (int)sentByte);
     }
-    printf("Sent %d bytes:\t%s to %s\n", sentByte, message, ip);
+    printf("Sent %d bytes:\t%s to %s\n", (int)sentByte, message, ip);
 
     close(sockfd);	// close our socket
     return 0;		// 0 means everythings ok
