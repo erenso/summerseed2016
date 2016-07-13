@@ -1,5 +1,6 @@
 all:
+	rm -f common.o nc discovery listen
 	gcc -c common.c
 	gcc nc.c common.o -o nc
-	gcc discovery.c -o discovery
+	gcc discovery.c common.o -o discovery -lpthread
 	gcc listen_requests.c common.o -o listen

@@ -11,9 +11,10 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 
-#define AZAMIUZUNLUK 1024
+#define MAX_PACKET_LENGTH 1024
 
-void nclisten(int port);
-void ncsend(char *ip, int port, char *mesaj);
+int nclisten(int port);
+int ncsend(char *ip, int port, char *mesaj);
+int isValidIpAddress(char *ipAddress);
 
 #endif /* NETCAT_H */
