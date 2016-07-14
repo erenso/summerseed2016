@@ -38,7 +38,7 @@ int main(int argc, char const *argv[])
 
 	/*------------server address  set ------*/
   	serv_addr.sin_family = AF_INET;
-  	serv_addr.sin_port = htons(10000);
+  	serv_addr.sin_port = htons(10002);
   	serv_addr.sin_addr.s_addr = inet_addr("172.16.5.145");
 
 
