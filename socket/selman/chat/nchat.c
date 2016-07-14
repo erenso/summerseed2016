@@ -12,12 +12,7 @@ struct listen_args {
   int qid;
 };
 
-// http://stackoverflow.com/questions/6621785/posix-pthread-programming
-void sigint(int signo) {
-  puts("\nsignal arrived");
-  exit(1);
-  (void)signo;
-}
+
 
 void *listen_worker(void *passed_arg){
   struct listen_args *args;
