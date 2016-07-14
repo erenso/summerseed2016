@@ -53,6 +53,7 @@ void listen_port(int port, int qid){
         screwed = 1;
         break;
       }
+      //printf("%c\n", ch);
       message = sdscat(message, &ch);
       n++;
     }
@@ -90,7 +91,7 @@ void listen_port(int port, int qid){
     //   return;
     // }
 
-    //sdsfree(message);
+    sdsfree(message);
     fclose(socketf);
     close(newsockfd);
   }
