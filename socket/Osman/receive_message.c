@@ -71,13 +71,18 @@ int main(int argc, char const *argv[])
 	  	if(DEBUG){
 			printf("\nAccept request\n");
 		}
+		printf("connect\n");
 
 		//read message the socket
-		read(connfd,&recMessage,1024);
+		printf("receive byte : %d ",(int)read(connfd,&recMessage,1024));
+		//printf("mesage : %s\n", recMessage);
 
-		strcpy(temp,strtok(recMessage,","));
-		printf("%s : ",temp );
-		while(temp2=strtok(NULL,",")){
+		if(strstr(recMessage,",") == NULL) {
+    		printf("%s\n",recMessage );
+		}
+		printf("%s : ",strcpy(temp,strtok(recMessage,",")));
+
+		while((temp2=strtok(NULL,","))!=NULL){
 			printf("%s\n",temp2);
 		}
 

@@ -67,7 +67,7 @@ int discoveryMain(){
 
 
 	/*-------Wait for connection's finish---------*/
-	for (i = 0; i <255; ++i)
+	for (i = 1; i <255; ++i)
 	{
 		pthread_join(threads[i],NULL);
 		printf("joined thread : %d\n",i);
