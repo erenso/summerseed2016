@@ -28,9 +28,11 @@ int main(int argc, char *argv[]) {
          fprintf(stderr, "usage %s hostname port\n", argv[0]);
          exit(0);
      }
-     puts(argv[1]);
-     puts(argv[2]);
-     write_to(argv[1], atoi(argv[2]));
+     int r = write_to(argv[1], atoi(argv[2]));
+     if(r == -1){
+       exit(1);
+     }
+ 
   
   }
   return 0;

@@ -11,7 +11,7 @@ int listen_port(int port){
 
   sockfd = socket(AF_INET, SOCK_STREAM, 0);
   if (sockfd < 0){
-    //error("ERROR opening socket");
+    error("ERROR opening socket");
     return -1;
   }
   
@@ -21,14 +21,14 @@ int listen_port(int port){
   serv_addr.sin_addr.s_addr = INADDR_ANY;
   serv_addr.sin_port = htons(portno);
   if (bind(sockfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0){
-    //error("ERROR on binding");
+    error("ERROR on binding");
     return -1;
   }
   listen(sockfd, 5);
   clilen = sizeof(cli_addr);
   while ((newsockfd = accept(sockfd, (struct sockaddr *)&cli_addr, &clilen))) {
     if (newsockfd < 0) {
-      //error("ERROR on accept");
+      error("ERROR on accept");
       return -1;
     }
     // Just in case
@@ -56,7 +56,7 @@ int listen_port(int port){
     }
 
     if (n < 0) {
-      //error("ERROR reading from socket");
+      error("ERROR reading from socket");
       return -1;
     }
 
@@ -65,7 +65,7 @@ int listen_port(int port){
     n = write(org_newsocketfd, "I got your message", 18);
 
     if (n < 0) {
-      //error("ERROR writing to socket");
+      error("ERROR writing to socket");
       return -1;
     }
 
@@ -80,10 +80,11 @@ int listen_port(int port){
 int write_to(const char *hostname, int port){
   size_t buffer_size = 2048;
   char *message = calloc(sizeof(char),  (buffer_size + 1));
-  getline(&message, &buffer_size, stdin);
-  //sds message = sdstrim(sdsnew(message_h), " ");
-  message[strlen(message)] = '\t';
-  message[strlen(message)+1] = '\0';
+  size_t chars = getline(&message, &buffer_size, stdin);
+  if(message[chars - 1] == '\n' ){
+    message[chars - 1] = '\t';
+    message[chars+1] = '\0';
+  }
   
 
   
@@ -99,8 +100,8 @@ int write_to(const char *hostname, int port){
   }
   server = gethostbyname(hostname);
   if (server == NULL) {
-      fprintf(stderr, "ERROR, no such host\n");
-      exit(0);
+    error("ERROR, no such host");
+      return -1;
   }
   bzero((char *)&serv_addr, sizeof(serv_addr));
   serv_addr.sin_family = AF_INET;
@@ -109,6 +110,7 @@ int write_to(const char *hostname, int port){
   serv_addr.sin_port = htons(portno);
   if (connect(sockfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0){
     error("ERROR connecting");
+    return -1;
   }
   
   // How to get hostname
@@ -117,6 +119,7 @@ int write_to(const char *hostname, int port){
   n = write(sockfd, message, strlen(message));
   if (n < 0) {
       error("ERROR writing to socket");
+      return -1;
   }
   
   /*
@@ -134,5 +137,4 @@ int write_to(const char *hostname, int port){
 
 void error(const char *msg) {
   perror(msg);
-  exit(1);
 }
