@@ -22,7 +22,7 @@ void* sendRequest(void* arg){
 
 void discover(){
 	
-	int i, arr[NUM_IP];
+	int i, j, arr[NUM_IP];
 	pthread_t threads[NUM_IP];
 
 	fprintf(stderr, "discover start\n");
@@ -33,9 +33,9 @@ void discover(){
 		pthread_create(threads+i, NULL, sendRequest, (void*)(arr+i));
 	}
 
- 	for(i=0; i<NUM_IP; ++i)
+ 	for(j=0; j<i; ++j)
  		
- 		pthread_join(threads[i], NULL);	
+ 		pthread_join(threads[j], NULL);	
 	
 	fprintf(stderr, "discover done\n");
 }

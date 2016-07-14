@@ -96,9 +96,15 @@ int main(){
 		
 		puts("Enter target nick, -ls for list");
 		
-		while(scanf("%c", &ch) != EOF && ch != '\n')
+		while(!interrupt && scanf("%c", &ch) != EOF && ch != '\n')
 			
 			SBaddChar(&nick, ch);
+		
+		if(interrupt){
+			
+			SBclear(&nick);
+			break;			
+		}
 		
 		if(strcmp("-ls", nick.str) == 0){
 			
@@ -122,14 +128,21 @@ int main(){
 		SBaddString(&msg, NICK);
 		SBaddChar(&msg, ',');
 		
-		while(scanf("%c", &ch) != EOF && ch != '\n')
+		while(!interrupt && scanf("%c", &ch) != EOF && ch != '\n')
 			
 			SBaddChar(&msg, ch);
 		
+		if(interrupt){
+			
+			SBclear(&nick);
+			break;			
+		}
+
 		send_msg(target_ip, MSG_PORT, msg.str);
 		
 		SBclear(&nick);
 		SBclear(&msg);
+		
 	}
 	
 	/* wait for threads */
@@ -141,6 +154,7 @@ int main(){
 	
 	pthread_mutex_destroy(&ll_mutex);
 	free((void*)threadArray.threads);	
+	LLclear();
 	
 	return 0;
 }

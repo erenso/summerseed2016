@@ -150,7 +150,7 @@ void* listener(void* arg){
 		puts(address.nick);
 		*/
 		
-		if(*port == REQ_PORT)
+		if(*port == REQ_PORT && !interrupt)
 				
 			send_msg(address.ip, RESP_PORT, RESPONSE);
 	
