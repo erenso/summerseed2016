@@ -39,38 +39,38 @@ int main(int argc, char const *argv[])
 	/*------------server address  set ------*/
   	serv_addr.sin_family = AF_INET;
   	serv_addr.sin_port = htons(10002);
-  	serv_addr.sin_addr.s_addr = inet_addr("172.16.5.145");
+  	serv_addr.sin_addr.s_addr = inet_addr("172.16.5.187");
 
 
+	while(1){	
+		printf("-----------------START------------------\n");
+		printf("waiting for incoming message...\n");
+			
+		//if come a request to socket ,accept
+		if((connfd=connect(sockfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr)))<0){
+		  perror("Error connecting socket ");
+		}else{
+			printf("Accept socket\n");
+		}
 		
-	printf("-----------------START------------------\n");
-	printf("waiting for incoming message...\n");
-		
-	//if come a request to socket ,accept
-	if((connfd=connect(sockfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr)))<0){
-	  perror("Error connecting socket ");
-	}else{
-		printf("Accept socket\n");
+
+		printf("Please enter message>>");
+		fgets (mess, 1024,stdin);
+		//strncat(mess,"\t",strlen(mess)-2);
+		strcpy(mess,strtok(mess,"\n"));
+		strncat(mess,"\t",strlen(mess));
+		printf("[%s] length : %d \n",mess ,(int)strlen(mess));
+
+		//send message the socket
+		printf("sent byte:%d\n",(int)write(sockfd,&mess,sizeof(mess)));
+		printf("send message\n");
+			
+		/*-----close connection-----*/
+		//close(connfd);
+		close(sockfd);
+
+		printf("Terminated connection\n");
+		printf("-----------------END------------------\n\n");
 	}
-	
-
-	printf("Please enter message>>");
-	//scanf("%s",mess);
-	fgets (mess, 1024,stdin);
-	//strncat(mess,"\t",strlen(mess)-2);
-	strcpy(mess,strtok(mess,"\n"));
-	strncat(mess,"\t",strlen(mess));
-	printf("[%s] length : %d \n",mess ,(int)strlen(mess));
-
-	//send message the socket
-	write(sockfd,&mess,1024);
-	printf("send message\n");
-		
-	/*-----close connection-----*/
-	close(connfd);
-	close(sockfd);
-
-	printf("Terminated connection\n");
-	printf("-----------------END------------------\n\n");
 	return 0;
 }
