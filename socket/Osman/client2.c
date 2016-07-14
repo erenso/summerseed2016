@@ -10,7 +10,7 @@
 #define DEBUG 0
 #endif
 
-#define REQUEST "172.16.5.187"
+#define REQUEST "172.16.5.61"
 
 
 int main(void)
@@ -22,7 +22,7 @@ int main(void)
 
   strcpy(mess,"172.16.5.187,Osman\t");
 
-  memset(sendBuff, '0' ,sizeof(recvBuff));
+
 
   if((sockfd = socket(AF_INET, SOCK_STREAM, 0))< 0)
   {
@@ -31,6 +31,7 @@ int main(void)
   }
   printf("Socket retrieve succes\n");
 
+  printf("len : %d\n",strlen(REQUEST));
   serv_addr.sin_family = AF_INET;
   serv_addr.sin_port = htons(10000);
   serv_addr.sin_addr.s_addr = inet_addr(REQUEST);

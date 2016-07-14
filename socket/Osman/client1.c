@@ -64,7 +64,7 @@ int main(int argc, char const *argv[])
 	while(1){
 		
 		printf("-----------------START------------------\n");
-		printf("waiting for accept request...");
+		printf("waiting for accept request...\n");
 		
 		
 

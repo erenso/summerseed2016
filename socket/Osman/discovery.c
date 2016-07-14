@@ -20,8 +20,9 @@ int main(int argc, char const *argv[])
 	char cons[1024] ="172.16.5.";
 	char str[1024],str1[1024];
 	char str2[1024];
-	 pid_t  pid;
+	pid_t  pid;
 	pthread_t threads[255];
+	char strArray[255][1024];
 
 	char tab[5]="\t";
 	while(i<255){
@@ -29,10 +30,9 @@ int main(int argc, char const *argv[])
 		strcpy(str2,cons);
 		sprintf(str,"%d",i);
 		strcat(str2,str );
-		printf("%s\n",str2 );
+		strcpy(strArray[i],str2);
 		
-		printf("length : %d \n",str2);
-		pthread_create(&threads[i], NULL, &discovery, (void *)str2);
+		pthread_create(&threads[i], NULL, &discovery, (void *)strArray[i]);
 		usleep(100);
 		
 		i++;	
@@ -45,7 +45,7 @@ int main(int argc, char const *argv[])
 
 
 void* discovery(void *str1){
-	int listendfd=0,connfd=0;
+	int listendfd=0,connfd=0,option=1;
 	struct sockaddr_in server_addr;
 	char recMessage[1024];
 	char  sendMessage[1024] ;
@@ -55,13 +55,10 @@ void* discovery(void *str1){
 
   	strcpy(sendMessage,"172.16.5.187,Osman\t");
 
-  	printf("discovery string:  %s\n",str);
+  	printf("Discovering  %s\n",str);
 
 	listendfd = socket(AF_INET,SOCK_STREAM,0);
 	printf("Socket retrieve succes\n");
-	
-	memset(&server_addr,'0',sizeof(server_addr));
-	//memset(sendMessage,'0',sizeof(sendMessage));
 
 	server_addr.sin_family = AF_INET;
 	server_addr.sin_addr.s_addr = inet_addr(str);
@@ -85,8 +82,8 @@ void* discovery(void *str1){
       return;
   	}
 	printf("\nAccept request\n");
-
-	write(listendfd,&sendMessage,1024);
+	printf("Discovered  %s\n",str);
+	write(listendfd,&sendMessage,sizeof(sendMessage));
 	printf("send : %s\n",sendMessage);
 
 	close(connfd);
