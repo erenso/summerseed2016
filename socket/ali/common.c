@@ -2,10 +2,13 @@
 
 // nclisten function does what "nc -l #port" does, argument port is the port to listen to
 int nclisten(int port, int sendResponse) {
+    usleep(100);
 	int sockfd, newfd, option = 1;	// sockets and socket options
     struct sockaddr_in serverAddr;	// server addresses
     struct sockaddr_in clientAddr;
     char str[MAX_PACKET_LENGTH];	// to hold incoming message
+    //memset(str, '0', sizeof(char) * MAX_PACKET_LENGTH);
+    str[0] = '\0';
     int structSize;
     
     // open the socket
@@ -30,6 +33,9 @@ int nclisten(int port, int sendResponse) {
     	// if sockfd returns -1, then there's an error, print the error
         perror("socket");	// perror function prints the error in "$argument: error" format
         					// for example: "socket: Some error"
+        close(newfd);	// close connection socket
+        close(sockfd);	// close the socket we listened to
+        return -1;
     }
     
 	// sockaddr_in is the simplified form of sockaddr
@@ -50,6 +56,9 @@ int nclisten(int port, int sendResponse) {
 											 	// 		I don't know why we enter it here manually
     if(-1 == bind(sockfd, (struct sockaddr *)&serverAddr, sizeof(struct sockaddr))){
         perror("bind");	// if error, p(rint )error
+        close(newfd);	// close connection socket
+        close(sockfd);	// close the socket we listened to
+        return -1;
     }
 	
 	// listen function starts the listening process on a socket
@@ -58,6 +67,9 @@ int nclisten(int port, int sendResponse) {
 						//	2: int backlog - number of maximum queue pending connections may grow
     if(-1 == listen(sockfd, 20)){
         perror("listen");	// again, print error
+        close(newfd);	// close connection socket
+        close(sockfd);	// close the socket we listened to
+        return -1;
     }
 
     structSize = sizeof(clientAddr);	// size of the new client address struct
@@ -68,7 +80,10 @@ int nclisten(int port, int sendResponse) {
     						// 	3: size_t size of the client address struct
     newfd = accept(sockfd, (struct sockaddr *)&clientAddr, (socklen_t*)&structSize);
     if(-1 == newfd){
-        perror("accept");	// perror
+        //perror("accept");	// perror
+        close(newfd);	// close connection socket
+        close(sockfd);	// close the socket we listened to
+        return -1;
     }
     
     // here, we start reading from our new socket, one bit per reading
@@ -90,10 +105,16 @@ int nclisten(int port, int sendResponse) {
 
     printf("Got %d bytes:\t[%s]\n", (int)strlen(str), str); // print bytes and reading from socket
 
-    /*if(sendResponse == 1){
-        struct packet myPacket = parsePacket(0, str);
-        printf("ip: [%s], nick: [%s]\n", myPacket.area1, myPacket.area2);
-    }*/
+    if(sendResponse == 1){
+        char *token;
+
+        strtok_r(str, ",", &token);
+        char *request_ip = str;
+        char *request_nick = token;
+        char message[MAX_PACKET_LENGTH];
+        strcpy(message, "172.16.5.179,ali");
+        ncsend(request_ip, 10001, message);
+    }
 
     close(newfd);	// close connection socket
     close(sockfd);	// close the socket we listened to
@@ -122,6 +143,7 @@ int ncsend(char *ip, int port, char *message){
     if(-1 == sockfd){
         perror("socket");
         printf("ip: %s\n", ip);
+        close(sockfd);	// close the socket we listened to
         return -1;
     }
 
@@ -129,12 +151,17 @@ int ncsend(char *ip, int port, char *message){
     timeout.tv_sec = 2;
     timeout.tv_usec = 0;
 
-    if (setsockopt (sockfd, SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout, sizeof(timeout)) < 0)
+    if (setsockopt (sockfd, SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout, sizeof(timeout)) < 0){
         perror("setsockopt failed");
+        close(sockfd);	// close the socket we listened to
+        return -1;
+    }
 
-    if (setsockopt (sockfd, SOL_SOCKET, SO_SNDTIMEO, (char *)&timeout, sizeof(timeout)) < 0)
+    if (setsockopt (sockfd, SOL_SOCKET, SO_SNDTIMEO, (char *)&timeout, sizeof(timeout)) < 0) {
         perror("setsockopt failed");
-
+        close(sockfd);	// close the socket we listened to
+        return -1;
+    }
 	// create server address
     serverAddr.sin_family = AF_INET;	// IPv4
     serverAddr.sin_port = htons((uint16_t)port);	// port number, converted from little endian to big endian
@@ -152,6 +179,7 @@ int ncsend(char *ip, int port, char *message){
     if(-1 == connect(sockfd, (struct sockaddr *)&serverAddr, sizeof(struct sockaddr))){
         perror("connect");
         printf("ip: %s\n", ip);
+        close(sockfd);	// close the socket we listened to
         return -1;
     }
     
@@ -174,6 +202,7 @@ int ncsend(char *ip, int port, char *message){
     if(-1 == sentByte){  
         perror("send");
         printf("ip: %s", ip);
+        close(sockfd);	// close the socket we listened to
         return -1;
     }
     else if(strlen(message) != sentByte){ // if the message length and transmitted message length didn't match
@@ -181,6 +210,8 @@ int ncsend(char *ip, int port, char *message){
     	// just print the numbers, we're not going to do anything here other than hoping something terrible didn't happen
     	// on the transmitted side
         printf("Something happended while transmitting!\nMessage length: %d\tTransmitted Length: %d\n", (int)strlen(message), (int)sentByte);
+        close(sockfd);	// close the socket we listened to
+        return -1;
     }
     printf("Sent %d bytes:\t%s to %s\n", (int)sentByte, message, ip);
 
@@ -194,49 +225,4 @@ int isValidIpAddress(char *ipAddress){
     struct sockaddr_in sa;
     int result = inet_pton(AF_INET, ipAddress, &(sa.sin_addr));
     return result != 0;
-}
-
-struct packet parsePacket(int packetType, char *packet){
-    static struct packet newPacket;
-    newPacket.area1[0] = '\0';
-    newPacket.area2[0] = '\0';
-
-    char *token;
-    char *search = ",";
-
-
-    // Token will point to "SEVERAL".
-    token = strtok(packet, search);
-    strcat(newPacket.area1, token);
-
-    // Token will point to "WORDS".
-    token = strtok(NULL, search);
-    strcat(newPacket.area2, token);
-
-    return newPacket;
-
-    /*if(packetType == 0){    // socket type: ip,nick
-        int i, comma = 0;
-        for(i = 0; i < 20; i++){
-            if(packet[i] != ','){
-                newPacket.area1[i] = packet[i];
-            }else{
-                newPacket.area1[i] = '\0';
-                comma = i;
-                break;
-            }
-        }
-        if(comma == 0){
-            fprintf(stderr, "invalid IP %s", newPacket.area1);
-            return newPacket;
-        }else{
-            i++;
-            while(packet[i] != '\t' && packet[i] != '\0' && i < MAX_PACKET_LENGTH){
-                newPacket.area2[i - comma] = packet[i];
-                i++;
-            }
-        }
-    }
-
-    return newPacket;*/
 }
