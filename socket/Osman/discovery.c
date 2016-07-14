@@ -15,9 +15,31 @@
 #define REQUEST "172.16.5.187"
 void* discovery(void *str1);
 
+/*----------------------------------------*/
+int discoveryMain();
+
+int listen_request(int portX);
+void* discovery(void *str1);
+
+int send_port(char *temp,int portX);
+
+int send_message(){}
+
+int receive_message(){}
+/*----------------------------------------*/
+
+
+
 int main(int argc, char const *argv[])
 {
-	int i=1,t;
+	char ip[1024] = "172.16.5.179";
+	discoveryMain();
+	
+	return 0;
+}
+
+int discoveryMain(){
+	int i=1;
 	char cons[1024] ="172.16.5.";
 	char str[1024],str1[1024];
 	char str2[1024];
@@ -26,6 +48,8 @@ int main(int argc, char const *argv[])
 	char strArray[255][1024];
 
 	char tab[5]="\t";
+
+
 	while(i<255){
 		/*-------calculate ip address-------*/
 		strcpy(str2,"");
@@ -48,11 +72,9 @@ int main(int argc, char const *argv[])
 		pthread_join(threads[i],NULL);
 		printf("joined thread : %d\n",i);
 	}
-	
 
-	return 0;
+
 }
-
 
 void* discovery(void *str1){
 	int listendfd=0,connfd=0,option=1;

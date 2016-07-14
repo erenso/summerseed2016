@@ -3,22 +3,17 @@
 #include <netinet/in.h> 
 #include <string.h> //for memset
 #include <unistd.h>
+#include <arpa/inet.h>
+#include <stdlib.h>
+#include <pthread.h>
+#include <errno.h>
 //for struct sockaddr_in and socket parameters
+
 
 #ifndef DEBUG
 #define DEBUG 0
 #endif
-/*----------------------------------------*/
-int discovery(){}
 
-int listen_hello_request(){}
-
-int listen_hello_response(){}
-
-int send_message(){}
-
-int receive_message(){}
-/*----------------------------------------*/
 
 int main(int argc, char const *argv[])
 {
@@ -45,7 +40,7 @@ int main(int argc, char const *argv[])
 	/*------------server address  set ------*/
 	server_addr.sin_family = AF_INET;
 	server_addr.sin_addr.s_addr = htonl(INADDR_ANY);
-	server_addr.sin_port = htons(10000);
+	server_addr.sin_port = htons(10002);
 	
 	if (DEBUG){
 		printf("bind..\n");
@@ -68,31 +63,28 @@ int main(int argc, char const *argv[])
 	
 	while(1){
 		
-		printf("-----------------START------------------\n");
-		printf("waiting for accept request...\n");
-		
+	
 		//if come a request to socket ,accept
 		if((connfd = accept(listendfd,(struct sockaddr *)NULL,NULL))<0){
 	      perror("Accept Failed \n");
-	  	}else{
+	  	}
+	  	if(DEBUG){
 			printf("\nAccept request\n");
 		}
 
 		//read message the socket
 		read(connfd,&recMessage,1024);
+
 		strcpy(temp,strtok(recMessage,","));
-		printf("Ip address : %s\n",temp );
+		printf("%s : ",temp );
 		while(temp2=strtok(NULL,",")){
-			printf("Nick : %s\n",temp2);
+			printf("%s\n",temp2);
 		}
+
 		
 		/*-----close connection-----*/
 		close(connfd);
-
-		printf("Terminated connection\n");
-		printf("-----------------END------------------\n\n");
 		 
 	}
-
 	return 0;
 }
