@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>  
+#include <errno.h>  
 #include <unistd.h>  
 #include <netdb.h>
 #include <netinet/in.h>
@@ -35,7 +36,7 @@ void parser(address_t* address, char* str){
 			
 		(address->nick)[j] = str[i];
 	
-	str[i] = '\0';
+	(address->nick)[j] = '\0';
 }
 
 int open_socket(short port){
@@ -105,20 +106,25 @@ void* listener(void* arg){
 	
 			perror("Client couldn't accept");
 			close(socketServer);
+			
+			if(interrupt)
+				
+				break;
+			
 			exit(1);
 		}
 	
 		SBinitilize(&str);
 		
-		while(recv(socketClient, buf, 1, 0)){
-			
+		while(!interrupt && recv(socketClient, buf, 1, 0)){
+						
 			if(*buf == terminate_char)
 				
 				break;
 				
 			SBaddChar(&str, *buf);		
 		}
-		
+					
 		if(*port == MSG_PORT){
 			
 			for(i=0; i<str.size; ++i){
@@ -139,10 +145,10 @@ void* listener(void* arg){
 		parser(&address, str.str);
 
 		SBclear(&str);
-		
+		/*
 		puts(address.ip);
 		puts(address.nick);
-		
+		*/
 		
 		if(*port == REQ_PORT)
 				

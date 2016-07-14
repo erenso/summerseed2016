@@ -85,8 +85,7 @@ int main(){
 	pthread_create(&thread, NULL, listener, (void*)(ports+2)); //message
 	threadArray.threads[(threadArray.size)++] = thread;
 	
-	
-	sleep(1); //wait for listener threads
+	sleep(1); //wait for listener threads TODO flag array?
 	
 	pthread_create(&thread, NULL, refresh, NULL);
 	threadArray.threads[(threadArray.size)++] = thread;
@@ -110,7 +109,8 @@ int main(){
 			
 		if((target_ip = LLfindIP(nick.str)) == NULL){
 			
-			fprintf(stderr, "user %s couldn't find\n", nick.str);
+			if(!interrupt)
+				fprintf(stderr, "user %s couldn't find\n", nick.str);
 			SBclear(&nick);
 			continue;
 		}
@@ -150,7 +150,7 @@ void* refresh(void* arg){
 	while(!interrupt){
 		
 		discover();
-		
+		return NULL;
 		sleep(REFRESH_FREQ);
 	}
 	
@@ -233,13 +233,21 @@ void listUsers(){
 
 void signalHandler(int sig){
 	
-	exit(0);
+	static int count = 0;
+	
+	if(++count == 3) //force exit
+		
+		exit(0);
 	
 	if(interrupt)
 		
 		return ;
 	
 	fprintf(stderr, "Interrupt signal received. Closing program\n");
-		
+	
 	interrupt = 1;	
+	
+	send_msg("127.0.0.1", MSG_PORT, " ");
+	send_msg("127.0.0.1", REQ_PORT, " ");
+	send_msg("127.0.0.1", RESP_PORT, " ");
 }
