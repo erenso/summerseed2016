@@ -28,18 +28,21 @@ int main(int argc, char const *argv[])
 	int option = 1 ;
 	char  sendMessage[1024] ;
 
-  	strcpy(sendMessage,"172.16.5.187,Osman");
-
-
-
+  	/*------create socket --------*/
 	listendfd = socket(AF_INET,SOCK_STREAM,0);
-	 setsockopt(listendfd,SOL_SOCKET,SO_REUSEADDR,
-       &option, sizeof(option));
-	printf("Socket retrieve succes\n");
-	
-	memset(&server_addr,'0',sizeof(server_addr));
-	//memset(sendMessage,'0',sizeof(sendMessage));
+	if(listendfd<0)
+		perror("dont create socket\n");
+	else
+		printf("Socket create succes\n");
 
+	/*------assign socket for timeout------*/
+	setsockopt(listendfd,SOL_SOCKET,SO_REUSEADDR,
+       &option, sizeof(option));
+	
+	//set server address initiliaze '0'
+	memset(&server_addr,'0',sizeof(server_addr));
+	
+	/*------------server address  set ------*/
 	server_addr.sin_family = AF_INET;
 	server_addr.sin_addr.s_addr = htonl(INADDR_ANY);
 	server_addr.sin_port = htons(10000);
@@ -48,12 +51,14 @@ int main(int argc, char const *argv[])
 		printf("bind..\n");
 	}
 	
+	//Server address bind socket
 	bind(listendfd,(struct sockaddr*)&server_addr,sizeof(server_addr));
 	
 	if (DEBUG){
 		printf("end bind\n");
 	}
 
+	//listen socket
 	if (listen(listendfd,10)==-1)
 	{
 		printf("failed listen\n");
@@ -66,20 +71,20 @@ int main(int argc, char const *argv[])
 		printf("-----------------START------------------\n");
 		printf("waiting for accept request...\n");
 		
-		
+		//if come a request to socket ,accept
+		if((connfd = accept(listendfd,(struct sockaddr *)NULL,NULL))<0){
+	      perror("Accept Failed \n");
+	  	}else{
+			printf("\nAccept request\n");
+		}
 
-		connfd = accept(listendfd,(struct sockaddr *)NULL,NULL);
-		printf("\nAccept request\n");
-		
+		//read message the socket
 		read(connfd,&recMessage,1024);
-		printf("Request : %s\n",recMessage);
+		printf("Request : [%s]\n",recMessage);
 
-		
-
-/*
-		write(connfd,sendMessage,strlen(sendMessage));
-		printf("Response : %s\n",sendMessage);*/
+		/*-----close connection-----*/
 		close(connfd);
+
 		printf("Terminated connection\n");
 		printf("-----------------END------------------\n\n");
 		 

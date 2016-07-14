@@ -6,6 +6,7 @@
 #include <arpa/inet.h>
 #include <stdlib.h>
 #include <pthread.h>
+#include <errno.h>
 //for struct sockaddr_in and socket parameters
 
 #ifndef DEBUG
@@ -26,18 +27,27 @@ int main(int argc, char const *argv[])
 
 	char tab[5]="\t";
 	while(i<255){
+		/*-------calculate ip address-------*/
 		strcpy(str2,"");
 		strcpy(str2,cons);
 		sprintf(str,"%d",i);
 		strcat(str2,str );
 		strcpy(strArray[i],str2);
-		
+		/*---------------------------*/
+
 		pthread_create(&threads[i], NULL, &discovery, (void *)strArray[i]);
 		usleep(100);
 		
 		i++;	
 	}
 
+
+	/*-------Wait for connection's finish---------*/
+	for (i = 0; i <255; ++i)
+	{
+		pthread_join(threads[i],NULL);
+		printf("joined thread : %d\n",i);
+	}
 	
 
 	return 0;
@@ -51,42 +61,53 @@ void* discovery(void *str1){
 	char  sendMessage[1024] ;
 	char str[1024] ;
 	strcpy(str,(void *)str1);
-	
+	int bindErr=0;
+
+	/*------initiliaze timeout for socket ---------*/
+	struct timeval timeout;      
+    timeout.tv_sec = 0;
+    timeout.tv_usec = 3;
+    /*--------------------*/
+
 
   	strcpy(sendMessage,"172.16.5.187,Osman\t");
 
   	printf("Discovering  %s\n",str);
 
+  	/*------create socket --------*/
 	listendfd = socket(AF_INET,SOCK_STREAM,0);
-	printf("Socket retrieve succes\n");
+	if(listendfd<0)
+		perror("Error  ");
+	else
+		printf("Socket create succes\n");
+	
+	/*------assign socket for timeout------*/
+	setsockopt(listendfd,SOL_SOCKET,SO_REUSEADDR,
+       (char *)&timeout, sizeof(timeout));
 
+	
+	/*------------server address  set ------*/
 	server_addr.sin_family = AF_INET;
 	server_addr.sin_addr.s_addr = inet_addr(str);
 	server_addr.sin_port = htons(10000);
 	
-	if (DEBUG){
-		printf("bind..\n");
-	}
-	
-	bind(listendfd,(struct sockaddr*)&server_addr,sizeof(server_addr));
-	
-	if (DEBUG){
-		printf("end bind\n");
-	}
-	
 		
-	printf("waiting for accept request...");
+	printf("waiting for accept request...\n");
 
+	/*------connect address the socket--------*/
 	if((connfd=connect(listendfd, (struct sockaddr *)&server_addr, sizeof(server_addr)))<0){
-      printf("\n Error : Connect Failed \n");
-      return;
+      printf("ip : %s\n",str);
+      perror("Error  ");
+  	}else{
+		printf("\nAccept request\n");
+		printf("Discovered  %s\n",str);
+		write(listendfd,&sendMessage,sizeof(sendMessage));
+		printf("send : %s\n",sendMessage);
   	}
-	printf("\nAccept request\n");
-	printf("Discovered  %s\n",str);
-	write(listendfd,&sendMessage,sizeof(sendMessage));
-	printf("send : %s\n",sendMessage);
 
+  	/*-----close connect and socket -----*/
 	close(connfd);
+	close(listendfd);
 	printf("Terminated connection\n");	
 
 }
