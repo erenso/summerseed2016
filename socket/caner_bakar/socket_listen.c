@@ -17,7 +17,7 @@
 #include <sys/sendfile.h>
 #include <pthread.h>
 
-#define MAXCLIENT 5
+#define MAXCLIENT 254
 
 
 int new_sock[10];
@@ -34,7 +34,7 @@ int main(int argc , char *argv[]){
     int socket_desc;
     char message[128];
     int counter=0;
-    char response[50]="Message that you sent is received succesfully";
+    char response[100]="192.168.2.1,Caner Bakar = Message that you sent is received succesfully";
 
 
     socket_desc=establish(atoi(argv[1]));
@@ -63,17 +63,23 @@ int main(int argc , char *argv[]){
         ++numberClient;
         client_arr[numberClient-1]=new_sock[sockets-1];
         
-        while (read(new_sock[sockets-1],&message[counter-1],sizeof(char)) > 0){
-            if ( message[counter-1] == '\t')
+        while (read(new_sock[sockets-1],&message[counter],sizeof(char)) > 0){
+            if ( message[counter] == '\t')
                 break;
-            fprintf(stderr, "%c\n", message[counter-1]);
+            ++counter;
         }
+
+        message[counter]='\0';
+        fprintf(stderr, "%s\n",message );
+        
+        message[0]='\0';
+        counter=0;
         
         write(new_sock[sockets-1],response,sizeof(response));
-
-        close(socket_desc);
-        break;    
+  
     }
+
+    close(socket_desc);
 
 }
 
