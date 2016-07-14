@@ -1,10 +1,7 @@
-#include "include/nc.h"
+#include "include/workers.h"
 
-/*
- *  TODO: Seperate Makefile for "nc"
- */
 
-int listen_port(int port, char *response){
+void listen_port(int port, int qid){
   int sockfd, newsockfd, portno;
   socklen_t clilen;
   struct sockaddr_in serv_addr, cli_addr;
@@ -12,7 +9,7 @@ int listen_port(int port, char *response){
   sockfd = socket(AF_INET, SOCK_STREAM, 0);
   if (sockfd < 0){
     error("ERROR opening socket");
-    return -1;
+    return;
   }
   
   bzero((char *)&serv_addr, sizeof(serv_addr));
@@ -22,14 +19,14 @@ int listen_port(int port, char *response){
   serv_addr.sin_port = htons(portno);
   if (bind(sockfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0){
     error("ERROR on binding");
-    return -1;
+    return;
   }
   listen(sockfd, 5);
   clilen = sizeof(cli_addr);
   while ((newsockfd = accept(sockfd, (struct sockaddr *)&cli_addr, &clilen))) {
     if (newsockfd < 0) {
       error("ERROR on accept");
-      return -1;
+      return;
     }
     // Just in case
     //int org_newsocketfd = dup(newsockfd);
@@ -55,10 +52,19 @@ int listen_port(int port, char *response){
 
     if (n < 0) {
       error("ERROR reading from socket");
-      return -1;
+      return;
     }
 
-    printf("%s\n", message);
+    Message response_message;
+    int message_length = sizeof(Message)-sizeof(int);
+    response_message.qid = qid;
+    response_message.mtype = 1;
+    response_message.response = sdsempty();
+    response_message.response = sdscpy(response_message.response, message);
+    printf("%s", message);
+    if(msgsnd(response_message.qid, &response_message, message_length, IPC_NOWAIT) != 0){
+      perror("failed to send");
+    }
     //strcpy(response, message);
 
     //
@@ -66,7 +72,7 @@ int listen_port(int port, char *response){
     //
     // if (n < 0) {
     //   error("ERROR writing to socket");
-    //   return -1;
+    //   return;
     // }
 
     //sdsfree(message);
@@ -74,67 +80,21 @@ int listen_port(int port, char *response){
     close(newsockfd);
   }
   close(sockfd);
-  return 0;
+  return;
 }
 
-int write_to(const char *hostname, int port){
-  size_t buffer_size = 2048;
-  char *message = calloc(sizeof(char),  (buffer_size + 1));
-  size_t chars = getline(&message, &buffer_size, stdin);
-  if(message[chars - 1] == '\n' ){
-    message[chars - 1] = '\t';
-    message[chars+1] = '\0';
+void response_consumer(int qid){
+  Message received;
+  printf("%s\n","outside1" );
+  while(1){
+    if(msgrcv(qid, &received, sizeof(Message)-sizeof(int), 1,1) != -1){
+      
+      if(received.mtype == 1){
+        printf("message : %s", received.response);
+      }
+    }
   }
-  
-
-  
-  int sockfd, portno, n;
-  struct sockaddr_in serv_addr;
-  struct hostent *server;
-
-  portno = port;
-  sockfd = socket(AF_INET, SOCK_STREAM, 0);
-  if (sockfd < 0){
-    error("ERROR opening socket");
-    return -1;
-  }
-  server = gethostbyname(hostname);
-  if (server == NULL) {
-    error("ERROR, no such host");
-      return -1;
-  }
-  bzero((char *)&serv_addr, sizeof(serv_addr));
-  serv_addr.sin_family = AF_INET;
-  bcopy((char *)server->h_addr, (char *)&serv_addr.sin_addr.s_addr,
-        server->h_length);
-  serv_addr.sin_port = htons(portno);
-  if (connect(sockfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0){
-    error("ERROR connecting");
-    return -1;
-  }
-  
-  // How to get hostname
-  // printf("%s", inet_ntoa(serv_addr.sin_addr));
-  
-  n = write(sockfd, message, strlen(message));
-  if (n < 0) {
-      error("ERROR writing to socket");
-      return -1;
-  }
-  
-  /*
-   * Should w8 for response?
-   */
-  
-  //printf("%s\n",message);
-  free(message);
-  close(sockfd);
-  return 0;
-  
-  
-
 }
-
 void error(const char *msg) {
   perror(msg);
 }
