@@ -27,12 +27,14 @@ void *print_message_worker(void *passed_arg){
   Message response_message;
   int message_length = sizeof(Message)-sizeof(int);
   while(1){
-    int r = (msgrcv(*qid,&response_message,message_length,1, IPC_NOWAIT));
-    if( r != -1 ){
+     msgrcv(*qid,&response_message,message_length,1, 0);
+    // if( r != -1 ){   // in case of fails
       printf("%s \n", response_message.response);
-    }
+    // }
     //printf("%d", r);
   }
+  
+
   return NULL;
 }
 
@@ -53,13 +55,13 @@ int main(int argc, char const *argv[]) {
   listen_args->response = "";
   listen_args->qid = response_qid;
   
-  pthread_create(&t1, NULL, listen_worker, (void *)listen_args);
+  
   pthread_create(&t2, NULL, print_message_worker, (void *)&response_qid);
+  pthread_create(&t1, NULL, listen_worker, (void *)listen_args);
 
-  printf("%s\n", "before" );
+
   pthread_join(t2, NULL);
   pthread_join(t1, NULL);
-  printf("%s\n", "after" );
   
 
   
