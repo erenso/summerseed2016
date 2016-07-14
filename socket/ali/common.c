@@ -1,12 +1,12 @@
 #include "netcat.h"
 
 // nclisten function does what "nc -l #port" does, argument port is the port to listen to
-int nclisten(int port){
+int nclisten(int port, int sendResponse) {
 	int sockfd, newfd, option = 1;	// sockets and socket options
     struct sockaddr_in serverAddr;	// server addresses
     struct sockaddr_in clientAddr;
     char str[MAX_PACKET_LENGTH];	// to hold incoming message
-    int structSize;	
+    int structSize;
     
     // open the socket
     // parameters mean:	   address family: 	AF_INET (IPv4 socket)
@@ -15,6 +15,17 @@ int nclisten(int port){
 	sockfd = socket(AF_INET, SOCK_STREAM, 0);
 	setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &option, sizeof(option));	// this prevents port from going to TIME_WAIT state
 																			// in TIME_WAIT state, you can't use that port
+    struct timeval timeout;
+    timeout.tv_sec = 3;
+    timeout.tv_usec = 0;
+
+    if (setsockopt (sockfd, SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout,
+                    sizeof(timeout)) < 0)
+        perror("setsockopt failed");
+
+    if (setsockopt (sockfd, SOL_SOCKET, SO_SNDTIMEO, (char *)&timeout,
+                    sizeof(timeout)) < 0)
+        perror("setsockopt failed");
     if(-1 == sockfd){
     	// if sockfd returns -1, then there's an error, print the error
         perror("socket");	// perror function prints the error in "$argument: error" format
@@ -107,7 +118,18 @@ int ncsend(char *ip, int port, char *message){
     if(-1 == sockfd){
         perror("socket");
         printf("ip: %s\n", ip);
+        return -1;
     }
+
+    struct timeval timeout;
+    timeout.tv_sec = 3;
+    timeout.tv_usec = 0;
+
+    if (setsockopt (sockfd, SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout, sizeof(timeout)) < 0)
+        perror("setsockopt failed");
+
+    if (setsockopt (sockfd, SOL_SOCKET, SO_SNDTIMEO, (char *)&timeout, sizeof(timeout)) < 0)
+        perror("setsockopt failed");
 
 	// create server address
     serverAddr.sin_family = AF_INET;	// IPv4
@@ -126,6 +148,7 @@ int ncsend(char *ip, int port, char *message){
     if(-1 == connect(sockfd, (struct sockaddr *)&serverAddr, sizeof(struct sockaddr))){
         perror("connect");
         printf("ip: %s\n", ip);
+        return -1;
     }
     
     // first we translate our message from the form "xxxx\0???" to "xxxx\t\0??", so we add the end of line character
@@ -146,6 +169,8 @@ int ncsend(char *ip, int port, char *message){
     sentByte = send(sockfd, message, strlen(message), 0);
     if(-1 == sentByte){  
         perror("send");
+        printf("ip: %s", ip);
+        return -1;
     }
     else if(strlen(message) != sentByte){ // if the message length and transmitted message length didn't match
     	// then there's something terrible happened

@@ -13,7 +13,7 @@
 
 #define MAX_PACKET_LENGTH 1024
 
-int nclisten(int port);
+int nclisten(int port, int sendResponse);
 int ncsend(char *ip, int port, char *mesaj);
 int isValidIpAddress(char *ipAddress);
 
