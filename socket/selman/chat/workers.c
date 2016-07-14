@@ -46,16 +46,21 @@ void listen_port(int port, int qid){
      * CRY A LOT
      */
     sds message = sdsempty();
-
+    int screwed = 0;
     while ('\t' != (ch = fgetc(socketf))) {
       // what if '\t' does not exist?
       if(n > 2048){
-        fclose(socketf);
-        close(newsockfd);
+        screwed = 1;
         break;
       }
       message = sdscat(message, &ch);
       n++;
+    }
+    
+    if(screwed){
+      fclose(socketf);
+      close(newsockfd);
+      continue;
     }
 
     if (n < 0) {
@@ -64,6 +69,8 @@ void listen_port(int port, int qid){
     }
 
     Message response_message;
+    // Just in case
+    bzero((char *)&response_message, sizeof(response_message));
     int message_length = sizeof(Message)-sizeof(int);
     response_message.qid = qid;
     response_message.mtype = 1;
