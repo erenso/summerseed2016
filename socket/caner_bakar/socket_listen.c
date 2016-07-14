@@ -27,6 +27,7 @@ int sockets=0;
 int numberClient;
 int client_arr[10];
 int establish (unsigned short portnum);
+int response(char *str);
 
 
 int main(int argc , char *argv[]){
@@ -34,8 +35,7 @@ int main(int argc , char *argv[]){
     int socket_desc;
     char message[128];
     int counter=0;
-    char response[100]="192.168.2.1,Caner Bakar = Message that you sent is received succesfully";
-
+    char *savedEndd1;
 
     socket_desc=establish(atoi(argv[1]));
 
@@ -63,6 +63,7 @@ int main(int argc , char *argv[]){
         ++numberClient;
         client_arr[numberClient-1]=new_sock[sockets-1];
         
+        
         while (read(new_sock[sockets-1],&message[counter],sizeof(char)) > 0){
             if ( message[counter] == '\t')
                 break;
@@ -71,18 +72,74 @@ int main(int argc , char *argv[]){
 
         message[counter]='\0';
         fprintf(stderr, "%s\n",message );
+    
         
+        strtok_r(message, ",",&savedEndd1);
+        response(message);
+  
         message[0]='\0';
         counter=0;
-        
-        write(new_sock[sockets-1],response,sizeof(response));
-  
+
     }
 
     close(socket_desc);
 
 }
 
+int response(char *str){
+
+    
+    int listendfd=0,connfd=0,option=1;
+    struct sockaddr_in server_addr;
+    char response1[100]="192.168.2.1,Caner Bakar\t";
+    int bindErr=0;
+    int counter=0;
+
+    while ( response1[counter] != '\0' ){
+        ++counter;
+    }
+
+
+    /*------initiliaze timeout for socket ---------*/
+    struct timeval timeout;      
+    timeout.tv_sec = 0;
+    timeout.tv_usec = 3;
+    /*--------------------*/
+
+    printf("Repsonsing... \n");
+
+    /*------create socket --------*/
+    listendfd = socket(AF_INET,SOCK_STREAM,0);
+    if(listendfd<0)
+        perror("Error  ");
+    else
+        printf("Socket create succes\n");
+    
+    /*------assign socket for timeout------*/
+    setsockopt(listendfd,SOL_SOCKET,SO_REUSEADDR,(char *)&timeout, sizeof(timeout));
+
+    
+    /*------------server address  set ------*/
+    server_addr.sin_family = AF_INET;
+    server_addr.sin_addr.s_addr = inet_addr(str);
+    server_addr.sin_port = htons(10001);
+
+    /*------connect address the socket--------*/
+    
+    if((connfd=connect(listendfd, (struct sockaddr *)&server_addr, sizeof(server_addr)))<0){
+      printf("ip : %s\n",str);
+      perror("Error  ");
+    }
+
+    else{
+        write(listendfd,response1,sizeof(response1));
+    }
+
+    /*-----close connect and socket -----*/
+    close(connfd);
+    close(listendfd);
+    printf("Terminated connection\n");  
+}
 
 
 int establish (unsigned short portnum) {
