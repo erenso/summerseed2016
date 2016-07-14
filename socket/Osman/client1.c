@@ -6,23 +6,26 @@
 //for struct sockaddr_in and socket parameters
 
 #ifndef DEBUG
-#define DEBUG 1
+#define DEBUG 0
 #endif
+/*----------------------------------------*/
+int discovery(){}
 
-typedef struct
-{
-	int wr;
-	int re;
-	char message[1024];
+int listen_hello_request(){}
 
-}sendM;
+int listen_hello_response(){}
+
+int send_message(){}
+
+int receive_message(){}
+/*----------------------------------------*/
 
 int main(int argc, char const *argv[])
 {
 	int listendfd=0,connfd=0;
 	struct sockaddr_in server_addr;
 	char recMessage[1024];
-	int numrv;
+	int option = 1 ;
 	char  sendMessage[1024] ;
 
   	strcpy(sendMessage,"172.16.5.187,Osman");
@@ -30,6 +33,8 @@ int main(int argc, char const *argv[])
 
 
 	listendfd = socket(AF_INET,SOCK_STREAM,0);
+	 setsockopt(listendfd,SOL_SOCKET,SO_REUSEADDR,
+       &option, sizeof(option));
 	printf("Socket retrieve succes\n");
 	
 	memset(&server_addr,'0',sizeof(server_addr));
@@ -56,10 +61,10 @@ int main(int argc, char const *argv[])
 	}
 
 	
-	//while(1){
+	while(1){
 		
-		
-		printf("waiting for accept request...");
+		printf("-----------------START------------------\n");
+		printf("waiting for accept request...\n");
 		
 		
 
@@ -71,13 +76,14 @@ int main(int argc, char const *argv[])
 
 		
 
-
+/*
 		write(connfd,sendMessage,strlen(sendMessage));
-		printf("Response : %s\n",sendMessage);
+		printf("Response : %s\n",sendMessage);*/
 		close(connfd);
 		printf("Terminated connection\n");
+		printf("-----------------END------------------\n\n");
 		 
-	//}
+	}
 
 	return 0;
 }

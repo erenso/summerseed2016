@@ -10,16 +10,8 @@
 #define DEBUG 0
 #endif
 
-#define REQUEST "172.16.5.179"
- 
+#define REQUEST "172.16.5.61"
 
-typedef struct
-{
-  int wr;
-  int re;
-  char message[1026];
-
-}sendM;
 
 int main(void)
 {
@@ -30,12 +22,7 @@ int main(void)
 
   strcpy(mess,"172.16.5.187,Osman\t");
 
-  sendM sd;
-  sd.wr=0;
-  sd.re=1;
 
-  //memset(recvBuff, '0' ,sizeof(recvBuff));
-  memset(sendBuff, '0' ,sizeof(recvBuff));
 
   if((sockfd = socket(AF_INET, SOCK_STREAM, 0))< 0)
   {
@@ -44,6 +31,7 @@ int main(void)
   }
   printf("Socket retrieve succes\n");
 
+  printf("len : %d\n",strlen(REQUEST));
   serv_addr.sin_family = AF_INET;
   serv_addr.sin_port = htons(10000);
   serv_addr.sin_addr.s_addr = inet_addr(REQUEST);
@@ -53,9 +41,6 @@ int main(void)
       return 1;
   }
   printf("Connect ip address : %s\n",REQUEST);
-
-
-  
 
   write(sockfd,mess,sizeof(mess));
   printf("Sent my information : %s\n",mess );
