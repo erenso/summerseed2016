@@ -47,7 +47,7 @@ volatile sig_atomic_t interrupt = 0;
 pthread_mutex_t ll_mutex;
 /* head of the linked list */
 static address_ll* headLL = NULL;
-/* "192,...., nick" */
+/* request/response message. ex. "192,...., nick" */
 const char* RESPONSE;
 
 int main(){

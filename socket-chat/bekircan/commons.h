@@ -11,8 +11,6 @@
 
 #define NICK "bekircan"
 
-//TODO 
-// #define RESPONSE "172.16.5.153,bekircan"
 
 typedef struct{
 	
