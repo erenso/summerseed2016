@@ -85,6 +85,8 @@ const char* recv_msg(int port){
 		SBaddChar(&str, *buf);		
 	}
 
+	SBaddChar(&str, '\0');		
+
 	if(close(socketServer) == -1)
 		
 		perror("");
