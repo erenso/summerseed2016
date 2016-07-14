@@ -50,7 +50,7 @@ static address_ll* headLL = NULL;
 
 int main(){
 	
-	int i;
+	int i, ports[]={REQ_PORT, RESP_PORT, MSG_PORT};
 	pthread_t thread;
 	StringBuilder nick, msg;
 	char ch;
@@ -76,14 +76,15 @@ int main(){
 	
 	/* create listener threads */
 	
-	pthread_create(&thread, NULL, listen_req, NULL);
+	pthread_create(&thread, NULL, listener, (void*)(ports)); //request
+	threadArray.threads[(threadArray.size)++] = thread;
+	 
+	pthread_create(&thread, NULL, listener, (void*)(ports+1)); //response
 	threadArray.threads[(threadArray.size)++] = thread;
 	
-	pthread_create(&thread, NULL, listen_resp, NULL);
+	pthread_create(&thread, NULL, listener, (void*)(ports+2)); //message
 	threadArray.threads[(threadArray.size)++] = thread;
 	
-	pthread_create(&thread, NULL, listen_msg, NULL);
-	threadArray.threads[(threadArray.size)++] = thread;
 	
 	sleep(1); //wait for listener threads
 	
