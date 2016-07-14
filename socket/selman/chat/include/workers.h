@@ -13,10 +13,13 @@
 #include <unistd.h>
 #include <netinet/in.h>
 #include <netdb.h>
+#include <stdbool.h>
 #include "../sds/sds.h"
+#include "utils.h"
 #include "message_queue.h"
 
-void listen_port(int, int);
+void listen_port(int, int, int, int, int);
+void send_response(sds, int, sds);
 void error(const char*);
 
 #endif
