@@ -22,39 +22,45 @@ int main(void)
 
   strcpy(mess,"172.16.5.187,Osman\t");
 
+  /*------initiliaze timeout for socket ---------*/
+  struct timeval timeout;      
+  timeout.tv_sec = 0;
+  timeout.tv_usec = 3;
+    /*--------------------*/
 
 
+
+  /*------create socket --------*/
   if((sockfd = socket(AF_INET, SOCK_STREAM, 0))< 0)
-  {
-      printf("\n Error : Could not create socket \n");
-      return 1;
-  }
-  printf("Socket retrieve succes\n");
+    perror("Error   ");
+  else
+    printf("Socket create succes\n");
 
-  printf("len : %d\n",(int)strlen(REQUEST));
+  /*------assign socket for timeout------*/
+  setsockopt(sockfd,SOL_SOCKET,SO_REUSEADDR,
+       (char *)&timeout, sizeof(timeout));
+
+  /*------------server address  set ------*/
   serv_addr.sin_family = AF_INET;
-  serv_addr.sin_port = htons(10000);
+  serv_addr.sin_port = htons(10001);
   serv_addr.sin_addr.s_addr = inet_addr(REQUEST);
+
+  //Server address bind socket
+  bind(sockfd,(struct sockaddr*)&serv_addr,sizeof(serv_addr));
+
  
-  if(connect(sockfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr))<0){
-      printf("\n Error : Connect Failed \n");
-      return 1;
-  }
   printf("Connect ip address : %s\n",REQUEST);
+
+
+  n = read(sockfd,&recvBuff, 1023);
+  printf("Read information : %s\n",recvBuff);
+
 
   write(sockfd,mess,sizeof(mess));
   printf("Sent my information : %s\n",mess );
  
   
-  n = read(sockfd,&recvBuff, 1023);
-  printf("Read information : %s\n",recvBuff);
-
  
-  if( n < 0)
-  {
-    printf("\n Read Error \n");
-  }
-
   close(sockfd);
   
  
