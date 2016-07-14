@@ -19,9 +19,10 @@
 extern void LLaddAdress(const address_t* address);
 extern const char* LLfindIP(const char* nick);
 extern char* recv_msg(int port);
-extern volatile sig_atomic_t interrupt;
 extern void send_msg(const char* ip, int port, const char* msg);
 
+extern const char*  RESPONSE;
+extern volatile sig_atomic_t interrupt;
 const char terminate_char = '\t';
 
 void parser(address_t* address, char* str){

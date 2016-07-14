@@ -10,6 +10,7 @@
 
 extern void send_msg(const char* ip, int port, const char* msg);
 extern volatile sig_atomic_t interrupt;
+extern const char*  RESPONSE;
 
 void* sendRequest(void* arg){
 	

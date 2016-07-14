@@ -21,7 +21,6 @@
 #define THREADVECTOR_INITIAL_CAPACITY 10
 #endif
 
-#define NICK "bekircan"
 #define REFRESH_FREQ 600 //sec
 
 /* thread vector */
@@ -37,6 +36,7 @@ void LLclear();
 const char* LLfindIP(const char* nick);
 extern void send_msg(const char* ip, int port, const char* msg);
 extern void discover();
+extern const char* create_response();
 void listUsers();
 void signalHandler(int sig);
 void* refresh(void* arg);
@@ -47,6 +47,8 @@ volatile sig_atomic_t interrupt = 0;
 pthread_mutex_t ll_mutex;
 /* head of the linked list */
 static address_ll* headLL = NULL;
+/* "192,...., nick" */
+const char* RESPONSE;
 
 int main(){
 	
@@ -56,6 +58,8 @@ int main(){
 	char ch;
 	const char* target_ip;
 	struct sigaction act;
+	
+	RESPONSE = create_response();
 	
 	threadvector_t threadArray={
 		

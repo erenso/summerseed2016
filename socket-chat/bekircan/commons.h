@@ -9,8 +9,10 @@
 #define RESP_PORT 10001
 #define MSG_PORT 10002
 
+#define NICK "bekircan"
+
 //TODO 
-#define RESPONSE "172.16.5.153,bekircan"
+// #define RESPONSE "172.16.5.153,bekircan"
 
 typedef struct{
 	
