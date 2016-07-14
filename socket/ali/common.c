@@ -125,7 +125,9 @@ int nclisten(int port, int sendResponse) {
 
 // this function does what "nc ip port" does, it sends a spesific message to an ip:port
 // it reads the message from stdin so "echo -e "message\t" | ./nc ip port" works :)
-int ncsend(char *ip, int port, char *message){
+int ncsend(char *ip, int port, char *messageToSend){
+    char message[MAX_PACKET_LENGTH];
+    strcpy(message, messageToSend);
     //printf("Trying to send a message to %s\n", ip);
 	if(!isValidIpAddress(ip)){	// check if ip address is valid
 		printf("Error: %s is not a valid IP address\n", ip);	// if not, print error and return
