@@ -11,8 +11,10 @@ int main(int argc, char *argv[]) {
      */
      
      
+     sds response = sdsempty();
     // blocking call
-    int r = listen_port(atoi(argv[2]));
+    int r = listen_port(atoi(argv[2]), response);
+    puts(response);
     
       if(r == -1){
         exit(1);

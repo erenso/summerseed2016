@@ -13,7 +13,7 @@
 #include "../../sds/sds.h"
 
 
-int listen_port(int );
+int listen_port(int, char*);
 int write_to(const char *, int);
 void error(const char*);
 

@@ -4,7 +4,7 @@
  *  TODO: Seperate Makefile for "nc"
  */
 
-int listen_port(int port){
+int listen_port(int port, char *response){
   int sockfd, newsockfd, portno;
   socklen_t clilen;
   struct sockaddr_in serv_addr, cli_addr;
@@ -32,7 +32,7 @@ int listen_port(int port){
       return -1;
     }
     // Just in case
-    int org_newsocketfd = dup(newsockfd);
+    //int org_newsocketfd = dup(newsockfd);
 
     // Treat package as a file, 'cause why not?
     FILE *socketf = fdopen(newsockfd, "r");
@@ -60,16 +60,18 @@ int listen_port(int port){
       return -1;
     }
 
-    printf("%s\n", message);
+    //printf("%s\n", message);
+    strcpy(response, message);
 
-    n = write(org_newsocketfd, "I got your message", 18);
+    //
+    // n = write(org_newsocketfd, "I got your message", 18);
+    //
+    // if (n < 0) {
+    //   error("ERROR writing to socket");
+    //   return -1;
+    // }
 
-    if (n < 0) {
-      error("ERROR writing to socket");
-      return -1;
-    }
-
-    sdsfree(message);
+    //sdsfree(message);
     fclose(socketf);
     close(newsockfd);
   }
