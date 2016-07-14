@@ -1,6 +1,4 @@
 all:
-	gcc -o nc_socket nc_socket.c recv.c send.c StringBuilder.c -Wall -pedantic-errors
-	
+	gcc -o chat main.c listener.c send_msg.c StringBuilder.c discover.c create_response.c -lpthread -Wall -g
 clean:
-
-	rm nc_socket
+	rm -f chat
