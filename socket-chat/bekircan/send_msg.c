@@ -7,8 +7,6 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
-extern volatile sig_atomic_t interrupt;
-
 void send_msg(const char* ip, int port, const char* msg){
 	
 	struct sockaddr_in server_addr;
@@ -35,7 +33,6 @@ void send_msg(const char* ip, int port, const char* msg){
 	server_addr.sin_addr.s_addr = inet_addr(ip);
     server_addr.sin_family = AF_INET;
 	server_addr.sin_port = htons(port);
-  
 	
 	if(connect(fdSocket , (struct sockaddr*)&server_addr , sizeof(server_addr)) < 0){
          
