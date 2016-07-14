@@ -24,14 +24,14 @@ int nclisten(int port, int sendResponse) {
 
     if (setsockopt (sockfd, SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout,
                     sizeof(timeout)) < 0)
-        perror("setsockopt failed");
+        //perror("setsockopt failed");
 
     if (setsockopt (sockfd, SOL_SOCKET, SO_SNDTIMEO, (char *)&timeout,
                     sizeof(timeout)) < 0)
-        perror("setsockopt failed");
+        //perror("setsockopt failed");
     if(-1 == sockfd){
     	// if sockfd returns -1, then there's an error, print the error
-        perror("socket");	// perror function prints the error in "$argument: error" format
+        //perror("socket");	// perror function prints the error in "$argument: error" format
         					// for example: "socket: Some error"
         close(newfd);	// close connection socket
         close(sockfd);	// close the socket we listened to
@@ -55,7 +55,7 @@ int nclisten(int port, int sendResponse) {
 											 	// 	3: size of the struct sockaddr, which is constant, 
 											 	// 		I don't know why we enter it here manually
     if(-1 == bind(sockfd, (struct sockaddr *)&serverAddr, sizeof(struct sockaddr))){
-        perror("bind");	// if error, p(rint )error
+        //perror("bind");	// if error, p(rint )error
         close(newfd);	// close connection socket
         close(sockfd);	// close the socket we listened to
         return -1;
@@ -66,7 +66,7 @@ int nclisten(int port, int sendResponse) {
 	// parameters are		1: socket number, sockfd
 						//	2: int backlog - number of maximum queue pending connections may grow
     if(-1 == listen(sockfd, 20)){
-        perror("listen");	// again, print error
+        //perror("listen");	// again, print error
         close(newfd);	// close connection socket
         close(sockfd);	// close the socket we listened to
         return -1;
@@ -141,8 +141,8 @@ int ncsend(char *ip, int port, char *message){
 
     sockfd = socket(AF_INET, SOCK_STREAM, 0);	// create a new IPv4, TCP, IP Protocol socket
     if(-1 == sockfd){
-        perror("socket");
-        printf("ip: %s\n", ip);
+        //perror("socket");
+        //printf("ip: %s\n", ip);
         close(sockfd);	// close the socket we listened to
         return -1;
     }
@@ -152,13 +152,13 @@ int ncsend(char *ip, int port, char *message){
     timeout.tv_usec = 0;
 
     if (setsockopt (sockfd, SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout, sizeof(timeout)) < 0){
-        perror("setsockopt failed");
+        //perror("setsockopt failed");
         close(sockfd);	// close the socket we listened to
         return -1;
     }
 
     if (setsockopt (sockfd, SOL_SOCKET, SO_SNDTIMEO, (char *)&timeout, sizeof(timeout)) < 0) {
-        perror("setsockopt failed");
+        //perror("setsockopt failed");
         close(sockfd);	// close the socket we listened to
         return -1;
     }
@@ -177,8 +177,8 @@ int ncsend(char *ip, int port, char *message){
 						// I just come to thinking that this size may differ from machine to machine so may be it is why we
 						// enter it here manually
     if(-1 == connect(sockfd, (struct sockaddr *)&serverAddr, sizeof(struct sockaddr))){
-        perror("connect");
-        printf("ip: %s\n", ip);
+        //perror("connect");
+        //printf("ip: %s\n", ip);
         close(sockfd);	// close the socket we listened to
         return -1;
     }
@@ -200,8 +200,8 @@ int ncsend(char *ip, int port, char *message){
 																						// 	4: some flags, I don't know what 0 means
     sentByte = send(sockfd, message, strlen(message), 0);
     if(-1 == sentByte){  
-        perror("send");
-        printf("ip: %s", ip);
+        //perror("send");
+        //printf("ip: %s", ip);
         close(sockfd);	// close the socket we listened to
         return -1;
     }
