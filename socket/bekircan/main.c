@@ -187,6 +187,10 @@ void LLaddAdress(const address_t* address){
 	
 	address_ll **temp = &headLL;
 	
+	if(LLfindIP(address->nick)) /* if exist */
+
+		return ;
+	
 	pthread_mutex_lock(&ll_mutex);
 	
 	while(*temp)

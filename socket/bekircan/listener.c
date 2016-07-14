@@ -155,7 +155,7 @@ void* listener(void* arg){
 				
 			send_msg(address.ip, RESP_PORT, RESPONSE);
 	
-		if(LLfindIP(address.nick) == NULL) /* if not exist */
+		if(!interrupt)
 			
 			LLaddAdress(&address);
 		
