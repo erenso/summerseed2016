@@ -13,8 +13,13 @@
 
 #define MAX_PACKET_LENGTH 1024
 
+struct packet {
+    char area1[50];
+    char area2[MAX_PACKET_LENGTH - 20];
+};
+
 int nclisten(int port, int sendResponse);
 int ncsend(char *ip, int port, char *mesaj);
 int isValidIpAddress(char *ipAddress);
-
+struct packet parsePacket(int packetType, char *packet);
 #endif /* NETCAT_H */

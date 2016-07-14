@@ -87,9 +87,13 @@ int nclisten(int port, int sendResponse) {
 	
 	str[index] = '\0';					// after reading, we have char[] in the form of "xxxx\t????", we turn it into
 										// "xxxx\t\0???" so we can find it's length and print it, it's a string now
-	
-    
-    printf("Got %d bytes:\t%s\n", (int)strlen(str), str); // print bytes and reading from socket
+
+    printf("Got %d bytes:\t[%s]\n", (int)strlen(str), str); // print bytes and reading from socket
+
+    /*if(sendResponse == 1){
+        struct packet myPacket = parsePacket(0, str);
+        printf("ip: [%s], nick: [%s]\n", myPacket.area1, myPacket.area2);
+    }*/
 
     close(newfd);	// close connection socket
     close(sockfd);	// close the socket we listened to
@@ -122,7 +126,7 @@ int ncsend(char *ip, int port, char *message){
     }
 
     struct timeval timeout;
-    timeout.tv_sec = 3;
+    timeout.tv_sec = 2;
     timeout.tv_usec = 0;
 
     if (setsockopt (sockfd, SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout, sizeof(timeout)) < 0)
@@ -190,4 +194,49 @@ int isValidIpAddress(char *ipAddress){
     struct sockaddr_in sa;
     int result = inet_pton(AF_INET, ipAddress, &(sa.sin_addr));
     return result != 0;
+}
+
+struct packet parsePacket(int packetType, char *packet){
+    static struct packet newPacket;
+    newPacket.area1[0] = '\0';
+    newPacket.area2[0] = '\0';
+
+    char *token;
+    char *search = ",";
+
+
+    // Token will point to "SEVERAL".
+    token = strtok(packet, search);
+    strcat(newPacket.area1, token);
+
+    // Token will point to "WORDS".
+    token = strtok(NULL, search);
+    strcat(newPacket.area2, token);
+
+    return newPacket;
+
+    /*if(packetType == 0){    // socket type: ip,nick
+        int i, comma = 0;
+        for(i = 0; i < 20; i++){
+            if(packet[i] != ','){
+                newPacket.area1[i] = packet[i];
+            }else{
+                newPacket.area1[i] = '\0';
+                comma = i;
+                break;
+            }
+        }
+        if(comma == 0){
+            fprintf(stderr, "invalid IP %s", newPacket.area1);
+            return newPacket;
+        }else{
+            i++;
+            while(packet[i] != '\t' && packet[i] != '\0' && i < MAX_PACKET_LENGTH){
+                newPacket.area2[i - comma] = packet[i];
+                i++;
+            }
+        }
+    }
+
+    return newPacket;*/
 }
