@@ -103,7 +103,10 @@ int nclisten(int port, int sendResponse) {
 	str[index] = '\0';					// after reading, we have char[] in the form of "xxxx\t????", we turn it into
 										// "xxxx\t\0???" so we can find it's length and print it, it's a string now
 
-    printf("Got %d bytes:\t[%s]\n", (int)strlen(str), str); // print bytes and reading from socket
+    struct in_addr ipAddr = (&clientAddr)->sin_addr;
+    char incoming_IP[INET_ADDRSTRLEN];
+    inet_ntop( AF_INET, &ipAddr, incoming_IP, INET_ADDRSTRLEN );
+    printf("Got %d bytes:\t[%s] from [%s]\n", (int)strlen(str), str, incoming_IP); // print bytes and reading from socket
 
     if(sendResponse == 1){
         char *token;
