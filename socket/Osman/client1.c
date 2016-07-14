@@ -27,7 +27,7 @@ int main(int argc, char const *argv[])
 	char recMessage[1024];
 	int option = 1 ;
 	char  sendMessage[1024] ;
-
+	char temp[20],*temp2;
   	/*------create socket --------*/
 	listendfd = socket(AF_INET,SOCK_STREAM,0);
 	if(listendfd<0)
@@ -80,8 +80,12 @@ int main(int argc, char const *argv[])
 
 		//read message the socket
 		read(connfd,&recMessage,1024);
-		printf("Request : [%s]\n",recMessage);
-
+		strcpy(temp,strtok(recMessage,","));
+		printf("Ip address : %s\n",temp );
+		while(temp2=strtok(NULL,",")){
+			printf("Nick : %s\n",temp2);
+		}
+		
 		/*-----close connection-----*/
 		close(connfd);
 
