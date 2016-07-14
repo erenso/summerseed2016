@@ -25,5 +25,17 @@ Discovery yapmak:
 ```
 Sürekli gelen requestleri dinlemek
 ```sh
-./listen
+./listen_req
+```
+Sürekli gelen responseları dinlemek:
+```sh
+./listen_resp
+```
+Gelen mesajları dinlemek:
+```sh
+./listen_mesg
+```
+Mesaj göndermek:
+```sh
+echo "mesaj" | ./send
 ```

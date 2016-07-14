@@ -31,7 +31,7 @@ int main(void)
   }
   printf("Socket retrieve succes\n");
 
-  printf("len : %d\n",strlen(REQUEST));
+  printf("len : %d\n",(int)strlen(REQUEST));
   serv_addr.sin_family = AF_INET;
   serv_addr.sin_port = htons(10000);
   serv_addr.sin_addr.s_addr = inet_addr(REQUEST);

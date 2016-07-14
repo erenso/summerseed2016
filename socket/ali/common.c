@@ -2,10 +2,13 @@
 
 // nclisten function does what "nc -l #port" does, argument port is the port to listen to
 int nclisten(int port, int sendResponse) {
+    usleep(100);
 	int sockfd, newfd, option = 1;	// sockets and socket options
     struct sockaddr_in serverAddr;	// server addresses
     struct sockaddr_in clientAddr;
     char str[MAX_PACKET_LENGTH];	// to hold incoming message
+    //memset(str, '0', sizeof(char) * MAX_PACKET_LENGTH);
+    str[0] = '\0';
     int structSize;
     
     // open the socket
@@ -21,15 +24,18 @@ int nclisten(int port, int sendResponse) {
 
     if (setsockopt (sockfd, SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout,
                     sizeof(timeout)) < 0)
-        perror("setsockopt failed");
+        //perror("setsockopt failed");
 
     if (setsockopt (sockfd, SOL_SOCKET, SO_SNDTIMEO, (char *)&timeout,
                     sizeof(timeout)) < 0)
-        perror("setsockopt failed");
+        //perror("setsockopt failed");
     if(-1 == sockfd){
     	// if sockfd returns -1, then there's an error, print the error
-        perror("socket");	// perror function prints the error in "$argument: error" format
+        //perror("socket");	// perror function prints the error in "$argument: error" format
         					// for example: "socket: Some error"
+        close(newfd);	// close connection socket
+        close(sockfd);	// close the socket we listened to
+        return -1;
     }
     
 	// sockaddr_in is the simplified form of sockaddr
@@ -49,7 +55,10 @@ int nclisten(int port, int sendResponse) {
 											 	// 	3: size of the struct sockaddr, which is constant, 
 											 	// 		I don't know why we enter it here manually
     if(-1 == bind(sockfd, (struct sockaddr *)&serverAddr, sizeof(struct sockaddr))){
-        perror("bind");	// if error, p(rint )error
+        //perror("bind");	// if error, p(rint )error
+        close(newfd);	// close connection socket
+        close(sockfd);	// close the socket we listened to
+        return -1;
     }
 	
 	// listen function starts the listening process on a socket
@@ -57,7 +66,10 @@ int nclisten(int port, int sendResponse) {
 	// parameters are		1: socket number, sockfd
 						//	2: int backlog - number of maximum queue pending connections may grow
     if(-1 == listen(sockfd, 20)){
-        perror("listen");	// again, print error
+        //perror("listen");	// again, print error
+        close(newfd);	// close connection socket
+        close(sockfd);	// close the socket we listened to
+        return -1;
     }
 
     structSize = sizeof(clientAddr);	// size of the new client address struct
@@ -68,7 +80,10 @@ int nclisten(int port, int sendResponse) {
     						// 	3: size_t size of the client address struct
     newfd = accept(sockfd, (struct sockaddr *)&clientAddr, (socklen_t*)&structSize);
     if(-1 == newfd){
-        perror("accept");	// perror
+        //perror("accept");	// perror
+        close(newfd);	// close connection socket
+        close(sockfd);	// close the socket we listened to
+        return -1;
     }
     
     // here, we start reading from our new socket, one bit per reading
@@ -87,9 +102,19 @@ int nclisten(int port, int sendResponse) {
 	
 	str[index] = '\0';					// after reading, we have char[] in the form of "xxxx\t????", we turn it into
 										// "xxxx\t\0???" so we can find it's length and print it, it's a string now
-	
-    
-    printf("Got %d bytes:\t%s\n", (int)strlen(str), str); // print bytes and reading from socket
+
+    printf("Got %d bytes:\t[%s]\n", (int)strlen(str), str); // print bytes and reading from socket
+
+    if(sendResponse == 1){
+        char *token;
+
+        strtok_r(str, ",", &token);
+        char *request_ip = str;
+        char *request_nick = token;
+        char message[MAX_PACKET_LENGTH];
+        strcpy(message, "172.16.5.179,ali");
+        ncsend(request_ip, 10001, message);
+    }
 
     close(newfd);	// close connection socket
     close(sockfd);	// close the socket we listened to
@@ -100,7 +125,9 @@ int nclisten(int port, int sendResponse) {
 
 // this function does what "nc ip port" does, it sends a spesific message to an ip:port
 // it reads the message from stdin so "echo -e "message\t" | ./nc ip port" works :)
-int ncsend(char *ip, int port, char *message){
+int ncsend(char *ip, int port, char *messageToSend){
+    char message[MAX_PACKET_LENGTH];
+    strcpy(message, messageToSend);
     //printf("Trying to send a message to %s\n", ip);
 	if(!isValidIpAddress(ip)){	// check if ip address is valid
 		printf("Error: %s is not a valid IP address\n", ip);	// if not, print error and return
@@ -116,21 +143,27 @@ int ncsend(char *ip, int port, char *message){
 
     sockfd = socket(AF_INET, SOCK_STREAM, 0);	// create a new IPv4, TCP, IP Protocol socket
     if(-1 == sockfd){
-        perror("socket");
-        printf("ip: %s\n", ip);
+        //perror("socket");
+        //printf("ip: %s\n", ip);
+        close(sockfd);	// close the socket we listened to
         return -1;
     }
 
     struct timeval timeout;
-    timeout.tv_sec = 3;
+    timeout.tv_sec = 2;
     timeout.tv_usec = 0;
 
-    if (setsockopt (sockfd, SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout, sizeof(timeout)) < 0)
-        perror("setsockopt failed");
+    if (setsockopt (sockfd, SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout, sizeof(timeout)) < 0){
+        //perror("setsockopt failed");
+        close(sockfd);	// close the socket we listened to
+        return -1;
+    }
 
-    if (setsockopt (sockfd, SOL_SOCKET, SO_SNDTIMEO, (char *)&timeout, sizeof(timeout)) < 0)
-        perror("setsockopt failed");
-
+    if (setsockopt (sockfd, SOL_SOCKET, SO_SNDTIMEO, (char *)&timeout, sizeof(timeout)) < 0) {
+        //perror("setsockopt failed");
+        close(sockfd);	// close the socket we listened to
+        return -1;
+    }
 	// create server address
     serverAddr.sin_family = AF_INET;	// IPv4
     serverAddr.sin_port = htons((uint16_t)port);	// port number, converted from little endian to big endian
@@ -146,8 +179,9 @@ int ncsend(char *ip, int port, char *message){
 						// I just come to thinking that this size may differ from machine to machine so may be it is why we
 						// enter it here manually
     if(-1 == connect(sockfd, (struct sockaddr *)&serverAddr, sizeof(struct sockaddr))){
-        perror("connect");
-        printf("ip: %s\n", ip);
+        //perror("connect");
+        //printf("ip: %s\n", ip);
+        close(sockfd);	// close the socket we listened to
         return -1;
     }
     
@@ -168,8 +202,9 @@ int ncsend(char *ip, int port, char *message){
 																						// 	4: some flags, I don't know what 0 means
     sentByte = send(sockfd, message, strlen(message), 0);
     if(-1 == sentByte){  
-        perror("send");
-        printf("ip: %s", ip);
+        //perror("send");
+        //printf("ip: %s", ip);
+        close(sockfd);	// close the socket we listened to
         return -1;
     }
     else if(strlen(message) != sentByte){ // if the message length and transmitted message length didn't match
@@ -177,6 +212,8 @@ int ncsend(char *ip, int port, char *message){
     	// just print the numbers, we're not going to do anything here other than hoping something terrible didn't happen
     	// on the transmitted side
         printf("Something happended while transmitting!\nMessage length: %d\tTransmitted Length: %d\n", (int)strlen(message), (int)sentByte);
+        close(sockfd);	// close the socket we listened to
+        return -1;
     }
     printf("Sent %d bytes:\t%s to %s\n", (int)sentByte, message, ip);
 

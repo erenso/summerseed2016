@@ -16,5 +16,4 @@
 int nclisten(int port, int sendResponse);
 int ncsend(char *ip, int port, char *mesaj);
 int isValidIpAddress(char *ipAddress);
-
 #endif /* NETCAT_H */
