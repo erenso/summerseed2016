@@ -11,6 +11,9 @@ void listen_port(int port, int qid){
     error("ERROR opening socket");
     return;
   }
+  int option = 1;
+  sockfd = socket(AF_INET, SOCK_STREAM, 0);
+  setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &option, sizeof(option));
   
   bzero((char *)&serv_addr, sizeof(serv_addr));
   portno = port;
@@ -46,6 +49,11 @@ void listen_port(int port, int qid){
 
     while ('\t' != (ch = fgetc(socketf))) {
       // what if '\t' does not exist?
+      if(n > 2048){
+        fclose(socketf);
+        close(newsockfd);
+        break;
+      }
       message = sdscat(message, &ch);
       n++;
     }
@@ -61,7 +69,7 @@ void listen_port(int port, int qid){
     response_message.mtype = 1;
     response_message.response = sdsempty();
     response_message.response = sdscpy(response_message.response, message);
-    printf("%s", message);
+    //printf("%s", message);
     if(msgsnd(response_message.qid, &response_message, message_length, IPC_NOWAIT) != 0){
       perror("failed to send");
     }
