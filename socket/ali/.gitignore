@@ -43,6 +43,7 @@
 # Debug files
 *.dSYM/
 *.su
+!makefile
 nc
 listen
 discovery

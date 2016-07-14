@@ -90,11 +90,13 @@ int nclisten(int port){
 // this function does what "nc ip port" does, it sends a spesific message to an ip:port
 // it reads the message from stdin so "echo -e "message\t" | ./nc ip port" works :)
 int ncsend(char *ip, int port, char *message){
+    //printf("Trying to send a message to %s\n", ip);
 	if(!isValidIpAddress(ip)){	// check if ip address is valid
 		printf("Error: %s is not a valid IP address\n", ip);	// if not, print error and return
 		return -1;
 	}
 	if(strlen(message) > MAX_PACKET_LENGTH){	// if the message which is going to be transmitted is longer than maximum length
+        printf("Message too long. :(\n");
 		return -1;						// kill the execution and return an error
 	}
 	int sockfd; // our socket
@@ -104,6 +106,7 @@ int ncsend(char *ip, int port, char *message){
     sockfd = socket(AF_INET, SOCK_STREAM, 0);	// create a new IPv4, TCP, IP Protocol socket
     if(-1 == sockfd){
         perror("socket");
+        printf("ip: %s\n", ip);
     }
 
 	// create server address
@@ -122,6 +125,7 @@ int ncsend(char *ip, int port, char *message){
 						// enter it here manually
     if(-1 == connect(sockfd, (struct sockaddr *)&serverAddr, sizeof(struct sockaddr))){
         perror("connect");
+        printf("ip: %s\n", ip);
     }
     
     // first we translate our message from the form "xxxx\0???" to "xxxx\t\0??", so we add the end of line character

@@ -3,7 +3,7 @@
 
 // BEWARE, this file has threads
 
-char ip[50] = "10.38.65.";	// first three numbers of the ip address
+char ip[50] = "172.16.5.";	// first three numbers of the ip address
 
 // this function is passed into pthread_create function in order to create a thread
 // this has to be type of void* and its argument should be void* as well
@@ -15,7 +15,7 @@ void *sendRequest(void *i_ptr){
 	char newip[50];			// holds new ip value
 	sprintf(newip, "%s%d", ip, *i); // new ip in the form of ip.i, basically concats i to ip creating an ip address
 	char message[MAX_PACKET_LENGTH];	// our message, which is "10.38.65.183,ali"
-	strcpy(message, "10.38.65.183,ali");	// copy our message to the variable
+	strcpy(message, "172.16.5.179,ali");	// copy our message to the variable
 	ncsend(newip, 10000, message);		// send our message
 	
 	return NULL;
