@@ -87,6 +87,8 @@ int main(int argc, char const *argv[])
 				printf("\nAccept request\n");
 			}
 			printf("-------------------------------\n");
+			/*fflush(stdin);
+			fflush(stdout);*/
 			//read message the socket
 			if(read(connfd,&recMessage,1024)>-1){
 				strcpy(temp,strtok(recMessage,","));

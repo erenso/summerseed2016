@@ -76,7 +76,7 @@ int main(int argc, char const *argv[])
 			printf("\nAccept request\n");
 		}
 		printf("connect %d\n",count++);
-
+		memset(&recMessage,' ',1024);
 		//read message the socket
 		len = (int)read(connfd,&recMessage,1024);
 		if (DEBUG)
@@ -94,7 +94,8 @@ int main(int argc, char const *argv[])
 				printf(": %s\n",temp2);
 			}
 		}
-		
+		fflush(stdin);
+		fflush(stdout);
 		/*-----close connection-----*/
 		close(connfd);
 	}

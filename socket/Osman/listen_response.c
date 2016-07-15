@@ -85,7 +85,7 @@ int main(int argc, char const *argv[])
 	      return -1;
 	  	}else{
 	  		printf("Accept request\n");
-			
+			memset(&recMessage,' ',1024);
 			//read message the socket
 			if(read(connfd,&recMessage,1024)>-1){
 				strcpy(temp,strtok(recMessage,","));
