@@ -21,7 +21,7 @@ int discoveryMain();
 int listen_request(int portX);
 void* discovery(void *str1);
 
-int receive_port(int portX);
+void* receive_port();
 
 int send_message(){}
 
@@ -83,6 +83,8 @@ void* discovery(void *str1){
 	char  sendMessage[1024] ;
 	char str[1024] ;
 	strcpy(str,(void *)str1);
+	pthread_t threads[255];
+	int i=0;
 	
 	/*------initiliaze timeout for socket ---------*/
 	struct timeval timeout;      
@@ -126,6 +128,7 @@ void* discovery(void *str1){
 	if((connfd=connect(listendfd, (struct sockaddr *)&server_addr, sizeof(server_addr)))<0){
       printf("ip : %s connect fault\n",str);  	
   	}else{
+		pthread_create(&threads[i], NULL, &receive_port,(void*)threads[i]);
 		
 		if (DEBUG){
 			printf("\nConnect host\n");
@@ -133,9 +136,9 @@ void* discovery(void *str1){
 
 
 		write(listendfd,&sendMessage,sizeof(sendMessage));
-		printf("-----------------------------\n");
+		/*printf("-----------------------------\n");
 		printf("Discovered  : %s\n",str);
-		printf("-----------------------------\n");
+		printf("-----------------------------\n");*/
 		
 		
 		
@@ -153,7 +156,7 @@ void* discovery(void *str1){
 }
 
 
-int receive_port(int portX){
+void* receive_port(void *idThread){
 	int listendfd=0,connfd=0;
 	struct sockaddr_in server_addr;
 	char recMessage[1024];
@@ -161,14 +164,11 @@ int receive_port(int portX){
 	int byte=0;
 	char  sendMessage[1024] ;
 	char temp[20],*temp2;
+	int portX = 10001;
 
-	FILE *inp = fopen("discovery.txt","a");
-	if(inp==NULL){
-		perror("Error file");
-		exit(1);
-	}
-
-
+	pthread_t myTid =(pthread_t)idThread;
+	
+	
 
   	/*------create socket --------*/
 	listendfd = socket(AF_INET,SOCK_STREAM,0);
@@ -216,7 +216,7 @@ int receive_port(int portX){
 	if(DEBUG){
 		printf("\nAccept request\n");
 	}
-
+	recMessage[0]='\0';
 	byte=(int)read(connfd,&recMessage,1024);
 	if (DEBUG)
 	{
@@ -230,22 +230,26 @@ int receive_port(int portX){
 	
 
 	if(strstr(recMessage,",") == NULL) {
-    	fprintf(inp,"%s\n",recMessage );
+    	printf("*********************\n");
+    	printf("wrong respond\n");
+		printf("*********************\n");
+	}
 	
-	}
 	printf("--------------------------------------------\n");
-	fprintf(inp,"%s : ",strcpy(temp,strtok(recMessage,",")));
 	printf("discovered\n");
+	temp[0] = '\0';
+	strcpy(temp,strtok(recMessage,","));
 	printf("IP : %s\n",temp);
-	printf("--------------------------------------------\n");
+	
 	while((temp2=strtok(NULL,","))!=NULL){
-		fprintf(inp,",%s\n",temp2);
+		printf("Nick : %s\n",temp2);	
 	}
-	printf("Nick : %s\n",temp2);
-
-	fclose(inp);
 	printf("discovered end\n");
+	printf("--------------------------------------------\n");
+	
+
 	/*-----close connection-----*/
+	pthread_join(myTid,NULL);
 	close(connfd);
 	close(listendfd);
 }

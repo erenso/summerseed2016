@@ -90,10 +90,13 @@ int main(int argc, char const *argv[])
 			/*fflush(stdin);
 			fflush(stdout);*/
 			//read message the socket
+			recMessage[0]='\0';
 			if(read(connfd,&recMessage,1024)>-1){
+				temp[0] = '\0';
+				printf("%s\n",recMessage );
 				strcpy(temp,strtok(recMessage,","));
 				printf("Request Ip address : %s\n",temp );
-				while(temp2=strtok(NULL,",")){
+				while(temp2=strtok(NULL,"	")){
 					printf("Nick : %s\n",temp2);
 				}
 
@@ -136,6 +139,7 @@ int send_port(char *ip,int portX){
 	char  mess[1024] ;
 	int connfd;
 
+	memset(&mess,' ',1024);
 	strcpy(mess,"192.168.182.187,Osman\t");
 
 	/*------initiliaze timeout for socket ---------*/
@@ -152,11 +156,15 @@ int send_port(char *ip,int portX){
 	}else if (DEBUG){
 		printf("Socket create succes (send response)\n");
 	}
-		
+	
+
 
 	/*------assign socket for timeout------*/
 	setsockopt(sockfd,SOL_SOCKET,SO_REUSEADDR,
 	       (char *)&timeout, sizeof(timeout));
+	/*if (setsockopt (sockfd, SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout,
+                    sizeof(timeout)) < 0)*/
+        //perror("setsockopt failed");
 
 	/*------------server address  set ------*/
   	serv_addr.sin_family = AF_INET;
@@ -170,7 +178,8 @@ int send_port(char *ip,int portX){
 		printf("waiting for send port 10001...\n");		
 	}
 	printf("response 10001\n");
-		
+	
+
 	//if come a request to socket ,accept
 	if((connfd=connect(sockfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr)))<0){
 	  perror("Error connecting socket ");
