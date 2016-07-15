@@ -12,7 +12,6 @@ void error(char *msg)
     exit(1);
 }
 
-
 int main(int argc, char *argv[])
 {
      int sockfd, newsockfd, portno, clilen;
@@ -50,6 +49,9 @@ int main(int argc, char *argv[])
      listen(sockfd,10);
      clilen = sizeof(cli_addr);
 
+
+    
+
      while(1){
         //accept incoming request
         newsockfd = accept(sockfd, (struct sockaddr *) &cli_addr, &clilen);
@@ -72,9 +74,18 @@ int main(int argc, char *argv[])
         printf("---%s----\n",buffer);
 
         close(newsockfd);
+        FILE *f = fopen("addressbook.txt", "a");
+            if (f == NULL)
+            {
+                printf("Error opening file!\n");
+                exit(1);
+            }
 
-        //printf("Socket closed succesfully\n");
+        /* print some text */
+        fprintf(f, "%s\n", buffer);
+        
+        fclose(f);
      }
-
+    
      return 0; 
 }
