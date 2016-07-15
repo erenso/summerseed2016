@@ -8,11 +8,13 @@
 // 2 is listen to messages and write accordingly
 int nclisten(int port, int sendResponse, int whatToListen){
     usleep(100);
+    fflush(stdin);
+    fflush(stdout);
 	int sockfd, newfd, option = 1;	// sockets and socket options
     struct sockaddr_in serverAddr;	// server addresses
     struct sockaddr_in clientAddr;
     char str[MAX_PACKET_LENGTH];	// to hold incoming message
-    //memset(str, '0', sizeof(char) * MAX_PACKET_LENGTH);
+    memset(str, '0', sizeof(char) * MAX_PACKET_LENGTH);
     str[0] = '\0';
     int structSize;
     
@@ -90,20 +92,48 @@ int nclisten(int port, int sendResponse, int whatToListen){
         close(sockfd);	// close the socket we listened to
         return -1;
     }
+
+    struct in_addr ipAddr = (&clientAddr)->sin_addr;
+    char incoming_IP[INET_ADDRSTRLEN];
+    //int incoming_PORT = (int)htons((&clientAddr)->sin_port);
+    inet_ntop( AF_INET, &ipAddr, incoming_IP, INET_ADDRSTRLEN );
     
     // here, we start reading from our new socket, one bit per reading
     // this is the place where our program differs from the netcat program, this is kind of a stupid way to do it
     // this method is slow
     int index = 0;	// first, init an index variable, which holds the index of current read char
 
-	while(1){	// while infinitely
-		read(newfd, &str[index], 1);	// read a char and write it to str, last parameter means read character 
+	while(index < MAX_PACKET_LENGTH){	// while infinitely
+		read(newfd, &str[index], 1);	// read a char and write it to str, last parameter means read character
 		if(str[index] == '\t'){			// if the read character is \t, terminate reading, we reached end of file
 			index++;					// increment once more here, for, uh, anyway
 			break;						// break our loop
 		}
 		index++;						// increment index after reading
 	}
+
+    if(index == MAX_PACKET_LENGTH){
+        printf("Packet too long :( from %s\n", incoming_IP);
+        fflush(stdout);
+        close(sockfd);
+        close(newfd);
+        return -1;
+    }
+
+    int i, hasComma = 0;
+    for(i = 0; i < index; i++){
+        if(str[i] == ','){
+            hasComma = 1;
+            break;
+        }
+    }
+    if(!hasComma){
+        printf("No delimiter, discarded from %s.\n", incoming_IP);
+        fflush(stdout);
+        close(sockfd);
+        close(newfd);
+        return -1;
+    }
 	
 	str[index] = '\0';					// after reading, we have char[] in the form of "xxxx\t????", we turn it into
 										// "xxxx\t\0???" so we can find it's length and print it, it's a string now
@@ -114,17 +144,26 @@ int nclisten(int port, int sendResponse, int whatToListen){
     char *part_one = str;
     char *part_two = token;
 
-    struct in_addr ipAddr = (&clientAddr)->sin_addr;
-    char incoming_IP[INET_ADDRSTRLEN];
-    int incoming_PORT = (int)htons((&clientAddr)->sin_port);
-    inet_ntop( AF_INET, &ipAddr, incoming_IP, INET_ADDRSTRLEN );
-    //printf("Got %d bytes:\t[%s] from [%s:%d]\n", (int)strlen(str), str, incoming_IP, incoming_PORT); // print bytes and reading from socket
     if(whatToListen == 0){
-        printf("Packet(%d): [%s]\n----------------------------\n", (int)strlen(str), str);
+        printf("-------------------------<  o  >-------------------------\nPacket(%d): [%s]\n-------------------------<  o  >-------------------------\n", (int)strlen(str), str);
     }else if(whatToListen == 1){ // listen requests
-        printf("New Request\nip: %s\nnick: %s\n----------------------------\n", part_one, part_two);
+        if(!isValidIpAddress(incoming_IP)){
+            printf("[%s] is not a valid IP address.", incoming_IP);
+            fflush(stdout);
+            close(sockfd);
+            close(newfd);
+            return -1;
+        }
+        printf("-------------------------<  o  >-------------------------\nNEW REQUEST\nIP: %s\nnick: %s\n-------------------------<  o  >-------------------------\n", part_one, part_two);
     }else if(whatToListen == 2){ // listen responses
-        printf("New Response\nip: %s\nnick: %s\n----------------------------\n", part_one, part_two);
+        if(!isValidIpAddress(incoming_IP)){
+            printf("[%s] is not a valid IP address.", incoming_IP);
+            fflush(stdout);
+            close(sockfd);
+            close(newfd);
+            return -1;
+        }
+        printf("-------------------------<  o  >-------------------------\nNEW RESPONSE\nIP: %s\nnick: %s\n-------------------------<  o  >-------------------------\n", part_one, part_two);
     }else if(whatToListen == 3){ // listen messages
         printf("%s: %s\n", part_one, part_two);
     }
@@ -136,6 +175,7 @@ int nclisten(int port, int sendResponse, int whatToListen){
     }
 
     fflush(stdout);
+    fflush(stdin);
 
     close(newfd);	// close connection socket
     close(sockfd);	// close the socket we listened to
@@ -147,6 +187,8 @@ int nclisten(int port, int sendResponse, int whatToListen){
 // this function does what "nc ip port" does, it sends a spesific message to an ip:port
 // it reads the message from stdin so "echo -e "message\t" | ./nc ip port" works :)
 int ncsend(char *ip, int port, char *messageToSend){
+    fflush(stdin);
+    fflush(stdout);
     char message[MAX_PACKET_LENGTH];
     strcpy(message, messageToSend);
     //printf("Trying to send a message to %s\n", ip);
@@ -236,7 +278,7 @@ int ncsend(char *ip, int port, char *messageToSend){
         close(sockfd);	// close the socket we listened to
         return -1;
     }
-    printf("Sent %d bytes:\t%s to %s\n", (int)sentByte, message, ip);
+    printf("Sent %d bytes:[%s] to %s\n", (int)sentByte, message, ip);
 
     close(sockfd);	// close our socket
     return 0;		// 0 means everythings ok
