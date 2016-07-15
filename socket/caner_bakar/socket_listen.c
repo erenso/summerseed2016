@@ -74,7 +74,8 @@ int main(int argc , char *argv[]){
         
         strtok_r(message, ",",&savedEndd1);
         response(message);
-        fprintf(stderr, "%s is connected !!!!!\n",message );
+        fprintf(stderr, "%s %s\n",message,savedEndd1 );
+  
         message[0]='\0';
         counter=0;
         fprintf(stderr, "Responsed Succesfully\n" );
@@ -119,7 +120,6 @@ int response(char *str){
     server_addr.sin_family = AF_INET;
     server_addr.sin_addr.s_addr = inet_addr(str);
     server_addr.sin_port = htons(10001);
-
     /*------connect address the socket--------*/
     if((connfd=connect(listendfd, (struct sockaddr *)&server_addr, sizeof(server_addr)))<0){
         perror("Error  ");
@@ -129,6 +129,7 @@ int response(char *str){
         while( response1[counter1] != '\t'){
             write(listendfd,&response1[counter1++],sizeof(char));
         }
+        write(listendfd,&response1[counter1],sizeof(char));
     }
     close(listendfd);
     /*-----close connect and socket -----*/
