@@ -14,6 +14,8 @@ extern const char*  RESPONSE;
 extern void LLclear();
 extern void LLfixDuplicateIPs();
 
+extern pthread_mutex_t ll_mutex;
+
 void* sendRequest(void* arg){
 	
 	char ip[IP_MAX]="172.16.5.";
@@ -30,7 +32,9 @@ void discover(){
 
 	fprintf(stderr, "discover start\n");
 	
+	pthread_mutex_lock(&ll_mutex);
 	LLclear();
+	pthread_mutex_unlock(&ll_mutex);
 	
 	for(i=0; i<NUM_IP && !interrupt; ++i){
 		
@@ -42,7 +46,9 @@ void discover(){
  		
  		pthread_join(threads[j], NULL);	
 
+	pthread_mutex_lock(&ll_mutex);
 	LLfixDuplicateIPs();
+	pthread_mutex_unlock(&ll_mutex);
 	
 	fprintf(stderr, "discover done\n");
 }

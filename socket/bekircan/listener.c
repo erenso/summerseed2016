@@ -9,6 +9,7 @@
 #include <netdb.h>
 #include <netinet/in.h>
 #include <dirent.h>
+#include <pthread.h>
 #include "StringBuilder.h"
 #include "commons.h"
 
@@ -25,6 +26,7 @@ extern address_t* LLfindEntry(const char* nick);
 extern const char*  RESPONSE;
 extern volatile sig_atomic_t interrupt;
 const char terminate_char = '\t';
+extern pthread_mutex_t ll_mutex;
 
 void parser(address_t* address, char* str){
 	
@@ -165,17 +167,21 @@ void* listener(void* arg){
 		*/
 		
 		if(*port == REQ_PORT && !interrupt){
-		
+
+			pthread_mutex_lock(&ll_mutex);
 			temp = LLfindEntry(address.nick);
+			pthread_mutex_unlock(&ll_mutex);
 			
 			if(!(temp && temp->numReq >= 10))
 				
 				send_msg(address.ip, RESP_PORT, RESPONSE);
 			
-		}if(!interrupt)
-			
+		}
+		if(!interrupt){
+			pthread_mutex_lock(&ll_mutex);
 			LLaddAdress(&address);
-		
+			pthread_mutex_unlock(&ll_mutex);
+		}
 	}
 	
 	close(socketServer);
