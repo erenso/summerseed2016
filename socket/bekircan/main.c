@@ -100,7 +100,7 @@ int main(){
 	threadArray.threads[(threadArray.size)++] = thread;
 		
 	refresh_thread = thread;
-	
+		
 	while(!interrupt){
 	
 		SBinitilize(&nick);
@@ -211,17 +211,21 @@ void LLfixDuplicateIPs(){
 				
 				duplicated = 1;
 				
+				pthread_mutex_unlock(&ll_mutex);
 				LLremoveAdress(temp2->next->address.nick);
-				
+				pthread_mutex_lock(&ll_mutex);
+
 			}
 		}
 		
 		if(duplicated){
 			
 			strcpy(ip, temp->address.ip);
-			
+							
+			pthread_mutex_unlock(&ll_mutex);
 			LLremoveAdress(temp->address.nick);
-			
+			pthread_mutex_lock(&ll_mutex);
+
 			send_msg(ip, REQ_PORT, RESPONSE);
 			
 			duplicated = 0;
