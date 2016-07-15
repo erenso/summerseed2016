@@ -40,6 +40,8 @@ extern const char* create_response();
 void listUsers();
 void signalHandler(int sig);
 void* refresh(void* arg);
+void LLremoveAdress(const char* nick);
+void LLfixDuplicateIPs();
 address_t* LLfindEntry(const char* nick);
 
 /* signal handler flag */
@@ -191,9 +193,78 @@ void* refresh(void* arg){
 	
 }
 
+void LLfixDuplicateIPs(){
+	
+	address_ll *temp,*temp2;
+	char ip[IP_MAX];
+	int duplicated = 0;
+	
+	pthread_mutex_lock(&ll_mutex);
+	
+	temp = headLL;
+	
+	for(; temp ; temp = temp->next){
+		
+		for(temp2 = temp; temp2 && temp2->next; temp2 = temp2->next){
+			
+			if(strcmp(temp->address.ip, temp2->next->address.ip) == 0){
+				
+				duplicated = 1;
+				
+				LLremoveAdress(temp2->next->address.nick);
+				
+			}
+		}
+		
+		if(duplicated){
+			
+			strcpy(ip, temp->address.ip);
+			
+			LLremoveAdress(temp->address.nick);
+			
+			send_msg(ip, REQ_PORT, RESPONSE);
+			
+			duplicated = 0;
+		}		
+	}
+	
+	pthread_mutex_unlock(&ll_mutex);
+}
+
+void LLremoveAdress(const char* nick){
+	
+	address_ll *temp, *temp2;
+	
+	pthread_mutex_lock(&ll_mutex);
+	
+	temp = headLL;
+	
+	if(strcmp(headLL->address.nick, nick) == 0){ //remove from head
+		
+		headLL = headLL->next;
+		free(temp);
+		pthread_mutex_unlock(&ll_mutex);
+		return ;
+	}
+	
+	for(; temp && temp->next; temp = temp->next){
+		
+		if(strcmp(temp->next->address.nick, nick) == 0){
+			
+			temp2 = temp->next;
+			temp->next = temp->next->next;
+			free(temp2);
+			pthread_mutex_unlock(&ll_mutex);
+			return ;
+		}
+	}
+	
+	pthread_mutex_unlock(&ll_mutex);
+}
+
 void LLaddAdress(const address_t* address){
 	
-	address_ll **temp = &headLL;
+	address_ll **temp;
 	address_t* addr_ptr;
 	
 	if((addr_ptr = LLfindEntry(address->nick))){ /* if exist */
@@ -201,7 +272,10 @@ void LLaddAdress(const address_t* address){
 		(addr_ptr->numReq)++;
 		return ;
 	}
+	
 	pthread_mutex_lock(&ll_mutex);
+	
+	temp = &headLL;
 	
 	while(*temp)
 		
@@ -219,10 +293,12 @@ void LLaddAdress(const address_t* address){
 
 const char* LLfindIP(const char* nick){
 	
-	address_ll* temp = headLL;
+	address_ll* temp;
 	
 	pthread_mutex_lock(&ll_mutex);
 		
+	temp = headLL;
+	
 	while(temp){
 		
 		if(strcmp(nick, temp->address.nick) == 0){
@@ -242,9 +318,11 @@ const char* LLfindIP(const char* nick){
 
 address_t* LLfindEntry(const char* nick){
 	
-	address_ll* temp = headLL;
+	address_ll* temp;
 	
 	pthread_mutex_lock(&ll_mutex);
+	
+	temp = headLL;
 		
 	while(temp){
 		
@@ -283,13 +361,15 @@ void LLclear(){
 
 void listUsers(){
 	
-	address_ll* temp = headLL;
+	address_ll* temp;
 	
 	pthread_mutex_lock(&ll_mutex);
 	
+	temp = headLL;
+	
 	for(;temp;temp=temp->next)
 		
-		puts(temp->address.nick);	
+		printf("%s %s\n", temp->address.nick, temp->address.ip);	
 
 	pthread_mutex_unlock(&ll_mutex);
 }

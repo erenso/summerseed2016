@@ -12,6 +12,7 @@ extern void send_msg(const char* ip, int port, const char* msg);
 extern volatile sig_atomic_t interrupt;
 extern const char*  RESPONSE;
 extern void LLclear();
+extern void LLfixDuplicateIPs();
 
 void* sendRequest(void* arg){
 	
@@ -40,6 +41,8 @@ void discover(){
  	for(j=0; j<i; ++j)
  		
  		pthread_join(threads[j], NULL);	
+
+	LLfixDuplicateIPs();
 	
 	fprintf(stderr, "discover done\n");
 }
