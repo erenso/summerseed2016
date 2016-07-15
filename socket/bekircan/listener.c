@@ -184,6 +184,9 @@ void* listener(void* arg){
 		}
 	}
 	
+	shutdown(socketServer, SHUT_RDWR);
+	shutdown(socketClient, SHUT_RDWR);
+	
 	close(socketServer);
 	close(socketClient);
 	
