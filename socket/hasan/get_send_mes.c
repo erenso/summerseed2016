@@ -37,8 +37,6 @@ int listenmes (int portno, int opt)
     //     return -1;
     // }
 
-    //puts("Socket created");
-     
     //Prepare the sockaddr_in structure
     server.sin_family = AF_INET;
     server.sin_addr.s_addr = INADDR_ANY;
@@ -52,8 +50,7 @@ int listenmes (int portno, int opt)
         close(socket_desc);
         return 1;
     }
-    //puts("bind done");
-     
+
     //Listen
     listen(socket_desc , 3);
      
@@ -97,14 +94,13 @@ int listenmes (int portno, int opt)
     }
 
     //show the new message
-    //puts("+++++++++++++++++++++New Message+++++++++++++++++++");
     puts("+++++++++++++++++++++++++++++++++++++++++++++++++++");
     puts(originalMes);
     puts("+++++++++++++++++++++++++++++++++++++++++++++++++++");
     //Send recv message to the client
     //write(client_sock , "Got it (hasan)" , strlen("Got it (hasan)"));
     puts("\n");
-     
+
     if(read_size == 0)
     {
         puts("Client disconnected\n");
