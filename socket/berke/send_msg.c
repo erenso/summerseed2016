@@ -61,6 +61,7 @@ int main(int argc, char *argv[])
     } 
         
     //write buffer to the connected address and port
+    strcat(buffer,"\t");
     write(sockfd,&buffer,1024);
     printf("Message sent: %s\n",buffer);
 

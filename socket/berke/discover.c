@@ -59,7 +59,7 @@ int sockfd, portno, n;
     char ipstr[1024];
     strcpy(ipstr,str1);
     char buffer[1024];
-    strcpy(buffer,"172.16.5.108,berke");
+    strcpy(buffer,"172.16.5.108,berke\t");
     portno = 10000;
     server = gethostbyname(ipstr);
 
