@@ -1,7 +1,7 @@
 #include <pthread.h>
 #include "get_send_mes.h"
 
-char new_mes[MAXLEN] = "Hasan: ";
+char new_mes[MAXLEN] = "Hasan,";
 
 void* send_mes (void* req_ip)
 {
