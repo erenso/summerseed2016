@@ -2,7 +2,9 @@ all:
 	rm -f nc listen request disc  	
 	
 	gcc -c listen_request.c
-	gcc listen_request.o -o nc
+	gcc listen_request.o -o listen_request
+	gcc -c listen_response.c
+	gcc listen_response.o -o listen_response
 	gcc -c client2.c
 	gcc client2.o -o request
 	gcc -c  discovery.c
