@@ -16,6 +16,7 @@ typedef struct{
 	
 	char nick[NICK_MAX];
 	char ip[IP_MAX];
+	int numReq;
 }address_t;
 
 /* linked list structure */

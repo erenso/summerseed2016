@@ -40,6 +40,7 @@ extern const char* create_response();
 void listUsers();
 void signalHandler(int sig);
 void* refresh(void* arg);
+address_t* LLfindEntry(const char* nick);
 
 /* signal handler flag */
 volatile sig_atomic_t interrupt = 0;
@@ -188,11 +189,13 @@ void* refresh(void* arg){
 void LLaddAdress(const address_t* address){
 	
 	address_ll **temp = &headLL;
+	address_t* addr_ptr;
 	
-	if(LLfindIP(address->nick)) /* if exist */
+	if((addr_ptr = LLfindEntry(address->nick))){ /* if exist */
 
+		(addr_ptr->numReq)++;
 		return ;
-	
+	}
 	pthread_mutex_lock(&ll_mutex);
 	
 	while(*temp)
@@ -203,6 +206,7 @@ void LLaddAdress(const address_t* address){
 		
 	strcpy(((*temp)->address).nick, address->nick);
 	strcpy(((*temp)->address).ip, address->ip);
+	(*temp)->address.numReq = 1;
 	(*temp)->next = NULL;	
 		
 	pthread_mutex_unlock(&ll_mutex);
@@ -221,6 +225,29 @@ const char* LLfindIP(const char* nick){
 			pthread_mutex_unlock(&ll_mutex);
 			
 			return temp->address.ip;
+		}
+		
+		temp = temp->next;
+	}
+	
+	pthread_mutex_unlock(&ll_mutex);
+	
+	return NULL;
+}
+
+address_t* LLfindEntry(const char* nick){
+	
+	address_ll* temp = headLL;
+	
+	pthread_mutex_lock(&ll_mutex);
+		
+	while(temp){
+		
+		if(strcmp(nick, temp->address.nick) == 0){
+				
+			pthread_mutex_unlock(&ll_mutex);
+			
+			return &(temp->address);
 		}
 		
 		temp = temp->next;

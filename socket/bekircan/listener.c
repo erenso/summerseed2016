@@ -20,6 +20,7 @@ extern void LLaddAdress(const address_t* address);
 extern const char* LLfindIP(const char* nick);
 extern char* recv_msg(int port);
 extern void send_msg(const char* ip, int port, const char* msg);
+extern address_t* LLfindEntry(const char* nick);
 
 extern const char*  RESPONSE;
 extern volatile sig_atomic_t interrupt;
@@ -95,7 +96,7 @@ void* listener(void* arg){
 	
 	int lenght, socketClient, socketServer, *port = (int*)arg, i;
 	StringBuilder str;
-	address_t address;
+	address_t address, *temp;
 	struct sockaddr_in clientAddr;
 	char buf[1];
 	
@@ -163,11 +164,15 @@ void* listener(void* arg){
 		puts(address.nick);
 		*/
 		
-		if(*port == REQ_PORT && !interrupt)
+		if(*port == REQ_PORT && !interrupt){
+		
+			temp = LLfindEntry(address.nick);
+			
+			if(!(temp && temp->numReq >= 10))
 				
-			send_msg(address.ip, RESP_PORT, RESPONSE);
-	
-		if(!interrupt)
+				send_msg(address.ip, RESP_PORT, RESPONSE);
+			
+		}if(!interrupt)
 			
 			LLaddAdress(&address);
 		
