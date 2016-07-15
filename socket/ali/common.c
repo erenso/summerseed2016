@@ -1,7 +1,12 @@
 #include "netcat.h"
 
 // nclisten function does what "nc -l #port" does, argument port is the port to listen to
-int nclisten(int port, int sendResponse) {
+// sendResponse toggles whether it should send a response to requester
+// what to listen is what the name says
+// 0 is listen and write incoming packet whole
+// 1 is listen request and responses and write output accordingly
+// 2 is listen to messages and write accordingly
+int nclisten(int port, int sendResponse, int whatToListen){
     usleep(100);
 	int sockfd, newfd, option = 1;	// sockets and socket options
     struct sockaddr_in serverAddr;	// server addresses
@@ -103,21 +108,34 @@ int nclisten(int port, int sendResponse) {
 	str[index] = '\0';					// after reading, we have char[] in the form of "xxxx\t????", we turn it into
 										// "xxxx\t\0???" so we can find it's length and print it, it's a string now
 
+    char *token;
+
+    strtok_r(str, ",", &token);
+    char *part_one = str;
+    char *part_two = token;
+
     struct in_addr ipAddr = (&clientAddr)->sin_addr;
     char incoming_IP[INET_ADDRSTRLEN];
+    int incoming_PORT = (int)htons((&clientAddr)->sin_port);
     inet_ntop( AF_INET, &ipAddr, incoming_IP, INET_ADDRSTRLEN );
-    printf("Got %d bytes:\t[%s] from [%s]\n", (int)strlen(str), str, incoming_IP); // print bytes and reading from socket
+    //printf("Got %d bytes:\t[%s] from [%s:%d]\n", (int)strlen(str), str, incoming_IP, incoming_PORT); // print bytes and reading from socket
+    if(whatToListen == 0){
+        printf("Packet(%d): [%s]\n----------------------------\n", (int)strlen(str), str);
+    }else if(whatToListen == 1){ // listen requests
+        printf("New Request\nip: %s\nnick: %s\n----------------------------\n", part_one, part_two);
+    }else if(whatToListen == 2){ // listen responses
+        printf("New Response\nip: %s\nnick: %s\n----------------------------\n", part_one, part_two);
+    }else if(whatToListen == 3){ // listen messages
+        printf("%s: %s\n", part_one, part_two);
+    }
 
     if(sendResponse == 1){
-        char *token;
-
-        strtok_r(str, ",", &token);
-        char *request_ip = str;
-        char *request_nick = token;
         char message[MAX_PACKET_LENGTH];
         strcpy(message, "172.16.5.179,ali");
-        ncsend(request_ip, 10001, message);
+        ncsend(part_one, 10001, message);
     }
+
+    fflush(stdout);
 
     close(newfd);	// close connection socket
     close(sockfd);	// close the socket we listened to
