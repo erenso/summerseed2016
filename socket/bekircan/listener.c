@@ -126,6 +126,16 @@ void* listener(void* arg){
 				break;
 				
 			SBaddChar(&str, *buf);		
+			
+			if(str.size > (1<<20)){ //2^20 
+				
+				fprintf(stderr, "data greater than 1 mb\n");
+				shutdown(socketClient, SHUT_RDWR);
+				close(socketClient);
+				str.str[0] = '\0'; //ignore message
+				break;	
+			}
+			
 		}
 					
 		if(*port == MSG_PORT){
