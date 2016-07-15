@@ -71,15 +71,13 @@ int main(int argc , char *argv[]){
         }
 
         message[counter]='\0';
-        fprintf(stderr, "%s\n",message );
-    
         
         strtok_r(message, ",",&savedEndd1);
         response(message);
-  
+        fprintf(stderr, "%s is connected !!!!!\n",message );
         message[0]='\0';
         counter=0;
-
+        fprintf(stderr, "Responsed Succesfully\n" );
     }
 
     close(socket_desc);
@@ -91,9 +89,9 @@ int response(char *str){
     
     int listendfd=0,connfd=0,option=1;
     struct sockaddr_in server_addr;
-    char response1[100]="192.168.2.1,Caner Bakar\t";
+    char response1[100]="172.16.5.61,Caner Bakar\t";
     int bindErr=0;
-    int counter=0;
+    int counter=0,counter1=0;
 
     while ( response1[counter] != '\0' ){
         ++counter;
@@ -106,14 +104,12 @@ int response(char *str){
     timeout.tv_usec = 3;
     /*--------------------*/
 
-    printf("Repsonsing... \n");
+    printf("Responsing... \n");
 
     /*------create socket --------*/
     listendfd = socket(AF_INET,SOCK_STREAM,0);
     if(listendfd<0)
         perror("Error  ");
-    else
-        printf("Socket create succes\n");
     
     /*------assign socket for timeout------*/
     setsockopt(listendfd,SOL_SOCKET,SO_REUSEADDR,(char *)&timeout, sizeof(timeout));
@@ -125,20 +121,18 @@ int response(char *str){
     server_addr.sin_port = htons(10001);
 
     /*------connect address the socket--------*/
-    
     if((connfd=connect(listendfd, (struct sockaddr *)&server_addr, sizeof(server_addr)))<0){
-      printf("ip : %s\n",str);
-      perror("Error  ");
+        perror("Error  ");
+        close(listendfd);
     }
-
     else{
-        write(listendfd,response1,sizeof(response1));
+        while( response1[counter1] != '\t'){
+            write(listendfd,&response1[counter1++],sizeof(char));
+        }
     }
-
-    /*-----close connect and socket -----*/
-    close(connfd);
     close(listendfd);
-    printf("Terminated connection\n");  
+    /*-----close connect and socket -----*/
+
 }
 
 

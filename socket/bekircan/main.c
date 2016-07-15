@@ -171,6 +171,8 @@ void* refresh(void* arg){
 	
 	while(!interrupt){
 		
+		LLclear();
+		
 		discover();
 
 		if(interrupt)
