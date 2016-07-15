@@ -63,15 +63,7 @@ int main(int argc , char *argv[]){
 	    }
 	}
 	takeResponse();
-<<<<<<< HEAD
 	sendMessage1(str2,IP);
-=======
-		sendMessage1(str2,IP);
-
-	for(i=0;i<iNumberofThread;++i){  
-        pthread_join(threadArr[i],(void**)&sockk);
-    }
->>>>>>> a4a1c2ed5f307d8dcf19e388ca892844c6f8d365
 
 }
 
