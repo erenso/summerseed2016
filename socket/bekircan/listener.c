@@ -140,6 +140,10 @@ void* listener(void* arg){
 			}
 			
 		}
+		
+		if(interrupt)
+			
+			break;
 					
 		if(*port == MSG_PORT){
 			
