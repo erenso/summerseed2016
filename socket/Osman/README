@@ -1,0 +1,42 @@
+1-)denemeBirlestirme.c tam olarak calısmayan butun modulleri birlestirmeye calitigim bir deneme dosyası
+2-)discovery.c dosyasi ayni subnette bulunan 255-2 hosta discovery mesaji gonderip 
+    a-) eger soketi açik ise karsı tarafatan response alir ve ekrana -------- response ----- basar.
+    b-) eger soket kapali ise connecting fault ekrana yazar
+    c-) Tum send islemleri bittiginde thread_join ibaresi gorunur
+3-)receive_message.c de 10002 portundan surekli mesaj gelmesini dinler
+    a-) Eger "nick,message" seklinde gelirse ise ekrana basar
+    b-) degilse ekrana basar ve (wrong format) der.
+4-)send_message.c ise mesaj gondermek istedigimiz ip adresini girer daha sonrasinda "nick,message" seklinde mesaj
+  gondeririz.Eger baglanmak istedigimiz hostun soketi kapali ise bi timeout tan sonra islem gerceklesmeden kapanir.
+  
+Not : Listen_response.c sadece 10001 dinliyor bir deneme dosyasi  
+  
+  
+  Ozet : 
+          Send islemlerinde 
+          
+          1-) socket create et("socket(...)")
+          2-) Timeout belirle ("setsockopt()")
+          3-) Bilgiyi gondermek istedigin adrese baglan("connect(......)")
+          4-) Baglanti saglandnda ("send()" or "write()") gibi gonder
+          5-) En son ("close(connect descriptor)" or "close(connect)") baglantilarimizi kapatyrz
+          
+          Receive islemlerinde
+          
+          
+          1-) socket create et("socket(...)")
+          2-) Timeout belirle ("setsockopt()")
+          3-) Bilgiyi gondermek istedigin adrese baglan("bind(......)")
+          4-) Daha sonra socket i dinliyoruz("listen()")
+          5-) Daha sonra bir request gelirse ("accept()") yapiyoruz
+          4-) Baglanti saglandnda ("recv()" or "read()") gibi gonder
+          5-) En son ("close(connect descriptor)" or "close(connect)") baglantilarimizi kapatyrz
+          
+          
+          Yukarda calisan programin genel mantigi send ve receive islemlerinin bir urunu.
+          
+          Terminalden calisirken "make" yaptiginiz da butun dosyalar derlenip link edilerek calistirilabilecek dosyalar
+          olusturulur
+          
+          
+           	
