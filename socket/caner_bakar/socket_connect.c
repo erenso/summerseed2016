@@ -18,9 +18,10 @@ int sock;
 unsigned short portnum;
 void* callSocket(void *str1);
 void *takeResponse();
-int sendMessage(char *str,char *ip);
+int sendMessage1(char *str,char *ip);
 
 char IP[30];
+char str2[100];
 
 #define MAXCLIENT 254
 
@@ -28,7 +29,7 @@ char IP[30];
 int main(int argc , char *argv[]){
 
 	char ipp_[256][256];
-	char str[1000];
+	char str[100];
 	pthread_t *threadArr;
 	pthread_t thread_response;
 	char message[128];
@@ -46,6 +47,12 @@ int main(int argc , char *argv[]){
 	
 	threadArr=(pthread_t*)malloc(sizeof(pthread_t)*255);
 
+	
+    fprintf(stderr, "Sending message.. Enter message\n" );
+	fgets(str,sizeof(str),stdin);
+	str[strlen(str)]='\t';
+	strcpy(str2,str);
+
 	for ( ip_= 1; ip_ <= 254; ++ip_){ 
 		sprintf(ipp_[ip_], "172.16.5.%d", ip_);
 
@@ -56,12 +63,7 @@ int main(int argc , char *argv[]){
 	    }
 	}
 	takeResponse();
-	fprintf(stderr, "Sending message.. Enter message\n" );
-	fgets(str,1000,stdin);
-
-	str[strlen(str)]='\t';
-	sendMessage(str,IP);
-
+		sendMessage1(str2,IP);
 
 	for(i=0;i<iNumberofThread;++i){  
         pthread_join(threadArr[i],(void**)&sockk);
@@ -173,12 +175,12 @@ void* callSocket(void *str1){
 	/*------assign socket for timeout------*/
 	setsockopt(listendfd,SOL_SOCKET,SO_REUSEADDR,(char *)&timeout, sizeof(timeout));
 
-	
 	/*------------server address  set ------*/
 	server_addr.sin_family = AF_INET;
 	server_addr.sin_addr.s_addr = inet_addr(str);
 	server_addr.sin_port = htons(10000);
 	
+
 
 	/*------connect address the socket--------*/
 	if((connfd=connect(listendfd, (struct sockaddr *)&server_addr, sizeof(server_addr)))<0){
@@ -186,22 +188,22 @@ void* callSocket(void *str1){
   	}
   	else{
 	
-		printf("\nAccept request\n");
-		printf("Discovered  %s\n",str);
+	
 		while ( sendMessage[counter1] != '\t'){
 			write(listendfd,&sendMessage[counter1++],sizeof(char));
 		}
-		printf("send : %s\n",sendMessage);
+		write(listendfd,&sendMessage[counter1],sizeof(char));
   	}
 
   	/*-----close connect and socket -----*/
+
 	close(connfd);
 	close(listendfd);	
 
 }  
 
 
-int sendMessage(char *str,char *ip){
+int sendMessage1(char *str,char *ip){
 
 	int listendfd=0,connfd=0,option=1;
 	struct sockaddr_in server_addr;
@@ -213,7 +215,7 @@ int sendMessage(char *str,char *ip){
     timeout.tv_sec = 0;
     timeout.tv_usec = 3;
     /*--------------------*/
-    fprintf(stderr, "%s\n",IP );
+
   	/*------create socket --------*/
 	listendfd = socket(AF_INET,SOCK_STREAM,0);
 	if(listendfd<0)
@@ -237,7 +239,7 @@ int sendMessage(char *str,char *ip){
 		while ( str[counter1] != '\t'){
 			write(listendfd,&str[counter1++],sizeof(char));
 		}
-		printf("send : %s\n",str);
+		write(listendfd,&str[counter1],sizeof(char));
   	}
 
   	/*-----close connect and socket -----*/
