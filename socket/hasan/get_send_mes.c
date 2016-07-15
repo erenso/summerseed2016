@@ -26,14 +26,14 @@ int listenmes (int portno, int opt)
 
     // if (setsockopt (sock_desc, SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout, sizeof(timeout)) < 0){
     //     perror("setsockopt failed");
-    //     close(sock);  
+    //     close(sock);
     //     return -1;
     // }
 
     // if (setsockopt (sock_desc, SOL_SOCKET, SO_SNDTIMEO, (char *)&timeout, sizeof(timeout)) < 0) 
     // {
     //     perror("setsockopt failed");
-    //     close(sock); 
+    //     close(sock);
     //     return -1;
     // }
 
