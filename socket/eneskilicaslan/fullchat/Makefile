@@ -1,0 +1,26 @@
+edit : main.o discovery.o listenRequest.o fileContains.o  listenResponce.o listenMessage.o responceMessage.o
+	cc -o edit main.o discovery.o listenRequest.o fileContains.o listenResponce.o listenMessage.o responceMessage.o -lpthread 
+
+main.o : main.c mainHeader.h  
+	cc -c main.c -lpthread 
+
+discovery.o : discovery.c mainHeader.h
+	cc -c discovery.c
+	
+listenRequest.o : listenRequest.c  mainHeader.h 
+	cc -c listenRequest.c -lpthread 
+	
+listenResponce.o : listenResponce.c  mainHeader.h 
+	cc -c listenResponce.c -lpthread 
+	
+fileContains.o : fileContains.c fileContains.h
+	cc -c fileContains.c
+	
+listenMessage.o : listenMessage.c mainHeader.h
+	cc -c listenMessage.c
+	
+responceMessage.o : responceMessage.c mainHeader.h
+	cc -c responceMessage.c
+
+clean :
+	rm edit main.o discovery.o  
