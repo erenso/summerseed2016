@@ -11,6 +11,7 @@
 extern void send_msg(const char* ip, int port, const char* msg);
 extern volatile sig_atomic_t interrupt;
 extern const char*  RESPONSE;
+extern void LLclear();
 
 void* sendRequest(void* arg){
 	
@@ -27,6 +28,8 @@ void discover(){
 	pthread_t threads[NUM_IP];
 
 	fprintf(stderr, "discover start\n");
+	
+	LLclear();
 	
 	for(i=0; i<NUM_IP && !interrupt; ++i){
 		

@@ -103,7 +103,7 @@ int main(){
 	
 		SBinitilize(&nick);
 		
-		puts("Enter target nick, -ls for list");
+		puts("Enter target nick, -ls for list, -disc for discover");
 		
 		while(!interrupt && scanf("%c", &ch) != EOF && ch != '\n')
 			
@@ -118,6 +118,13 @@ int main(){
 		if(strcmp("-ls", nick.str) == 0){
 			
 			listUsers();
+			SBclear(&nick);
+			continue;
+		}
+		
+		if(strcmp("-disc", nick.str) == 0){
+			
+			discover();
 			SBclear(&nick);
 			continue;
 		}
@@ -171,9 +178,7 @@ int main(){
 void* refresh(void* arg){
 	
 	while(!interrupt){
-		
-		LLclear();
-		
+				
 		discover();
 
 		if(interrupt)
