@@ -32,7 +32,9 @@ void parser(address_t* address, char* str){
 	for(i=0; str[i] != ',' && str[i] != '\0'; ++i)
 			
 		(address->ip)[i] = str[i];
-					
+
+	address->ip[i] = '\0';
+	
 	for(i=i+1, j=0; str[i] != '\0' ; ++i, ++j)
 			
 		(address->nick)[j] = str[i];
