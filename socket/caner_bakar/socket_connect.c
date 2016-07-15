@@ -15,68 +15,233 @@
 #include <pthread.h>
 
 int sock;
-int callSocket(char *hostname, unsigned short portnum,char ip[128]);
+unsigned short portnum;
+void* callSocket(void *str1);
+void *takeResponse();
+int sendMessage1(char *str,char *ip);
+
+char IP[30];
+char str2[100];
+
+#define MAXCLIENT 254
+
 
 int main(int argc , char *argv[]){
 
-	char ip[128];
-	char myname[HOST_NAME_MAX+1];
+	char ipp_[256][256];
+	char str[100];
+	pthread_t *threadArr;
+	pthread_t thread_response;
 	char message[128];
-	int counter=0;
+	char response[128];
+	int counter=0,counter1=0;
+	int ip_=1,i;
+	int *sockk;
+	int iNumberofThread=0;
+	int numberip=0;
+	unsigned short portnum;
 
+	sockk=malloc(sizeof(int));
+	
+	portnum=atoi(argv[1]);
+	
+	threadArr=(pthread_t*)malloc(sizeof(pthread_t)*255);
 
-	gethostname(myname, HOST_NAME_MAX);
-    sock=callSocket(myname,atoi(argv[2]),argv[1]);
+	
+    fprintf(stderr, "Sending message.. Enter message\n" );
+	fgets(str,sizeof(str),stdin);
+	str[strlen(str)]='\t';
+	strcpy(str2,str);
 
-    if ( sock == -1){
-        fprintf(stderr, "There is no server! \n" );
-        exit(0);
-    }
+	for ( ip_= 1; ip_ <= 254; ++ip_){ 
+		sprintf(ipp_[ip_], "172.16.5.%d", ip_);
 
-    fprintf(stderr, "Enter the message\n" );
-    scanf("%s",message);
+		++iNumberofThread;
+		if( pthread_create( &threadArr[iNumberofThread-1], NULL, (void*) callSocket, &ipp_[ip_]) < 0){
+	        fprintf(stderr,"could not create thread");
+	        return 1;
+	    }
+	}
+	takeResponse();
+	sendMessage1(str2,IP);
 
-    message[strlen(message)]='\t';
-
-
-    while ( message[counter++] != '\t'){
-    	write(sock,&message[counter-1],sizeof(char));
-    	fprintf(stderr, "%d\n",message[counter-1] );
-    }
-
-    write(sock,&message[counter-1],sizeof(char)*(counter-1));
-
-    
-    
-
-    close(sock);
 }
 
-
-
-
-
-
-int callSocket(char *hostname, unsigned short portnum,char ip[128]) {
-    struct sockaddr_in sa;
-    struct hostent *hp;
-    int a, s;
-
-    if ((hp= gethostbyname(hostname)) == NULL) { 
-        return(-1);
-    } 
+void *takeResponse(){
+	int sockfd, newfd;
+	struct sockaddr_in serverAddr;	// server addresses
+    struct sockaddr_in clientAddr;
+    char str[120]="172.16.5.61,Caner Bakar\t";
+    int option;
+    str[0] = '\0';
+    int structSize;
+    int counter=0;
+    char *savedEndd1;
     
-    memset(&sa,0,sizeof(sa));
-    sa.sin_family= hp->h_addrtype; 
-    sa.sin_port= htons((u_short)portnum);
-    inet_pton(AF_INET, ip, &(sa.sin_addr.s_addr));
-    
-    if ((s= socket(hp->h_addrtype,SOCK_STREAM,0)) < 0) 
-        return(-1);
+    option=1;
+	sockfd = socket(AF_INET, SOCK_STREAM, 0);
+	setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &option, sizeof(option));
+																			
+    struct timeval timeout;
+    timeout.tv_sec = 1;
+    timeout.tv_usec = 0;
 
-    if (connect(s,(struct sockaddr *)&sa,sizeof sa) < 0) { 
-        close(s);
-        return(-1);
+    if (setsockopt (sockfd, SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout,
+                    sizeof(timeout)) < 0)
+
+    if (setsockopt (sockfd, SOL_SOCKET, SO_SNDTIMEO, (char *)&timeout,
+                    sizeof(timeout)) < 0)
+
+    if(-1 == sockfd){
+        close(newfd);
+        close(sockfd);	
+        return ;
     }
-    return(s); 
+    
+    serverAddr.sin_family = AF_INET;		
+    serverAddr.sin_port = htons(10001);		
+    serverAddr.sin_addr.s_addr = INADDR_ANY;
+    memset(&(serverAddr.sin_zero), '\0', 8);
+
+
+    if(-1 == bind(sockfd, (struct sockaddr *)&serverAddr, sizeof(struct sockaddr))){
+        close(newfd);	
+        close(sockfd);
+        return ;
+	}
+	if(-1 == listen(sockfd, 20)){
+        close(newfd);	
+        close(sockfd);
+        return ;
+    }
+
+    structSize = sizeof(clientAddr);	
+    
+   
+    newfd = accept(sockfd, (struct sockaddr *)&clientAddr, (socklen_t*)&structSize);
+    if(-1 == newfd){
+     
+        close(newfd);
+        close(sockfd);
+        return ;
+    }
+  
+    int index = 0;	
+
+    fprintf(stderr, "Respond Taken: \n" );
+	while(1){
+		read(newfd, &str[index], 1);	
+		if(str[index] == '\t'){			
+			index++;					
+			break;					
+		}
+		fprintf(stderr, "%c",str[index] );
+		index++;					
+	}
+	strtok_r(str, ",",&savedEndd1);
+	strcpy(IP,str);
+	fprintf(stderr, "\n" );
+	str[index] = '\0';					
+}
+
+void* callSocket(void *str1){
+	int listendfd=0,connfd=0,option=1;
+	struct sockaddr_in server_addr;
+	char recMessage[1024];
+	char  sendMessage[1024] ;
+	char str[1024] ;
+	strcpy(str,(void *)str1);
+	int bindErr=0;
+	int counter1=0;
+
+	/*------initiliaze timeout for socket ---------*/
+	struct timeval timeout;      
+    timeout.tv_sec = 0;
+    timeout.tv_usec = 3;
+    /*--------------------*/
+
+  	strcpy(sendMessage,"172.16.5.61,Caner Bakar\t");
+
+
+  	/*------create socket --------*/
+	listendfd = socket(AF_INET,SOCK_STREAM,0);
+	if(listendfd<0)
+		perror("Error  ");
+	
+	/*------assign socket for timeout------*/
+	setsockopt(listendfd,SOL_SOCKET,SO_REUSEADDR,(char *)&timeout, sizeof(timeout));
+
+	/*------------server address  set ------*/
+	server_addr.sin_family = AF_INET;
+	server_addr.sin_addr.s_addr = inet_addr(str);
+	server_addr.sin_port = htons(10000);
+	
+
+
+	/*------connect address the socket--------*/
+	if((connfd=connect(listendfd, (struct sockaddr *)&server_addr, sizeof(server_addr)))<0){
+
+  	}
+  	else{
+	
+	
+		while ( sendMessage[counter1] != '\t'){
+			write(listendfd,&sendMessage[counter1++],sizeof(char));
+		}
+		write(listendfd,&sendMessage[counter1],sizeof(char));
+  	}
+
+  	/*-----close connect and socket -----*/
+
+	close(connfd);
+	close(listendfd);	
+
+}  
+
+
+int sendMessage1(char *str,char *ip){
+
+	int listendfd=0,connfd=0,option=1;
+	struct sockaddr_in server_addr;
+	int bindErr=0;
+	int counter1=0;
+
+	/*------initiliaze timeout for socket ---------*/
+	struct timeval timeout;      
+    timeout.tv_sec = 0;
+    timeout.tv_usec = 3;
+    /*--------------------*/
+
+  	/*------create socket --------*/
+	listendfd = socket(AF_INET,SOCK_STREAM,0);
+	if(listendfd<0)
+		perror("Error  ");
+	
+	/*------assign socket for timeout------*/
+	setsockopt(listendfd,SOL_SOCKET,SO_REUSEADDR,(char *)&timeout, sizeof(timeout));
+
+	
+	/*------------server address  set ------*/
+	server_addr.sin_family = AF_INET;
+	server_addr.sin_addr.s_addr = inet_addr(ip);
+	server_addr.sin_port = htons(10002);
+	
+
+	/*------connect address the socket--------*/
+	if((connfd=connect(listendfd, (struct sockaddr *)&server_addr, sizeof(server_addr)))<0){
+
+  	}
+  	else{
+		while ( str[counter1] != '\t'){
+			write(listendfd,&str[counter1++],sizeof(char));
+		}
+		write(listendfd,&str[counter1],sizeof(char));
+  	}
+
+  	/*-----close connect and socket -----*/
+	close(connfd);
+	close(listendfd);	
+
+
+
 }

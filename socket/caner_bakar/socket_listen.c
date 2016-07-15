@@ -17,7 +17,7 @@
 #include <sys/sendfile.h>
 #include <pthread.h>
 
-#define MAXCLIENT 5
+#define MAXCLIENT 254
 
 
 int new_sock[10];
@@ -27,6 +27,7 @@ int sockets=0;
 int numberClient;
 int client_arr[10];
 int establish (unsigned short portnum);
+int response(char *str);
 
 
 int main(int argc , char *argv[]){
@@ -34,8 +35,7 @@ int main(int argc , char *argv[]){
     int socket_desc;
     char message[128];
     int counter=0;
-    char response[50]="Message that you sent is received succesfully";
-
+    char *savedEndd1;
 
     socket_desc=establish(atoi(argv[1]));
 
@@ -63,20 +63,78 @@ int main(int argc , char *argv[]){
         ++numberClient;
         client_arr[numberClient-1]=new_sock[sockets-1];
         
-        while (read(new_sock[sockets-1],&message[counter-1],sizeof(char)) > 0){
-            if ( message[counter-1] == '\t')
-                break;
-            fprintf(stderr, "%c\n", message[counter-1]);
-        }
         
-        write(new_sock[sockets-1],response,sizeof(response));
+        while (read(new_sock[sockets-1],&message[counter],sizeof(char)) > 0){
+            if ( message[counter] == '\t')
+                break;
+            ++counter;
+        }
 
-        close(socket_desc);
-        break;    
+        message[counter]='\0';
+        
+        strtok_r(message, ",",&savedEndd1);
+        response(message);
+        fprintf(stderr, "%s %s\n",message,savedEndd1 );
+  
+        message[0]='\0';
+        counter=0;
+        fprintf(stderr, "Responsed Succesfully\n" );
     }
+
+    close(socket_desc);
 
 }
 
+int response(char *str){
+
+    
+    int listendfd=0,connfd=0,option=1;
+    struct sockaddr_in server_addr;
+    char response1[100]="172.16.5.61,Caner Bakar\t";
+    int bindErr=0;
+    int counter=0,counter1=0;
+
+    while ( response1[counter] != '\0' ){
+        ++counter;
+    }
+
+
+    /*------initiliaze timeout for socket ---------*/
+    struct timeval timeout;      
+    timeout.tv_sec = 0;
+    timeout.tv_usec = 3;
+    /*--------------------*/
+
+    printf("Responsing... \n");
+
+    /*------create socket --------*/
+    listendfd = socket(AF_INET,SOCK_STREAM,0);
+    if(listendfd<0)
+        perror("Error  ");
+    
+    /*------assign socket for timeout------*/
+    setsockopt(listendfd,SOL_SOCKET,SO_REUSEADDR,(char *)&timeout, sizeof(timeout));
+
+    
+    /*------------server address  set ------*/
+    server_addr.sin_family = AF_INET;
+    server_addr.sin_addr.s_addr = inet_addr(str);
+    server_addr.sin_port = htons(10001);
+    /*------connect address the socket--------*/
+    if((connfd=connect(listendfd, (struct sockaddr *)&server_addr, sizeof(server_addr)))<0){
+        perror("Error  ");
+        close(listendfd);
+    }
+    else{
+        while( response1[counter1] != '\t'){
+            write(listendfd,&response1[counter1++],sizeof(char));
+        }
+        write(listendfd,&response1[counter1],sizeof(char));
+    }
+    close(listendfd);
+    /*-----close connect and socket -----*/
+
+}
 
 
 int establish (unsigned short portnum) {
