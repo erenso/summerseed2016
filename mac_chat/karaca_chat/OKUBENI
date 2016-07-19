@@ -1,0 +1,24 @@
+1) Ekranın sağ üst köşesindeki network manager simgesine sağ tıklayarak "Enable Networking"
+tick'ini kaldırıyoruz.
+
+2) konsoldan wireless interface'imizi monitor mode'a alıyoruz:
+# airmon-ng stop wlan0
+# airmon-ng start wlan0
+
+3) havaya paket inject edebildiğimizden emin oluyoruz:
+# aireplay-ng --test wlan0
+
+"Injection is working!" mesajını görürsek tamamdır.
+
+
+Ekteki kodları derlemek için bu dosyaları daha önce build etmiş olduğumuz aircrack source
+paketinde "libosdep.a" kütüphanesinin olduğu yere (aircrack-ng-1.2-rc2/src/osdep) attıktan
+sonra konsoldan bu directory'e giderek aşağıdaki komutla derleme yapabiliriz:
+
+# gcc -o cappkt cappkt.c libosdep.a -lnl-3 -lnl-genl-3
+# gcc -o injpkt injpkt.c libosdep.a -lnl-3 -lnl-genl-3
+
+Artık bundan sonra havaya paket inject edip capture edebiliyor olmamız lazım:
+
+# ./cappkt wlan0
+# ./injpkt wlan0 "this is the message payload"

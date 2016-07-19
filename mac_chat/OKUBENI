@@ -1,0 +1,22 @@
+1) En az 8gb'lık bir flash disk'e bootable kali-linux usb imajını kopyalayalım:
+
+http://docs.kali.org/downloading/kali-linux-live-usb-install
+
+2) Reboot sonrası yapmış olduğumuz değişiklikler kaybolmasın diye değişikliklerin
+kaydedileceği ek bir partition yaratalım:
+
+http://docs.kali.org/downloading/kali-linux-live-usb-persistence
+
+3) usb'den kali-linux'u boot ettikten sonra sana usb içerisinde verdiğim aircrack
+paketini source'dan derleyecek hale gelmemiz gerekiyor. Bunun için "libnl" kütüphanesinin
+header'larına falan ihtiyaç var. Şu komutla gerekli paketleri internetten indirip sisteme kuruyoruz:
+
+ # apt-get install libnl-genl-3-dev
+
+4) libnl paketleri install edildikten sonra aircrack'i derleyebilir hale gelmiş olmamız lazım:
+
+# tar zxvf aircrack-ng-1.2-rc2.tar.gz
+# make -C aircrack-ng-1.2-rc2
+
+5) aircrack paketi derlendikten sonra oluşacak "aircrack-ng-1.2-rc2/src/osdep/libosdep.a"
+kütüphanesinden faydalanarak kolay bir şekilde paket inject edip capture edebiliyor olacağız.

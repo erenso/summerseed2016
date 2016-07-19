@@ -1,0 +1,2291 @@
+[    0.000000] microcode: CPU0 microcode updated early to revision 0x1c, date = 2015-02-26
+[    0.000000] Initializing cgroup subsys cpuset
+[    0.000000] Initializing cgroup subsys cpu
+[    0.000000] Initializing cgroup subsys cpuacct
+[    0.000000] Linux version 4.4.0-21-generic (buildd@lgw01-21) (gcc version 5.3.1 20160413 (Ubuntu 5.3.1-14ubuntu2) ) #37-Ubuntu SMP Mon Apr 18 18:33:37 UTC 2016 (Ubuntu 4.4.0-21.37-generic 4.4.6)
+[    0.000000] Command line: BOOT_IMAGE=/boot/vmlinuz-4.4.0-21-generic.efi.signed root=UUID=d0ee652b-0b00-44d3-8e84-77f016373eb7 ro quiet splash vt.handoff=7
+[    0.000000] KERNEL supported cpus:
+[    0.000000]   Intel GenuineIntel
+[    0.000000]   AMD AuthenticAMD
+[    0.000000]   Centaur CentaurHauls
+[    0.000000] x86/fpu: xstate_offset[2]:  576, xstate_sizes[2]:  256
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x01: 'x87 floating point registers'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x02: 'SSE registers'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x04: 'AVX registers'
+[    0.000000] x86/fpu: Enabled xstate features 0x7, context size is 832 bytes, using 'standard' format.
+[    0.000000] x86/fpu: Using 'eager' FPU context switches.
+[    0.000000] e820: BIOS-provided physical RAM map:
+[    0.000000] BIOS-e820: [mem 0x0000000000000000-0x000000000009bfff] usable
+[    0.000000] BIOS-e820: [mem 0x000000000009c000-0x000000000009cfff] reserved
+[    0.000000] BIOS-e820: [mem 0x000000000009d000-0x000000000009dfff] usable
+[    0.000000] BIOS-e820: [mem 0x000000000009e000-0x00000000000bffff] reserved
+[    0.000000] BIOS-e820: [mem 0x0000000000100000-0x000000001fffffff] usable
+[    0.000000] BIOS-e820: [mem 0x0000000020000000-0x00000000201fffff] reserved
+[    0.000000] BIOS-e820: [mem 0x0000000020200000-0x0000000040003fff] usable
+[    0.000000] BIOS-e820: [mem 0x0000000040004000-0x0000000040004fff] reserved
+[    0.000000] BIOS-e820: [mem 0x0000000040005000-0x00000000c9a16fff] usable
+[    0.000000] BIOS-e820: [mem 0x00000000c9a17000-0x00000000c9c18fff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000c9c19000-0x00000000d8459fff] usable
+[    0.000000] BIOS-e820: [mem 0x00000000d845a000-0x00000000dae9efff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000dae9f000-0x00000000daf9efff] ACPI NVS
+[    0.000000] BIOS-e820: [mem 0x00000000daf9f000-0x00000000daffefff] ACPI data
+[    0.000000] BIOS-e820: [mem 0x00000000dafff000-0x00000000daffffff] usable
+[    0.000000] BIOS-e820: [mem 0x00000000db000000-0x00000000df9fffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000f80f8000-0x00000000f80f8fff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000fed1c000-0x00000000fed1ffff] reserved
+[    0.000000] BIOS-e820: [mem 0x0000000100000000-0x000000011e5fffff] usable
+[    0.000000] NX (Execute Disable) protection: active
+[    0.000000] e820: update [mem 0xc97dc018-0xc97ec057] usable ==> usable
+[    0.000000] e820: update [mem 0xc97cb018-0xc97db057] usable ==> usable
+[    0.000000] extended physical RAM map:
+[    0.000000] reserve setup_data: [mem 0x0000000000000000-0x000000000009bfff] usable
+[    0.000000] reserve setup_data: [mem 0x000000000009c000-0x000000000009cfff] reserved
+[    0.000000] reserve setup_data: [mem 0x000000000009d000-0x000000000009dfff] usable
+[    0.000000] reserve setup_data: [mem 0x000000000009e000-0x00000000000bffff] reserved
+[    0.000000] reserve setup_data: [mem 0x0000000000100000-0x000000001fffffff] usable
+[    0.000000] reserve setup_data: [mem 0x0000000020000000-0x00000000201fffff] reserved
+[    0.000000] reserve setup_data: [mem 0x0000000020200000-0x0000000040003fff] usable
+[    0.000000] reserve setup_data: [mem 0x0000000040004000-0x0000000040004fff] reserved
+[    0.000000] reserve setup_data: [mem 0x0000000040005000-0x00000000c97cb017] usable
+[    0.000000] reserve setup_data: [mem 0x00000000c97cb018-0x00000000c97db057] usable
+[    0.000000] reserve setup_data: [mem 0x00000000c97db058-0x00000000c97dc017] usable
+[    0.000000] reserve setup_data: [mem 0x00000000c97dc018-0x00000000c97ec057] usable
+[    0.000000] reserve setup_data: [mem 0x00000000c97ec058-0x00000000c9a16fff] usable
+[    0.000000] reserve setup_data: [mem 0x00000000c9a17000-0x00000000c9c18fff] reserved
+[    0.000000] reserve setup_data: [mem 0x00000000c9c19000-0x00000000d8459fff] usable
+[    0.000000] reserve setup_data: [mem 0x00000000d845a000-0x00000000dae9efff] reserved
+[    0.000000] reserve setup_data: [mem 0x00000000dae9f000-0x00000000daf9efff] ACPI NVS
+[    0.000000] reserve setup_data: [mem 0x00000000daf9f000-0x00000000daffefff] ACPI data
+[    0.000000] reserve setup_data: [mem 0x00000000dafff000-0x00000000daffffff] usable
+[    0.000000] reserve setup_data: [mem 0x00000000db000000-0x00000000df9fffff] reserved
+[    0.000000] reserve setup_data: [mem 0x00000000f80f8000-0x00000000f80f8fff] reserved
+[    0.000000] reserve setup_data: [mem 0x00000000fed1c000-0x00000000fed1ffff] reserved
+[    0.000000] reserve setup_data: [mem 0x0000000100000000-0x000000011e5fffff] usable
+[    0.000000] efi: EFI v2.31 by Lenovo
+[    0.000000] efi:  ACPI 2.0=0xdaffe014  ACPI=0xdaffe000  SMBIOS=0xdac0f000 
+[    0.000000] SMBIOS 2.7 present.
+[    0.000000] DMI: LENOVO 3254T2G/3254T2G, BIOS H0ET70WW (2.04 ) 09/11/2012
+[    0.000000] e820: update [mem 0x00000000-0x00000fff] usable ==> reserved
+[    0.000000] e820: remove [mem 0x000a0000-0x000fffff] usable
+[    0.000000] e820: last_pfn = 0x11e600 max_arch_pfn = 0x400000000
+[    0.000000] MTRR default type: uncachable
+[    0.000000] MTRR fixed ranges enabled:
+[    0.000000]   00000-9FFFF write-back
+[    0.000000]   A0000-FFFFF uncachable
+[    0.000000] MTRR variable ranges enabled:
+[    0.000000]   0 base 0FFC00000 mask FFFC00000 write-protect
+[    0.000000]   1 base 000000000 mask F80000000 write-back
+[    0.000000]   2 base 080000000 mask FC0000000 write-back
+[    0.000000]   3 base 0C0000000 mask FE0000000 write-back
+[    0.000000]   4 base 0DC000000 mask FFC000000 uncachable
+[    0.000000]   5 base 0DB000000 mask FFF000000 uncachable
+[    0.000000]   6 base 100000000 mask FE0000000 write-back
+[    0.000000]   7 base 11F000000 mask FFF000000 uncachable
+[    0.000000]   8 base 11E800000 mask FFF800000 uncachable
+[    0.000000]   9 base 11E600000 mask FFFE00000 uncachable
+[    0.000000] x86/PAT: Configuration [0-7]: WB  WC  UC- UC  WB  WC  UC- WT  
+[    0.000000] e820: last_pfn = 0xdb000 max_arch_pfn = 0x400000000
+[    0.000000] Scanning 1 areas for low memory corruption
+[    0.000000] Base memory trampoline at [ffff880000096000] 96000 size 24576
+[    0.000000] BRK [0x021fe000, 0x021fefff] PGTABLE
+[    0.000000] BRK [0x021ff000, 0x021fffff] PGTABLE
+[    0.000000] BRK [0x02200000, 0x02200fff] PGTABLE
+[    0.000000] BRK [0x02201000, 0x02201fff] PGTABLE
+[    0.000000] BRK [0x02202000, 0x02202fff] PGTABLE
+[    0.000000] BRK [0x02203000, 0x02203fff] PGTABLE
+[    0.000000] RAMDISK: [mem 0x3ddb3000-0x3fffafff]
+[    0.000000] Secure boot enabled
+[    0.000000] ACPI: Early table checksum verification disabled
+[    0.000000] ACPI: RSDP 0x00000000DAFFE014 000024 (v02 LENOVO)
+[    0.000000] ACPI: XSDT 0x00000000DAFFE170 0000AC (v01 LENOVO TP-H0    00002040 PTL  00000002)
+[    0.000000] ACPI: FACP 0x00000000DAFED000 00010C (v05 LENOVO TP-H0    00002040 PTL  00000002)
+[    0.000000] ACPI: DSDT 0x00000000DAFEF000 00B548 (v02 LENOVO TP-H0    00002040 INTL 20061109)
+[    0.000000] ACPI: FACS 0x00000000DAF69000 000040
+[    0.000000] ACPI: SLIC 0x00000000DAFFD000 000176 (v01 LENOVO TP-H0    00002040 PTL  00000001)
+[    0.000000] ACPI: SSDT 0x00000000DAFFC000 000518 (v02 LENOVO SataAhci 00001000 INTL 20061109)
+[    0.000000] ACPI: SSDT 0x00000000DAFFB000 0006A5 (v02 LENOVO PtidDevc 00001000 INTL 20061109)
+[    0.000000] ACPI: ASF! 0x00000000DAFEE000 0000A5 (v32 LENOVO TP-H0    00002040 PTL  00000002)
+[    0.000000] ACPI: HPET 0x00000000DAFEB000 000038 (v01 LENOVO TP-H0    00002040 PTL  00000002)
+[    0.000000] ACPI: APIC 0x00000000DAFEA000 000098 (v01 LENOVO TP-H0    00002040 PTL  00000002)
+[    0.000000] ACPI: MCFG 0x00000000DAFE9000 00003C (v01 LENOVO TP-H0    00002040 PTL  00000002)
+[    0.000000] ACPI: FPDT 0x00000000DAFE8000 000064 (v01 LENOVO TP-H0    00002040 PTL  00000002)
+[    0.000000] ACPI: SSDT 0x00000000DAFE7000 000968 (v02 PmRef  Cpu0Ist  00003000 INTL 20061109)
+[    0.000000] ACPI: SSDT 0x00000000DAFE6000 000A92 (v02 PmRef  CpuPm    00003000 INTL 20061109)
+[    0.000000] ACPI: UEFI 0x00000000DAFE5000 00003E (v01 LENOVO TP-H0    00002040 PTL  00000002)
+[    0.000000] ACPI: UEFI 0x00000000DAFE4000 000042 (v01 PTL    COMBUF   00000001 PTL  00000001)
+[    0.000000] ACPI: MSDM 0x00000000DAF64000 000055 (v03 LENOVO TP-H0    00002040 PTL  00000002)
+[    0.000000] ACPI: UEFI 0x00000000DAFE3000 0002BA (v01 LENOVO TP-H0    00002040 PTL  00000002)
+[    0.000000] ACPI: DBG2 0x00000000DAFE2000 0000A5 (v00 LENOVO TP-H0    00002040 PTL  00000002)
+[    0.000000] ACPI: BGRT 0x00000000DAFE1000 000038 (v00 LENOVO TP-H0    00002040 PTL  00000002)
+[    0.000000] ACPI: Local APIC address 0xfee00000
+[    0.000000] No NUMA configuration found
+[    0.000000] Faking a node at [mem 0x0000000000000000-0x000000011e5fffff]
+[    0.000000] NODE_DATA(0) allocated [mem 0x11e5f5000-0x11e5f9fff]
+[    0.000000] Zone ranges:
+[    0.000000]   DMA      [mem 0x0000000000001000-0x0000000000ffffff]
+[    0.000000]   DMA32    [mem 0x0000000001000000-0x00000000ffffffff]
+[    0.000000]   Normal   [mem 0x0000000100000000-0x000000011e5fffff]
+[    0.000000]   Device   empty
+[    0.000000] Movable zone start for each node
+[    0.000000] Early memory node ranges
+[    0.000000]   node   0: [mem 0x0000000000001000-0x000000000009bfff]
+[    0.000000]   node   0: [mem 0x000000000009d000-0x000000000009dfff]
+[    0.000000]   node   0: [mem 0x0000000000100000-0x000000001fffffff]
+[    0.000000]   node   0: [mem 0x0000000020200000-0x0000000040003fff]
+[    0.000000]   node   0: [mem 0x0000000040005000-0x00000000c9a16fff]
+[    0.000000]   node   0: [mem 0x00000000c9c19000-0x00000000d8459fff]
+[    0.000000]   node   0: [mem 0x00000000dafff000-0x00000000daffffff]
+[    0.000000]   node   0: [mem 0x0000000100000000-0x000000011e5fffff]
+[    0.000000] Initmem setup node 0 [mem 0x0000000000001000-0x000000011e5fffff]
+[    0.000000] On node 0 totalpages: 1009140
+[    0.000000]   DMA zone: 64 pages used for memmap
+[    0.000000]   DMA zone: 23 pages reserved
+[    0.000000]   DMA zone: 3996 pages, LIFO batch:0
+[    0.000000]   DMA32 zone: 13762 pages used for memmap
+[    0.000000]   DMA32 zone: 880728 pages, LIFO batch:31
+[    0.000000]   Normal zone: 1944 pages used for memmap
+[    0.000000]   Normal zone: 124416 pages, LIFO batch:31
+[    0.000000] tboot: non-0 tboot_addr but it is not of type E820_RESERVED
+[    0.000000] Reserving Intel graphics stolen memory at 0xdba00000-0xdf9fffff
+[    0.000000] ACPI: PM-Timer IO Port: 0x408
+[    0.000000] ACPI: Local APIC address 0xfee00000
+[    0.000000] ACPI: LAPIC_NMI (acpi_id[0x00] high edge lint[0x1])
+[    0.000000] ACPI: LAPIC_NMI (acpi_id[0x01] high edge lint[0x1])
+[    0.000000] IOAPIC[0]: apic_id 2, version 32, address 0xfec00000, GSI 0-23
+[    0.000000] ACPI: INT_SRC_OVR (bus 0 bus_irq 0 global_irq 2 dfl dfl)
+[    0.000000] ACPI: INT_SRC_OVR (bus 0 bus_irq 9 global_irq 9 high level)
+[    0.000000] ACPI: IRQ0 used by override.
+[    0.000000] ACPI: IRQ9 used by override.
+[    0.000000] Using ACPI (MADT) for SMP configuration information
+[    0.000000] ACPI: HPET id: 0x8086a301 base: 0xfed00000
+[    0.000000] smpboot: Allowing 8 CPUs, 4 hotplug CPUs
+[    0.000000] PM: Registered nosave memory: [mem 0x00000000-0x00000fff]
+[    0.000000] PM: Registered nosave memory: [mem 0x0009c000-0x0009cfff]
+[    0.000000] PM: Registered nosave memory: [mem 0x0009e000-0x000bffff]
+[    0.000000] PM: Registered nosave memory: [mem 0x000c0000-0x000fffff]
+[    0.000000] PM: Registered nosave memory: [mem 0x20000000-0x201fffff]
+[    0.000000] PM: Registered nosave memory: [mem 0x40004000-0x40004fff]
+[    0.000000] PM: Registered nosave memory: [mem 0xc97cb000-0xc97cbfff]
+[    0.000000] PM: Registered nosave memory: [mem 0xc97db000-0xc97dbfff]
+[    0.000000] PM: Registered nosave memory: [mem 0xc97dc000-0xc97dcfff]
+[    0.000000] PM: Registered nosave memory: [mem 0xc97ec000-0xc97ecfff]
+[    0.000000] PM: Registered nosave memory: [mem 0xc9a17000-0xc9c18fff]
+[    0.000000] PM: Registered nosave memory: [mem 0xd845a000-0xdae9efff]
+[    0.000000] PM: Registered nosave memory: [mem 0xdae9f000-0xdaf9efff]
+[    0.000000] PM: Registered nosave memory: [mem 0xdaf9f000-0xdaffefff]
+[    0.000000] PM: Registered nosave memory: [mem 0xdb000000-0xdf9fffff]
+[    0.000000] PM: Registered nosave memory: [mem 0xdfa00000-0xf80f7fff]
+[    0.000000] PM: Registered nosave memory: [mem 0xf80f8000-0xf80f8fff]
+[    0.000000] PM: Registered nosave memory: [mem 0xf80f9000-0xfed1bfff]
+[    0.000000] PM: Registered nosave memory: [mem 0xfed1c000-0xfed1ffff]
+[    0.000000] PM: Registered nosave memory: [mem 0xfed20000-0xffffffff]
+[    0.000000] e820: [mem 0xdfa00000-0xf80f7fff] available for PCI devices
+[    0.000000] Booting paravirtualized kernel on bare hardware
+[    0.000000] clocksource: refined-jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 7645519600211568 ns
+[    0.000000] setup_percpu: NR_CPUS:256 nr_cpumask_bits:256 nr_cpu_ids:8 nr_node_ids:1
+[    0.000000] PERCPU: Embedded 33 pages/cpu @ffff88011e200000 s98008 r8192 d28968 u262144
+[    0.000000] pcpu-alloc: s98008 r8192 d28968 u262144 alloc=1*2097152
+[    0.000000] pcpu-alloc: [0] 0 1 2 3 4 5 6 7 
+[    0.000000] Built 1 zonelists in Node order, mobility grouping on.  Total pages: 993347
+[    0.000000] Policy zone: Normal
+[    0.000000] Kernel command line: BOOT_IMAGE=/boot/vmlinuz-4.4.0-21-generic.efi.signed root=UUID=d0ee652b-0b00-44d3-8e84-77f016373eb7 ro quiet splash vt.handoff=7
+[    0.000000] PID hash table entries: 4096 (order: 3, 32768 bytes)
+[    0.000000] Calgary: detecting Calgary via BIOS EBDA area
+[    0.000000] Calgary: Unable to locate Rio Grande table in EBDA - bailing!
+[    0.000000] Memory: 3782212K/4036560K available (8356K kernel code, 1278K rwdata, 3920K rodata, 1476K init, 1292K bss, 254348K reserved, 0K cma-reserved)
+[    0.000000] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=8, Nodes=1
+[    0.000000] Hierarchical RCU implementation.
+[    0.000000] 	Build-time adjustment of leaf fanout to 64.
+[    0.000000] 	RCU restricting CPUs from NR_CPUS=256 to nr_cpu_ids=8.
+[    0.000000] RCU: Adjusting geometry for rcu_fanout_leaf=64, nr_cpu_ids=8
+[    0.000000] NR_IRQS:16640 nr_irqs:488 16
+[    0.000000] vt handoff: transparent VT on vt#7
+[    0.000000] Console: colour dummy device 80x25
+[    0.000000] console [tty0] enabled
+[    0.000000] clocksource: hpet: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 133484882848 ns
+[    0.000000] hpet clockevent registered
+[    0.000000] tsc: Fast TSC calibration using PIT
+[    0.000000] tsc: Detected 2494.202 MHz processor
+[    0.000034] Calibrating delay loop (skipped), value calculated using timer frequency.. 4988.40 BogoMIPS (lpj=9976808)
+[    0.000036] pid_max: default: 32768 minimum: 301
+[    0.000042] ACPI: Core revision 20150930
+[    0.011652] ACPI: 5 ACPI AML tables successfully acquired and loaded
+[    0.033161] Security Framework initialized
+[    0.033164] Yama: becoming mindful.
+[    0.033182] AppArmor: AppArmor initialized
+[    0.033433] Dentry cache hash table entries: 524288 (order: 10, 4194304 bytes)
+[    0.034403] Inode-cache hash table entries: 262144 (order: 9, 2097152 bytes)
+[    0.034847] Mount-cache hash table entries: 8192 (order: 4, 65536 bytes)
+[    0.034852] Mountpoint-cache hash table entries: 8192 (order: 4, 65536 bytes)
+[    0.035048] Initializing cgroup subsys io
+[    0.035051] Initializing cgroup subsys memory
+[    0.035058] Initializing cgroup subsys devices
+[    0.035060] Initializing cgroup subsys freezer
+[    0.035062] Initializing cgroup subsys net_cls
+[    0.035064] Initializing cgroup subsys perf_event
+[    0.035066] Initializing cgroup subsys net_prio
+[    0.035067] Initializing cgroup subsys hugetlb
+[    0.035070] Initializing cgroup subsys pids
+[    0.035091] CPU: Physical Processor ID: 0
+[    0.035092] CPU: Processor Core ID: 0
+[    0.035096] ENERGY_PERF_BIAS: Set to 'normal', was 'performance'
+[    0.035097] ENERGY_PERF_BIAS: View and update with x86_energy_perf_policy(8)
+[    0.035452] mce: CPU supports 7 MCE banks
+[    0.035463] CPU0: Thermal monitoring enabled (TM1)
+[    0.035470] process: using mwait in idle threads
+[    0.035473] Last level iTLB entries: 4KB 512, 2MB 8, 4MB 8
+[    0.035474] Last level dTLB entries: 4KB 512, 2MB 32, 4MB 32, 1GB 0
+[    0.035892] Freeing SMP alternatives memory: 28K (ffffffff820b2000 - ffffffff820b9000)
+[    0.043627] Ignoring BGRT: invalid version 0 (expected 1)
+[    0.045364] ftrace: allocating 31878 entries in 125 pages
+[    0.060029] smpboot: Max logical packages: 4
+[    0.060032] smpboot: APIC(0) Converting physical 0 to logical package 0
+[    0.060106] x2apic: IRQ remapping doesn't support X2APIC mode
+[    0.060536] ..TIMER: vector=0x30 apic1=0 pin1=2 apic2=-1 pin2=-1
+[    0.100224] TSC deadline timer enabled
+[    0.100228] smpboot: CPU0: Intel(R) Core(TM) i5-3210M CPU @ 2.50GHz (family: 0x6, model: 0x3a, stepping: 0x9)
+[    0.100242] Performance Events: PEBS fmt1+, 16-deep LBR, IvyBridge events, full-width counters, Intel PMU driver.
+[    0.100261] ... version:                3
+[    0.100262] ... bit width:              48
+[    0.100263] ... generic registers:      4
+[    0.100264] ... value mask:             0000ffffffffffff
+[    0.100265] ... max period:             0000ffffffffffff
+[    0.100266] ... fixed-purpose events:   3
+[    0.100266] ... event mask:             000000070000000f
+[    0.101013] x86: Booting SMP configuration:
+[    0.101015] .... node  #0, CPUs:      #1
+[    0.103900] NMI watchdog: enabled on all CPUs, permanently consumes one hw-PMU counter.
+[    0.103976]  #2
+[    0.104666] microcode: CPU2 microcode updated early to revision 0x1c, date = 2015-02-26
+[    0.107178]  #3
+[    0.109939] x86: Booted up 1 node, 4 CPUs
+[    0.109942] smpboot: Total of 4 processors activated (19953.61 BogoMIPS)
+[    0.112994] devtmpfs: initialized
+[    0.115153] evm: security.selinux
+[    0.115155] evm: security.SMACK64
+[    0.115155] evm: security.SMACK64EXEC
+[    0.115156] evm: security.SMACK64TRANSMUTE
+[    0.115157] evm: security.SMACK64MMAP
+[    0.115158] evm: security.ima
+[    0.115159] evm: security.capability
+[    0.115217] PM: Registering ACPI NVS region [mem 0xdae9f000-0xdaf9efff] (1048576 bytes)
+[    0.115301] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 7645041785100000 ns
+[    0.115376] pinctrl core: initialized pinctrl subsystem
+[    0.115478] RTC time:  9:00:33, date: 07/15/16
+[    0.115582] NET: Registered protocol family 16
+[    0.125937] cpuidle: using governor ladder
+[    0.141943] cpuidle: using governor menu
+[    0.141949] PCCT header not found.
+[    0.142047] ACPI FADT declares the system doesn't support PCIe ASPM, so disable it
+[    0.142049] ACPI: bus type PCI registered
+[    0.142050] acpiphp: ACPI Hot Plug PCI Controller Driver version: 0.5
+[    0.142239] PCI: MMCONFIG for domain 0000 [bus 00-3f] at [mem 0xf8000000-0xfbffffff] (base 0xf8000000)
+[    0.142241] PCI: not using MMCONFIG
+[    0.142242] PCI: Using configuration type 1 for base access
+[    0.142272] core: PMU erratum BJ122, BV98, HSD29 worked around, HT is on
+[    0.158294] ACPI: Added _OSI(Module Device)
+[    0.158295] ACPI: Added _OSI(Processor Device)
+[    0.158297] ACPI: Added _OSI(3.0 _SCP Extensions)
+[    0.158298] ACPI: Added _OSI(Processor Aggregator Device)
+[    0.161033] ACPI: Executed 1 blocks of module-level executable AML code
+[    0.163457] [Firmware Bug]: ACPI: BIOS _OSI(Linux) query ignored
+[    0.166249] ACPI: Dynamic OEM Table Load:
+[    0.166258] ACPI: SSDT 0xFFFF880118E07000 00083B (v02 PmRef  Cpu0Cst  00003001 INTL 20061109)
+[    0.166801] ACPI: Dynamic OEM Table Load:
+[    0.166806] ACPI: SSDT 0xFFFF880118F93000 000303 (v02 PmRef  ApIst    00003000 INTL 20061109)
+[    0.167278] ACPI: Dynamic OEM Table Load:
+[    0.167283] ACPI: SSDT 0xFFFF880118F63600 000119 (v02 PmRef  ApCst    00003000 INTL 20061109)
+[    0.168142] ACPI : EC: EC started
+[    0.998452] ACPI: Interpreter enabled
+[    0.998460] ACPI Exception: AE_NOT_FOUND, While evaluating Sleep State [\_S1_] (20150930/hwxface-580)
+[    0.998465] ACPI Exception: AE_NOT_FOUND, While evaluating Sleep State [\_S2_] (20150930/hwxface-580)
+[    0.998480] ACPI: (supports S0 S3 S4 S5)
+[    0.998482] ACPI: Using IOAPIC for interrupt routing
+[    0.998508] PCI: MMCONFIG for domain 0000 [bus 00-3f] at [mem 0xf8000000-0xfbffffff] (base 0xf8000000)
+[    0.998796] PCI: MMCONFIG at [mem 0xf8000000-0xfbffffff] reserved in ACPI motherboard resources
+[    0.998804] PCI: Using host bridge windows from ACPI; if necessary, use "pci=nocrs" and report a bug
+[    1.004768] ACPI: PCI Root Bridge [PCI0] (domain 0000 [bus 00-3e])
+[    1.004773] acpi PNP0A08:00: _OSC: OS supports [ExtendedConfig ASPM ClockPM Segments MSI]
+[    1.004811] \_SB_.PCI0:_OSC invalid UUID
+[    1.004812] _OSC request data:1 1f 0 
+[    1.004816] acpi PNP0A08:00: _OSC failed (AE_ERROR); disabling ASPM
+[    1.005093] PCI host bridge to bus 0000:00
+[    1.005096] pci_bus 0000:00: root bus resource [io  0x0000-0x0cf7 window]
+[    1.005098] pci_bus 0000:00: root bus resource [io  0x0d00-0xffff window]
+[    1.005099] pci_bus 0000:00: root bus resource [mem 0x000a0000-0x000bffff window]
+[    1.005101] pci_bus 0000:00: root bus resource [mem 0x000c0000-0x000c3fff window]
+[    1.005102] pci_bus 0000:00: root bus resource [mem 0x000c4000-0x000c7fff window]
+[    1.005104] pci_bus 0000:00: root bus resource [mem 0x000c8000-0x000cbfff window]
+[    1.005105] pci_bus 0000:00: root bus resource [mem 0x000cc000-0x000cffff window]
+[    1.005107] pci_bus 0000:00: root bus resource [mem 0x000d0000-0x000d3fff window]
+[    1.005108] pci_bus 0000:00: root bus resource [mem 0x000d4000-0x000d7fff window]
+[    1.005110] pci_bus 0000:00: root bus resource [mem 0x000d8000-0x000dbfff window]
+[    1.005111] pci_bus 0000:00: root bus resource [mem 0x000dc000-0x000dffff window]
+[    1.005112] pci_bus 0000:00: root bus resource [mem 0x000e0000-0x000e3fff window]
+[    1.005114] pci_bus 0000:00: root bus resource [mem 0x000e4000-0x000e7fff window]
+[    1.005115] pci_bus 0000:00: root bus resource [mem 0x000e8000-0x000ebfff window]
+[    1.005117] pci_bus 0000:00: root bus resource [mem 0x000ec000-0x000effff window]
+[    1.005118] pci_bus 0000:00: root bus resource [mem 0x000f0000-0x000fffff window]
+[    1.005120] pci_bus 0000:00: root bus resource [mem 0xdfa00000-0xfeafffff window]
+[    1.005122] pci_bus 0000:00: root bus resource [bus 00-3e]
+[    1.005129] pci 0000:00:00.0: [8086:0154] type 00 class 0x060000
+[    1.005216] pci 0000:00:02.0: [8086:0166] type 00 class 0x030000
+[    1.005229] pci 0000:00:02.0: reg 0x10: [mem 0xf0000000-0xf03fffff 64bit]
+[    1.005235] pci 0000:00:02.0: reg 0x18: [mem 0xe0000000-0xefffffff 64bit pref]
+[    1.005240] pci 0000:00:02.0: reg 0x20: [io  0x5000-0x503f]
+[    1.005339] pci 0000:00:14.0: [8086:1e31] type 00 class 0x0c0330
+[    1.005370] pci 0000:00:14.0: reg 0x10: [mem 0xf3600000-0xf360ffff 64bit]
+[    1.005432] pci 0000:00:14.0: PME# supported from D3hot D3cold
+[    1.005473] pci 0000:00:14.0: System wakeup disabled by ACPI
+[    1.005513] pci 0000:00:16.0: [8086:1e3a] type 00 class 0x078000
+[    1.005545] pci 0000:00:16.0: reg 0x10: [mem 0xf3615000-0xf361500f 64bit]
+[    1.005609] pci 0000:00:16.0: PME# supported from D0 D3hot D3cold
+[    1.005687] pci 0000:00:1a.0: [8086:1e2d] type 00 class 0x0c0320
+[    1.005717] pci 0000:00:1a.0: reg 0x10: [mem 0xf361a000-0xf361a3ff]
+[    1.005791] pci 0000:00:1a.0: PME# supported from D0 D3hot D3cold
+[    1.005843] pci 0000:00:1a.0: System wakeup disabled by ACPI
+[    1.005881] pci 0000:00:1b.0: [8086:1e20] type 00 class 0x040300
+[    1.005908] pci 0000:00:1b.0: reg 0x10: [mem 0xf3610000-0xf3613fff 64bit]
+[    1.005970] pci 0000:00:1b.0: PME# supported from D0 D3hot D3cold
+[    1.006014] pci 0000:00:1b.0: System wakeup disabled by ACPI
+[    1.006050] pci 0000:00:1c.0: [8086:1e10] type 01 class 0x060400
+[    1.006127] pci 0000:00:1c.0: PME# supported from D0 D3hot D3cold
+[    1.006171] pci 0000:00:1c.0: System wakeup disabled by ACPI
+[    1.006206] pci 0000:00:1c.1: [8086:1e12] type 01 class 0x060400
+[    1.006280] pci 0000:00:1c.1: PME# supported from D0 D3hot D3cold
+[    1.006323] pci 0000:00:1c.1: System wakeup disabled by ACPI
+[    1.006358] pci 0000:00:1c.2: [8086:1e14] type 01 class 0x060400
+[    1.006439] pci 0000:00:1c.2: PME# supported from D0 D3hot D3cold
+[    1.006482] pci 0000:00:1c.2: System wakeup disabled by ACPI
+[    1.006518] pci 0000:00:1c.3: [8086:1e16] type 01 class 0x060400
+[    1.006594] pci 0000:00:1c.3: PME# supported from D0 D3hot D3cold
+[    1.006639] pci 0000:00:1c.3: System wakeup disabled by ACPI
+[    1.006678] pci 0000:00:1d.0: [8086:1e26] type 00 class 0x0c0320
+[    1.006707] pci 0000:00:1d.0: reg 0x10: [mem 0xf3619000-0xf36193ff]
+[    1.006782] pci 0000:00:1d.0: PME# supported from D0 D3hot D3cold
+[    1.006832] pci 0000:00:1d.0: System wakeup disabled by ACPI
+[    1.006869] pci 0000:00:1f.0: [8086:1e57] type 00 class 0x060100
+[    1.007039] pci 0000:00:1f.2: [8086:1e03] type 00 class 0x010601
+[    1.007063] pci 0000:00:1f.2: reg 0x10: [io  0x5088-0x508f]
+[    1.007071] pci 0000:00:1f.2: reg 0x14: [io  0x509c-0x509f]
+[    1.007079] pci 0000:00:1f.2: reg 0x18: [io  0x5080-0x5087]
+[    1.007087] pci 0000:00:1f.2: reg 0x1c: [io  0x5098-0x509b]
+[    1.007095] pci 0000:00:1f.2: reg 0x20: [io  0x5060-0x507f]
+[    1.007103] pci 0000:00:1f.2: reg 0x24: [mem 0xf3618000-0xf36187ff]
+[    1.007136] pci 0000:00:1f.2: PME# supported from D3hot
+[    1.007202] pci 0000:00:1f.3: [8086:1e22] type 00 class 0x0c0500
+[    1.007219] pci 0000:00:1f.3: reg 0x10: [mem 0xf3614000-0xf36140ff 64bit]
+[    1.007239] pci 0000:00:1f.3: reg 0x20: [io  0xefa0-0xefbf]
+[    1.007450] pci 0000:02:00.0: [10ec:5229] type 00 class 0xff0000
+[    1.007595] pci 0000:02:00.0: reg 0x10: [mem 0xf2e00000-0xf2e00fff]
+[    1.008042] pci 0000:02:00.0: supports D1 D2
+[    1.008044] pci 0000:02:00.0: PME# supported from D1 D2 D3hot
+[    1.008152] pci 0000:02:00.0: System wakeup disabled by ACPI
+[    1.014459] pci 0000:00:1c.0: PCI bridge to [bus 02]
+[    1.014463] pci 0000:00:1c.0:   bridge window [io  0x4000-0x4fff]
+[    1.014467] pci 0000:00:1c.0:   bridge window [mem 0xf2e00000-0xf35fffff]
+[    1.014474] pci 0000:00:1c.0:   bridge window [mem 0xf0400000-0xf0bfffff 64bit pref]
+[    1.014581] pci 0000:03:00.0: [8086:0888] type 00 class 0x028000
+[    1.014667] pci 0000:03:00.0: reg 0x10: [mem 0xf2d00000-0xf2d01fff 64bit]
+[    1.014892] pci 0000:03:00.0: PME# supported from D0 D3hot D3cold
+[    1.014955] pci 0000:03:00.0: System wakeup disabled by ACPI
+[    1.022475] pci 0000:00:1c.1: PCI bridge to [bus 03]
+[    1.022481] pci 0000:00:1c.1:   bridge window [mem 0xf2d00000-0xf2dfffff]
+[    1.022539] pci 0000:00:1c.2: PCI bridge to [bus 04-0b]
+[    1.022543] pci 0000:00:1c.2:   bridge window [io  0x3000-0x3fff]
+[    1.022547] pci 0000:00:1c.2:   bridge window [mem 0xf2500000-0xf2cfffff]
+[    1.022554] pci 0000:00:1c.2:   bridge window [mem 0xf0c00000-0xf13fffff 64bit pref]
+[    1.022675] pci 0000:0c:00.0: [10ec:8168] type 00 class 0x020000
+[    1.022852] pci 0000:0c:00.0: reg 0x10: [io  0x2000-0x20ff]
+[    1.022974] pci 0000:0c:00.0: reg 0x18: [mem 0xf1404000-0xf1404fff 64bit pref]
+[    1.023050] pci 0000:0c:00.0: reg 0x20: [mem 0xf1400000-0xf1403fff 64bit pref]
+[    1.023355] pci 0000:0c:00.0: supports D1 D2
+[    1.023357] pci 0000:0c:00.0: PME# supported from D0 D1 D2 D3hot D3cold
+[    1.023916] pci 0000:0c:00.0: System wakeup disabled by ACPI
+[    1.030462] pci 0000:00:1c.3: PCI bridge to [bus 0c]
+[    1.030466] pci 0000:00:1c.3:   bridge window [io  0x2000-0x2fff]
+[    1.030470] pci 0000:00:1c.3:   bridge window [mem 0xf1d00000-0xf24fffff]
+[    1.030477] pci 0000:00:1c.3:   bridge window [mem 0xf1400000-0xf1cfffff 64bit pref]
+[    1.031142] ACPI: PCI Interrupt Link [LNKA] (IRQs 1 3 4 5 6 10 11 12 14 15) *0, disabled.
+[    1.031191] ACPI: PCI Interrupt Link [LNKB] (IRQs 1 3 4 5 6 10 11 12 14 15) *0, disabled.
+[    1.031236] ACPI: PCI Interrupt Link [LNKC] (IRQs 1 3 4 5 6 10 11 12 14 15) *0, disabled.
+[    1.031281] ACPI: PCI Interrupt Link [LNKD] (IRQs 1 3 4 5 6 10 11 12 14 15) *0, disabled.
+[    1.031326] ACPI: PCI Interrupt Link [LNKE] (IRQs 1 3 4 5 6 10 11 12 14 15) *0, disabled.
+[    1.031371] ACPI: PCI Interrupt Link [LNKF] (IRQs 1 3 4 5 6 10 11 12 14 15) *0, disabled.
+[    1.031420] ACPI: PCI Interrupt Link [LNKG] (IRQs 1 3 4 5 6 10 11 12 14 15) *0, disabled.
+[    1.031465] ACPI: PCI Interrupt Link [LNKH] (IRQs 1 3 4 5 6 10 11 12 14 15) *0, disabled.
+[    1.031567] ACPI: Enabled 5 GPEs in block 00 to 3F
+[    1.031607] ACPI : EC: GPE = 0x17, I/O: command/status = 0x66, data = 0x62
+[    1.031708] vgaarb: setting as boot device: PCI:0000:00:02.0
+[    1.031710] vgaarb: device added: PCI:0000:00:02.0,decodes=io+mem,owns=io+mem,locks=none
+[    1.031712] vgaarb: loaded
+[    1.031713] vgaarb: bridge control possible 0000:00:02.0
+[    1.031922] SCSI subsystem initialized
+[    1.031966] libata version 3.00 loaded.
+[    1.031987] ACPI: bus type USB registered
+[    1.032001] usbcore: registered new interface driver usbfs
+[    1.032008] usbcore: registered new interface driver hub
+[    1.032024] usbcore: registered new device driver usb
+[    1.032170] PCI: Using ACPI for IRQ routing
+[    1.033731] PCI: pci_cache_line_size set to 64 bytes
+[    1.033875] e820: reserve RAM buffer [mem 0x0009c000-0x0009ffff]
+[    1.033876] e820: reserve RAM buffer [mem 0x0009e000-0x0009ffff]
+[    1.033877] e820: reserve RAM buffer [mem 0x40004000-0x43ffffff]
+[    1.033878] e820: reserve RAM buffer [mem 0xc97cb018-0xcbffffff]
+[    1.033880] e820: reserve RAM buffer [mem 0xc97dc018-0xcbffffff]
+[    1.033881] e820: reserve RAM buffer [mem 0xc9a17000-0xcbffffff]
+[    1.033882] e820: reserve RAM buffer [mem 0xd845a000-0xdbffffff]
+[    1.033884] e820: reserve RAM buffer [mem 0xdb000000-0xdbffffff]
+[    1.033885] e820: reserve RAM buffer [mem 0x11e600000-0x11fffffff]
+[    1.033990] NetLabel: Initializing
+[    1.033992] NetLabel:  domain hash size = 128
+[    1.033992] NetLabel:  protocols = UNLABELED CIPSOv4
+[    1.034003] NetLabel:  unlabeled traffic allowed by default
+[    1.034072] hpet0: at MMIO 0xfed00000, IRQs 2, 8, 0, 0, 0, 0, 0, 0
+[    1.034077] hpet0: 8 comparators, 64-bit 14.318180 MHz counter
+[    1.036105] clocksource: Switched to clocksource hpet
+[    1.041556] AppArmor: AppArmor Filesystem Enabled
+[    1.041620] pnp: PnP ACPI init
+[    1.041747] system 00:00: [io  0x0680-0x069f] has been reserved
+[    1.041750] system 00:00: [io  0x1000-0x100f] has been reserved
+[    1.041752] system 00:00: [io  0xffff] has been reserved
+[    1.041753] system 00:00: [io  0xffff] has been reserved
+[    1.041755] system 00:00: [io  0x0400-0x0453] could not be reserved
+[    1.041757] system 00:00: [io  0x0458-0x047f] has been reserved
+[    1.041758] system 00:00: [io  0x0500-0x057f] has been reserved
+[    1.041760] system 00:00: [io  0x164e-0x164f] has been reserved
+[    1.041761] system 00:00: [io  0x06fc-0x06ff] has been reserved
+[    1.041763] system 00:00: [io  0x0700-0x0703] has been reserved
+[    1.041767] system 00:00: Plug and Play ACPI device, IDs PNP0c02 (active)
+[    1.041790] pnp 00:01: Plug and Play ACPI device, IDs PNP0b00 (active)
+[    1.041836] system 00:02: [io  0x0454-0x0457] has been reserved
+[    1.041838] system 00:02: Plug and Play ACPI device, IDs INT3f0d PNP0c02 (active)
+[    1.042054] pnp 00:03: Plug and Play ACPI device, IDs LEN0071 PNP0303 (active)
+[    1.042088] pnp 00:04: Plug and Play ACPI device, IDs LEN0032 PNP0f13 (active)
+[    1.042187] system 00:05: [mem 0xfed1c000-0xfed1ffff] has been reserved
+[    1.042189] system 00:05: [mem 0xfed10000-0xfed17fff] has been reserved
+[    1.042191] system 00:05: [mem 0xfed18000-0xfed18fff] has been reserved
+[    1.042193] system 00:05: [mem 0xfed19000-0xfed19fff] has been reserved
+[    1.042195] system 00:05: [mem 0xf8000000-0xfbffffff] could not be reserved
+[    1.042196] system 00:05: [mem 0xfed20000-0xfed3ffff] has been reserved
+[    1.042198] system 00:05: [mem 0xfed90000-0xfed93fff] has been reserved
+[    1.042200] system 00:05: [mem 0xfed45000-0xfed8ffff] has been reserved
+[    1.042201] system 00:05: [mem 0xff000000-0xffffffff] has been reserved
+[    1.042203] system 00:05: [mem 0xfee00000-0xfeefffff] has been reserved
+[    1.042205] system 00:05: [mem 0xfffff000-0xffffffff] has been reserved
+[    1.042207] system 00:05: Plug and Play ACPI device, IDs PNP0c02 (active)
+[    1.042360] pnp: PnP ACPI: found 6 devices
+[    1.048749] clocksource: acpi_pm: mask: 0xffffff max_cycles: 0xffffff, max_idle_ns: 2085701024 ns
+[    1.048790] pci 0000:00:1c.0: PCI bridge to [bus 02]
+[    1.048793] pci 0000:00:1c.0:   bridge window [io  0x4000-0x4fff]
+[    1.048799] pci 0000:00:1c.0:   bridge window [mem 0xf2e00000-0xf35fffff]
+[    1.048803] pci 0000:00:1c.0:   bridge window [mem 0xf0400000-0xf0bfffff 64bit pref]
+[    1.048809] pci 0000:00:1c.1: PCI bridge to [bus 03]
+[    1.048815] pci 0000:00:1c.1:   bridge window [mem 0xf2d00000-0xf2dfffff]
+[    1.048823] pci 0000:00:1c.2: PCI bridge to [bus 04-0b]
+[    1.048826] pci 0000:00:1c.2:   bridge window [io  0x3000-0x3fff]
+[    1.048831] pci 0000:00:1c.2:   bridge window [mem 0xf2500000-0xf2cfffff]
+[    1.048836] pci 0000:00:1c.2:   bridge window [mem 0xf0c00000-0xf13fffff 64bit pref]
+[    1.048842] pci 0000:00:1c.3: PCI bridge to [bus 0c]
+[    1.048845] pci 0000:00:1c.3:   bridge window [io  0x2000-0x2fff]
+[    1.048850] pci 0000:00:1c.3:   bridge window [mem 0xf1d00000-0xf24fffff]
+[    1.048855] pci 0000:00:1c.3:   bridge window [mem 0xf1400000-0xf1cfffff 64bit pref]
+[    1.048862] pci_bus 0000:00: resource 4 [io  0x0000-0x0cf7 window]
+[    1.048864] pci_bus 0000:00: resource 5 [io  0x0d00-0xffff window]
+[    1.048865] pci_bus 0000:00: resource 6 [mem 0x000a0000-0x000bffff window]
+[    1.048867] pci_bus 0000:00: resource 7 [mem 0x000c0000-0x000c3fff window]
+[    1.048869] pci_bus 0000:00: resource 8 [mem 0x000c4000-0x000c7fff window]
+[    1.048870] pci_bus 0000:00: resource 9 [mem 0x000c8000-0x000cbfff window]
+[    1.048872] pci_bus 0000:00: resource 10 [mem 0x000cc000-0x000cffff window]
+[    1.048873] pci_bus 0000:00: resource 11 [mem 0x000d0000-0x000d3fff window]
+[    1.048875] pci_bus 0000:00: resource 12 [mem 0x000d4000-0x000d7fff window]
+[    1.048876] pci_bus 0000:00: resource 13 [mem 0x000d8000-0x000dbfff window]
+[    1.048878] pci_bus 0000:00: resource 14 [mem 0x000dc000-0x000dffff window]
+[    1.048879] pci_bus 0000:00: resource 15 [mem 0x000e0000-0x000e3fff window]
+[    1.048881] pci_bus 0000:00: resource 16 [mem 0x000e4000-0x000e7fff window]
+[    1.048882] pci_bus 0000:00: resource 17 [mem 0x000e8000-0x000ebfff window]
+[    1.048884] pci_bus 0000:00: resource 18 [mem 0x000ec000-0x000effff window]
+[    1.048885] pci_bus 0000:00: resource 19 [mem 0x000f0000-0x000fffff window]
+[    1.048887] pci_bus 0000:00: resource 20 [mem 0xdfa00000-0xfeafffff window]
+[    1.048888] pci_bus 0000:02: resource 0 [io  0x4000-0x4fff]
+[    1.048890] pci_bus 0000:02: resource 1 [mem 0xf2e00000-0xf35fffff]
+[    1.048891] pci_bus 0000:02: resource 2 [mem 0xf0400000-0xf0bfffff 64bit pref]
+[    1.048893] pci_bus 0000:03: resource 1 [mem 0xf2d00000-0xf2dfffff]
+[    1.048895] pci_bus 0000:04: resource 0 [io  0x3000-0x3fff]
+[    1.048896] pci_bus 0000:04: resource 1 [mem 0xf2500000-0xf2cfffff]
+[    1.048898] pci_bus 0000:04: resource 2 [mem 0xf0c00000-0xf13fffff 64bit pref]
+[    1.048899] pci_bus 0000:0c: resource 0 [io  0x2000-0x2fff]
+[    1.048901] pci_bus 0000:0c: resource 1 [mem 0xf1d00000-0xf24fffff]
+[    1.048902] pci_bus 0000:0c: resource 2 [mem 0xf1400000-0xf1cfffff 64bit pref]
+[    1.048934] NET: Registered protocol family 2
+[    1.049080] TCP established hash table entries: 32768 (order: 6, 262144 bytes)
+[    1.049149] TCP bind hash table entries: 32768 (order: 7, 524288 bytes)
+[    1.049233] TCP: Hash tables configured (established 32768 bind 32768)
+[    1.049254] UDP hash table entries: 2048 (order: 4, 65536 bytes)
+[    1.049269] UDP-Lite hash table entries: 2048 (order: 4, 65536 bytes)
+[    1.049316] NET: Registered protocol family 1
+[    1.049327] pci 0000:00:02.0: Video device with shadowed ROM
+[    1.049486] PCI: CLS 64 bytes, default 64
+[    1.049527] Trying to unpack rootfs image as initramfs...
+[    1.561361] Freeing initrd memory: 35104K (ffff88003ddb3000 - ffff88003fffb000)
+[    1.561384] PCI-DMA: Using software bounce buffering for IO (SWIOTLB)
+[    1.561386] software IO TLB [mem 0xd4023000-0xd8023000] (64MB) mapped at [ffff8800d4023000-ffff8800d8022fff]
+[    1.561444] RAPL PMU detected, API unit is 2^-32 Joules, 3 fixed counters 163840 ms ovfl timer
+[    1.561445] hw unit of domain pp0-core 2^-16 Joules
+[    1.561446] hw unit of domain package 2^-16 Joules
+[    1.561447] hw unit of domain pp1-gpu 2^-16 Joules
+[    1.561595] Scanning for low memory corruption every 60 seconds
+[    1.561934] futex hash table entries: 2048 (order: 5, 131072 bytes)
+[    1.561974] audit: initializing netlink subsys (disabled)
+[    1.561989] audit: type=2000 audit(1468573233.536:1): initialized
+[    1.562381] Initialise system trusted keyring
+[    1.562479] HugeTLB registered 2 MB page size, pre-allocated 0 pages
+[    1.563763] zbud: loaded
+[    1.563946] VFS: Disk quotas dquot_6.6.0
+[    1.563975] VFS: Dquot-cache hash table entries: 512 (order 0, 4096 bytes)
+[    1.564414] fuse init (API version 7.23)
+[    1.564535] Key type big_key registered
+[    1.564905] Key type asymmetric registered
+[    1.564908] Asymmetric key parser 'x509' registered
+[    1.564940] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 249)
+[    1.564971] io scheduler noop registered
+[    1.564974] io scheduler deadline registered (default)
+[    1.565001] io scheduler cfq registered
+[    1.565509] pci_hotplug: PCI Hot Plug PCI Core version: 0.5
+[    1.565514] pciehp: PCI Express Hot Plug Controller Driver version: 0.4
+[    1.565539] efifb: probing for efifb
+[    1.565551] efifb: framebuffer at 0xe0000000, mapped to 0xffffc90000800000, using 4128k, total 4128k
+[    1.565552] efifb: mode is 1366x768x32, linelength=5504, pages=1
+[    1.565552] efifb: scrolling: redraw
+[    1.565554] efifb: Truecolor: size=8:8:8:8, shift=24:16:8:0
+[    1.565640] Console: switching to colour frame buffer device 170x48
+[    1.565656] fb0: EFI VGA frame buffer device
+[    1.565664] intel_idle: MWAIT substates: 0x21120
+[    1.565665] intel_idle: v0.4.1 model 0x3A
+[    1.565666] intel_idle: lapic_timer_reliable_states 0xffffffff
+[    1.566180] ACPI: AC Adapter [AC] (on-line)
+[    1.566250] input: Power Button as /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0C0C:00/input/input0
+[    1.566254] ACPI: Power Button [PWRB]
+[    1.566288] input: Lid Switch as /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0C0D:00/input/input1
+[    1.566432] ACPI: Lid Switch [LID0]
+[    1.566471] input: Power Button as /devices/LNXSYSTM:00/LNXPWRBN:00/input/input2
+[    1.566473] ACPI: Power Button [PWRF]
+[    1.566957] thermal LNXTHERM:00: registered as thermal_zone0
+[    1.566959] ACPI: Thermal Zone [TZ01] (30 C)
+[    1.566987] GHES: HEST is not enabled!
+[    1.567085] Serial: 8250/16550 driver, 32 ports, IRQ sharing enabled
+[    1.568843] Linux agpgart interface v0.103
+[    1.571215] brd: module loaded
+[    1.572240] loop: module loaded
+[    1.572429] libphy: Fixed MDIO Bus: probed
+[    1.572432] tun: Universal TUN/TAP device driver, 1.6
+[    1.572433] tun: (C) 1999-2004 Max Krasnyansky <maxk@qualcomm.com>
+[    1.572468] PPP generic driver version 2.4.2
+[    1.572521] ehci_hcd: USB 2.0 'Enhanced' Host Controller (EHCI) Driver
+[    1.572526] ehci-pci: EHCI PCI platform driver
+[    1.572637] ehci-pci 0000:00:1a.0: EHCI Host Controller
+[    1.572642] ehci-pci 0000:00:1a.0: new USB bus registered, assigned bus number 1
+[    1.572654] ehci-pci 0000:00:1a.0: debug port 2
+[    1.576571] ehci-pci 0000:00:1a.0: cache line size of 64 is not supported
+[    1.576585] ehci-pci 0000:00:1a.0: irq 16, io mem 0xf361a000
+[    1.588150] ehci-pci 0000:00:1a.0: USB 2.0 started, EHCI 1.00
+[    1.588192] usb usb1: New USB device found, idVendor=1d6b, idProduct=0002
+[    1.588194] usb usb1: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+[    1.588195] usb usb1: Product: EHCI Host Controller
+[    1.588197] usb usb1: Manufacturer: Linux 4.4.0-21-generic ehci_hcd
+[    1.588198] usb usb1: SerialNumber: 0000:00:1a.0
+[    1.588381] hub 1-0:1.0: USB hub found
+[    1.588387] hub 1-0:1.0: 3 ports detected
+[    1.588666] ehci-pci 0000:00:1d.0: EHCI Host Controller
+[    1.588671] ehci-pci 0000:00:1d.0: new USB bus registered, assigned bus number 2
+[    1.588682] ehci-pci 0000:00:1d.0: debug port 2
+[    1.592593] ehci-pci 0000:00:1d.0: cache line size of 64 is not supported
+[    1.592600] ehci-pci 0000:00:1d.0: irq 23, io mem 0xf3619000
+[    1.604148] ehci-pci 0000:00:1d.0: USB 2.0 started, EHCI 1.00
+[    1.604178] usb usb2: New USB device found, idVendor=1d6b, idProduct=0002
+[    1.604180] usb usb2: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+[    1.604182] usb usb2: Product: EHCI Host Controller
+[    1.604183] usb usb2: Manufacturer: Linux 4.4.0-21-generic ehci_hcd
+[    1.604184] usb usb2: SerialNumber: 0000:00:1d.0
+[    1.604307] hub 2-0:1.0: USB hub found
+[    1.604311] hub 2-0:1.0: 3 ports detected
+[    1.604427] ehci-platform: EHCI generic platform driver
+[    1.604438] ohci_hcd: USB 1.1 'Open' Host Controller (OHCI) Driver
+[    1.604443] ohci-pci: OHCI PCI platform driver
+[    1.604453] ohci-platform: OHCI generic platform driver
+[    1.604460] uhci_hcd: USB Universal Host Controller Interface driver
+[    1.604561] xhci_hcd 0000:00:14.0: xHCI Host Controller
+[    1.604566] xhci_hcd 0000:00:14.0: new USB bus registered, assigned bus number 3
+[    1.605651] xhci_hcd 0000:00:14.0: hcc params 0x20007181 hci version 0x100 quirks 0x0000b930
+[    1.605656] xhci_hcd 0000:00:14.0: cache line size of 64 is not supported
+[    1.605782] usb usb3: New USB device found, idVendor=1d6b, idProduct=0002
+[    1.605784] usb usb3: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+[    1.605785] usb usb3: Product: xHCI Host Controller
+[    1.605787] usb usb3: Manufacturer: Linux 4.4.0-21-generic xhci-hcd
+[    1.605788] usb usb3: SerialNumber: 0000:00:14.0
+[    1.605907] hub 3-0:1.0: USB hub found
+[    1.605915] hub 3-0:1.0: 4 ports detected
+[    1.606201] xhci_hcd 0000:00:14.0: xHCI Host Controller
+[    1.606204] xhci_hcd 0000:00:14.0: new USB bus registered, assigned bus number 4
+[    1.606230] usb usb4: New USB device found, idVendor=1d6b, idProduct=0003
+[    1.606231] usb usb4: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+[    1.606233] usb usb4: Product: xHCI Host Controller
+[    1.606234] usb usb4: Manufacturer: Linux 4.4.0-21-generic xhci-hcd
+[    1.606236] usb usb4: SerialNumber: 0000:00:14.0
+[    1.606350] hub 4-0:1.0: USB hub found
+[    1.606358] hub 4-0:1.0: 4 ports detected
+[    1.606681] i8042: PNP: PS/2 Controller [PNP0303:PS2K,PNP0f13:MOU] at 0x60,0x64 irq 1,12
+[    1.618968] serio: i8042 KBD port at 0x60,0x64 irq 1
+[    1.618972] serio: i8042 AUX port at 0x60,0x64 irq 12
+[    1.619241] mousedev: PS/2 mouse device common for all mice
+[    1.621211] rtc_cmos 00:01: RTC can wake from S4
+[    1.621367] rtc_cmos 00:01: rtc core: registered rtc_cmos as rtc0
+[    1.621393] rtc_cmos 00:01: alarms up to one month, y3k, 242 bytes nvram, hpet irqs
+[    1.621401] i2c /dev entries driver
+[    1.621448] device-mapper: uevent: version 1.0.3
+[    1.621517] device-mapper: ioctl: 4.34.0-ioctl (2015-10-28) initialised: dm-devel@redhat.com
+[    1.621529] Intel P-state driver initializing.
+[    1.621737] ledtrig-cpu: registered to indicate activity on CPUs
+[    1.621744] EFI Variables Facility v0.08 2004-May-17
+[    1.633506] NET: Registered protocol family 10
+[    1.633657] NET: Registered protocol family 17
+[    1.633668] Key type dns_resolver registered
+[    1.633816] microcode: CPU0 sig=0x306a9, pf=0x10, revision=0x1c
+[    1.633825] microcode: CPU1 sig=0x306a9, pf=0x10, revision=0x1c
+[    1.633835] microcode: CPU2 sig=0x306a9, pf=0x10, revision=0x1c
+[    1.633842] microcode: CPU3 sig=0x306a9, pf=0x10, revision=0x1c
+[    1.633872] microcode: Microcode Update Driver: v2.01 <tigran@aivazian.fsnet.co.uk>, Peter Oruba
+[    1.634004] registered taskstats version 1
+[    1.634021] Loading compiled-in X.509 certificates
+[    1.634725] input: AT Translated Set 2 keyboard as /devices/platform/i8042/serio0/input/input3
+[    1.635953] Loaded X.509 cert 'Build time autogenerated kernel key: fc7c0e9f152f32eca50ea2d9722926e5127af244'
+[    1.635969] zswap: loaded using pool lzo/zbud
+[    1.638257] Key type trusted registered
+[    1.641968] Key type encrypted registered
+[    1.641976] AppArmor: AppArmor sha1 policy hashing enabled
+[    1.641980] ima: No TPM chip found, activating TPM-bypass!
+[    1.641996] evm: HMAC attrs: 0x1
+[    1.642319]   Magic number: 8:48:20
+[    1.642413] rtc_cmos 00:01: setting system clock to 2016-07-15 09:00:34 UTC (1468573234)
+[    1.642465] BIOS EDD facility v0.16 2004-Jun-25, 0 devices found
+[    1.642466] EDD information not available.
+[    1.825680] ACPI: Battery Slot [BAT0] (battery present)
+[    1.826664] Freeing unused kernel memory: 1476K (ffffffff81f41000 - ffffffff820b2000)
+[    1.826665] Write protecting the kernel read-only data: 14336k
+[    1.827140] Freeing unused kernel memory: 1872K (ffff88000182c000 - ffff880001a00000)
+[    1.827476] Freeing unused kernel memory: 176K (ffff880001dd4000 - ffff880001e00000)
+[    1.835707] random: systemd-udevd urandom read with 13 bits of entropy available
+[    1.856003] FUJITSU Extended Socket Network Device Driver - version 1.0 - Copyright (c) 2015 FUJITSU LIMITED
+[    1.859560] wmi: Mapper loaded
+[    1.867096] rtsx_pci 0000:02:00.0: rtsx_pci_acquire_irq: pcr->msi_en = 1, pci->irq = 25
+[    1.870994] ahci 0000:00:1f.2: version 3.0
+[    1.871135] ahci 0000:00:1f.2: SSS flag set, parallel bus scan disabled
+[    1.876358] [drm] Initialized drm 1.1.0 20060810
+[    1.884193] ahci 0000:00:1f.2: AHCI 0001.0300 32 slots 6 ports 6 Gbps 0x13 impl SATA mode
+[    1.884198] ahci 0000:00:1f.2: flags: 64bit ncq stag pm led clo pio slum part ems sxs apst 
+[    1.885511] r8169 Gigabit Ethernet driver 2.3LK-NAPI loaded
+[    1.885521] r8169 0000:0c:00.0: can't disable ASPM; OS doesn't have ASPM control
+[    1.886085] r8169 0000:0c:00.0 eth0: RTL8168evl/8111evl at 0xffffc9000067e000, b8:88:e3:e5:0a:8c, XID 0c900880 IRQ 27
+[    1.886088] r8169 0000:0c:00.0 eth0: jumbo features [frames: 9200 bytes, tx checksumming: ko]
+[    1.900181] usb 1-1: new high-speed USB device number 2 using ehci-pci
+[    1.900993] scsi host0: ahci
+[    1.901111] scsi host1: ahci
+[    1.901211] scsi host2: ahci
+[    1.901307] scsi host3: ahci
+[    1.901408] scsi host4: ahci
+[    1.901508] scsi host5: ahci
+[    1.901564] ata1: SATA max UDMA/133 abar m2048@0xf3618000 port 0xf3618100 irq 26
+[    1.901567] ata2: SATA max UDMA/133 abar m2048@0xf3618000 port 0xf3618180 irq 26
+[    1.901569] ata3: DUMMY
+[    1.901570] ata4: DUMMY
+[    1.901574] ata5: SATA max UDMA/133 abar m2048@0xf3618000 port 0xf3618300 irq 26
+[    1.901575] ata6: DUMMY
+[    1.902044] [drm] Memory usable by graphics device = 2048M
+[    1.902047] checking generic (e0000000 408000) vs hw (e0000000 10000000)
+[    1.902048] fb: switching to inteldrmfb from EFI VGA
+[    1.902070] Console: switching to colour dummy device 80x25
+[    1.902129] [drm] Replacing VGA console driver
+[    1.908307] [drm] Supports vblank timestamp caching Rev 2 (21.10.2013).
+[    1.908308] [drm] Driver supports precise vblank timestamp query.
+[    1.908707] vgaarb: device changed decodes: PCI:0000:00:02.0,olddecodes=io+mem,decodes=io+mem:owns=io+mem
+[    1.916181] usb 2-1: new high-speed USB device number 2 using ehci-pci
+[    1.922037] r8169 0000:0c:00.0 enp12s0: renamed from eth0
+[    1.930356] ACPI: Video Device [VID] (multi-head: yes  rom: no  post: no)
+[    1.930548] input: Video Bus as /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A08:00/LNXVIDEO:00/input/input6
+[    1.930621] [drm] Initialized i915 1.6.0 20151010 for 0000:00:02.0 on minor 0
+[    2.032580] usb 1-1: New USB device found, idVendor=8087, idProduct=0024
+[    2.032594] usb 1-1: New USB device strings: Mfr=0, Product=0, SerialNumber=0
+[    2.032867] hub 1-1:1.0: USB hub found
+[    2.033063] hub 1-1:1.0: 6 ports detected
+[    2.048597] usb 2-1: New USB device found, idVendor=8087, idProduct=0024
+[    2.048600] usb 2-1: New USB device strings: Mfr=0, Product=0, SerialNumber=0
+[    2.048995] hub 2-1:1.0: USB hub found
+[    2.049199] hub 2-1:1.0: 8 ports detected
+[    2.068443] fbcon: inteldrmfb (fb0) is primary device
+[    2.068557] Console: switching to colour frame buffer device 170x48
+[    2.068587] i915 0000:00:02.0: fb0: inteldrmfb frame buffer device
+[    2.220253] ata1: SATA link up 3.0 Gbps (SStatus 123 SControl 300)
+[    2.221302] ata1.00: ACPI cmd ef/02:00:00:00:00:a0 (SET FEATURES) succeeded
+[    2.221306] ata1.00: ACPI cmd f5/00:00:00:00:00:a0 (SECURITY FREEZE LOCK) filtered out
+[    2.221308] ata1.00: ACPI cmd ef/10:03:00:00:00:a0 (SET FEATURES) filtered out
+[    2.222350] ata1.00: ATA-8: HITACHI HTS725050A7E630, GH2ZB390, max UDMA/133
+[    2.222356] ata1.00: 976773168 sectors, multi 16: LBA48 NCQ (depth 31/32), AA
+[    2.223606] ata1.00: ACPI cmd ef/02:00:00:00:00:a0 (SET FEATURES) succeeded
+[    2.223610] ata1.00: ACPI cmd f5/00:00:00:00:00:a0 (SECURITY FREEZE LOCK) filtered out
+[    2.223611] ata1.00: ACPI cmd ef/10:03:00:00:00:a0 (SET FEATURES) filtered out
+[    2.224632] ata1.00: configured for UDMA/133
+[    2.224846] scsi 0:0:0:0: Direct-Access     ATA      HITACHI HTS72505 B390 PQ: 0 ANSI: 5
+[    2.225063] sd 0:0:0:0: [sda] 976773168 512-byte logical blocks: (500 GB/466 GiB)
+[    2.225065] sd 0:0:0:0: [sda] 4096-byte physical blocks
+[    2.225103] sd 0:0:0:0: Attached scsi generic sg0 type 0
+[    2.225140] sd 0:0:0:0: [sda] Write Protect is off
+[    2.225144] sd 0:0:0:0: [sda] Mode Sense: 00 3a 00 00
+[    2.225176] sd 0:0:0:0: [sda] Write cache: enabled, read cache: enabled, doesn't support DPO or FUA
+[    2.298454]  sda: sda1 sda2 sda3
+[    2.299146] sd 0:0:0:0: [sda] Attached SCSI disk
+[    2.304273] usb 1-1.3: new full-speed USB device number 3 using ehci-pci
+[    2.320235] usb 2-1.6: new high-speed USB device number 3 using ehci-pci
+[    2.401212] usb 1-1.3: New USB device found, idVendor=8087, idProduct=07da
+[    2.401216] usb 1-1.3: New USB device strings: Mfr=0, Product=0, SerialNumber=0
+[    2.420329] usb 2-1.6: New USB device found, idVendor=05ca, idProduct=1823
+[    2.420343] usb 2-1.6: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[    2.420344] usb 2-1.6: Product: Integrated Camera
+[    2.420346] usb 2-1.6: Manufacturer: C6JCAT7GH
+[    2.472276] usb 1-1.4: new full-speed USB device number 4 using ehci-pci
+[    2.544267] ata2: SATA link up 1.5 Gbps (SStatus 113 SControl 300)
+[    2.547673] ata2.00: ATAPI: HL-DT-ST DVDRAM GT50N, LC02, max UDMA/33
+[    2.551754] psmouse serio1: synaptics: queried max coordinates: x [..5702], y [..4828]
+[    2.551756] ata2.00: configured for UDMA/33
+[    2.558506] scsi 1:0:0:0: CD-ROM            HL-DT-ST DVDRAM GT50N     LC02 PQ: 0 ANSI: 5
+[    2.560221] tsc: Refined TSC clocksource calibration: 2494.333 MHz
+[    2.560223] clocksource: tsc: mask: 0xffffffffffffffff max_cycles: 0x23f45085418, max_idle_ns: 440795285711 ns
+[    2.565569] usb 1-1.4: New USB device found, idVendor=147e, idProduct=1002
+[    2.565573] usb 1-1.4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[    2.565576] usb 1-1.4: Product: TouchStrip Fingerprint Sensor      
+[    2.565578] usb 1-1.4: Manufacturer: UPEK
+[    2.576861] sr 1:0:0:0: [sr0] scsi3-mmc drive: 24x/24x writer dvd-ram cd/rw xa/form2 cdda tray
+[    2.576865] cdrom: Uniform CD-ROM driver Revision: 3.20
+[    2.577117] sr 1:0:0:0: Attached scsi CD-ROM sr0
+[    2.577275] sr 1:0:0:0: Attached scsi generic sg1 type 5
+[    2.603751] psmouse serio1: synaptics: queried min coordinates: x [1240..], y [1026..]
+[    2.696945] psmouse serio1: synaptics: Touchpad model: 1, fw: 8.1, id: 0x1e2b1, caps: 0xd002a3/0x940300/0x126c00/0x0, board id: 2273, fw id: 1214815
+[    2.696963] psmouse serio1: synaptics: serio: Synaptics pass-through port at isa0060/serio1/input0
+[    2.757431] input: SynPS/2 Synaptics TouchPad as /devices/platform/i8042/serio1/input/input5
+[    2.900316] ata5: SATA link down (SStatus 0 SControl 300)
+[    3.560505] clocksource: Switched to clocksource tsc
+[    4.168912] random: nonblocking pool is initialized
+[    8.674146] psmouse serio2: trackpoint: IBM TrackPoint firmware: 0x0e, buttons: 3/3
+[    8.982765] input: TPPS/2 IBM TrackPoint as /devices/platform/i8042/serio1/serio2/input/input7
+[    9.262156] EXT4-fs (sda2): mounted filesystem with ordered data mode. Opts: (null)
+[   10.192806] systemd[1]: systemd 229 running in system mode. (+PAM +AUDIT +SELINUX +IMA +APPARMOR +SMACK +SYSVINIT +UTMP +LIBCRYPTSETUP +GCRYPT +GNUTLS +ACL +XZ -LZ4 +SECCOMP +BLKID +ELFUTILS +KMOD -IDN)
+[   10.192914] systemd[1]: Detected architecture x86-64.
+[   10.206724] systemd[1]: Set hostname to <mercimek>.
+[   11.024975] systemd[1]: Listening on fsck to fsckd communication Socket.
+[   11.025040] systemd[1]: Listening on /dev/initctl Compatibility Named Pipe.
+[   11.025060] systemd[1]: Listening on Syslog Socket.
+[   11.025082] systemd[1]: Listening on udev Kernel Socket.
+[   11.025089] systemd[1]: Reached target Remote File Systems (Pre).
+[   11.025096] systemd[1]: Reached target Remote File Systems.
+[   11.025103] systemd[1]: Reached target User and Group Name Lookups.
+[   11.025120] systemd[1]: Listening on Journal Socket (/dev/log).
+[   11.025143] systemd[1]: Listening on Journal Socket.
+[   11.025171] systemd[1]: Listening on udev Control Socket.
+[   11.025239] systemd[1]: Created slice System Slice.
+[   11.025293] systemd[1]: Created slice system-getty.slice.
+[   11.036811] systemd[1]: Mounting POSIX Message Queue File System...
+[   11.037278] systemd[1]: Starting Uncomplicated firewall...
+[   11.037631] systemd[1]: Mounting Huge Pages File System...
+[   11.038098] systemd[1]: Started Read required files in advance.
+[   11.038360] systemd[1]: Set up automount Arbitrary Executable File Formats File System Automount Point.
+[   11.120867] systemd[1]: Starting Nameserver information manager...
+[   11.121050] systemd[1]: Listening on Journal Audit Socket.
+[   11.121225] systemd[1]: Created slice User and Session Slice.
+[   11.121273] systemd[1]: Reached target Slices.
+[   11.121447] systemd[1]: Started Forward Password Requests to Wall Directory Watch.
+[   11.121898] systemd[1]: Mounting Debug File System...
+[   11.122281] systemd[1]: Starting Create list of required static device nodes for the current kernel...
+[   11.122598] systemd[1]: Started Braille Device Support.
+[   11.123100] systemd[1]: Starting Journal Service...
+[   11.123122] systemd[1]: Reached target Encrypted Volumes.
+[   11.123243] systemd[1]: Created slice system-systemd\x2dfsck.slice.
+[   11.284836] systemd[1]: Starting Load Kernel Modules...
+[   11.296568] systemd[1]: Started Create list of required static device nodes for the current kernel.
+[   11.300184] systemd[1]: Starting Create Static Device Nodes in /dev...
+[   11.381849] systemd[1]: Started Uncomplicated firewall.
+[   11.703323] systemd[1]: Started Journal Service.
+[   11.822768] lp: driver loaded but no devices found
+[   11.867519] ppdev: user-space parallel port driver
+[   14.683310] EXT4-fs (sda2): re-mounted. Opts: errors=remount-ro
+[   14.826625] systemd-journald[251]: Received request to flush runtime journal from PID 1
+[   15.124000] ACPI Warning: SystemIO range 0x0000000000000428-0x000000000000042F conflicts with OpRegion 0x0000000000000400-0x000000000000047F (\PMIO) (20150930/utaddress-254)
+[   15.124008] ACPI: If an ACPI driver is available for this device, you should use it instead of the native driver
+[   15.124013] ACPI Warning: SystemIO range 0x0000000000000540-0x000000000000054F conflicts with OpRegion 0x0000000000000500-0x0000000000000563 (\GPIO) (20150930/utaddress-254)
+[   15.124017] ACPI: If an ACPI driver is available for this device, you should use it instead of the native driver
+[   15.124019] ACPI Warning: SystemIO range 0x0000000000000530-0x000000000000053F conflicts with OpRegion 0x0000000000000500-0x0000000000000563 (\GPIO) (20150930/utaddress-254)
+[   15.124023] ACPI: If an ACPI driver is available for this device, you should use it instead of the native driver
+[   15.124024] ACPI Warning: SystemIO range 0x0000000000000500-0x000000000000052F conflicts with OpRegion 0x0000000000000500-0x0000000000000563 (\GPIO) (20150930/utaddress-254)
+[   15.124028] ACPI: If an ACPI driver is available for this device, you should use it instead of the native driver
+[   15.124030] lpc_ich: Resource conflict(s) found affecting gpio_ich
+[   15.214177] shpchp: Standard Hot Plug PCI Controller Driver version: 0.4
+[   15.442511] Non-volatile memory driver v1.3
+[   15.476973] thinkpad_acpi: ThinkPad ACPI Extras v0.25
+[   15.476976] thinkpad_acpi: http://ibm-acpi.sf.net/
+[   15.476978] thinkpad_acpi: ThinkPad BIOS H0ET70WW (2.04 ), EC unknown
+[   15.476979] thinkpad_acpi: Lenovo ThinkPad Edge E430, model 3254T2G
+[   15.477523] thinkpad_acpi: Unsupported brightness interface
+[   15.477551] thinkpad_acpi: This ThinkPad has standard ACPI backlight brightness control, supported by the ACPI video driver
+[   15.477552] thinkpad_acpi: Disabling thinkpad-acpi brightness events by default...
+[   15.479047] thinkpad_acpi: rfkill switch tpacpi_bluetooth_sw: radio is unblocked
+[   15.481068] input: ThinkPad Extra Buttons as /devices/platform/thinkpad_acpi/input/input8
+[   15.503972] Intel(R) Wireless WiFi driver for Linux
+[   15.503974] Copyright(c) 2003- 2015 Intel Corporation
+[   15.504107] iwlwifi 0000:03:00.0: can't disable ASPM; OS doesn't have ASPM control
+[   15.610838] snd_hda_codec_conexant hdaudioC0D0: CX20590: BIOS auto-probing.
+[   15.611314] snd_hda_codec_conexant hdaudioC0D0: autoconfig for CX20590: line_outs=1 (0x1f/0x0/0x0/0x0/0x0) type:speaker
+[   15.611316] snd_hda_codec_conexant hdaudioC0D0:    speaker_outs=0 (0x0/0x0/0x0/0x0/0x0)
+[   15.611317] snd_hda_codec_conexant hdaudioC0D0:    hp_outs=1 (0x19/0x0/0x0/0x0/0x0)
+[   15.611318] snd_hda_codec_conexant hdaudioC0D0:    mono: mono_out=0x0
+[   15.611319] snd_hda_codec_conexant hdaudioC0D0:    inputs:
+[   15.611321] snd_hda_codec_conexant hdaudioC0D0:      Internal Mic=0x23
+[   15.611322] snd_hda_codec_conexant hdaudioC0D0:      Mic=0x1a
+[   15.612380] snd_hda_codec_conexant hdaudioC0D0: Enable sync_write for stable communication
+[   15.669953] input: HDA Intel PCH Mic as /devices/pci0000:00/0000:00:1b.0/sound/card0/input9
+[   15.670002] input: HDA Intel PCH Headphone as /devices/pci0000:00/0000:00:1b.0/sound/card0/input10
+[   15.670045] input: HDA Intel PCH HDMI/DP,pcm=3 as /devices/pci0000:00/0000:00:1b.0/sound/card0/input11
+[   15.900529] iwlwifi 0000:03:00.0: loaded firmware version 18.168.6.1 op_mode iwldvm
+[   16.266036] iwlwifi 0000:03:00.0: CONFIG_IWLWIFI_DEBUG disabled
+[   16.266039] iwlwifi 0000:03:00.0: CONFIG_IWLWIFI_DEBUGFS enabled
+[   16.266041] iwlwifi 0000:03:00.0: CONFIG_IWLWIFI_DEVICE_TRACING enabled
+[   16.266042] iwlwifi 0000:03:00.0: Detected Intel(R) Centrino(R) Wireless-N 2230 BGN, REV=0xC8
+[   16.266145] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[   16.315478] ieee80211 phy0: Selected rate control algorithm 'iwl-agn-rs'
+[   16.618965] iwlwifi 0000:03:00.0 wlp3s0: renamed from wlan0
+[   16.646544] intel_rapl: Found RAPL domain package
+[   16.646548] intel_rapl: Found RAPL domain core
+[   16.646550] intel_rapl: Found RAPL domain uncore
+[   16.646558] intel_rapl: RAPL package 0 domain package locked by BIOS
+[   17.544479] Bluetooth: Core ver 2.21
+[   17.544493] NET: Registered protocol family 31
+[   17.544494] Bluetooth: HCI device and connection manager initialized
+[   17.544498] Bluetooth: HCI socket layer initialized
+[   17.544500] Bluetooth: L2CAP socket layer initialized
+[   17.544504] Bluetooth: SCO socket layer initialized
+[   17.837823] usbcore: registered new interface driver btusb
+[   17.888818] media: Linux media interface: v0.10
+[   18.002564] Linux video capture interface: v2.00
+[   18.378100] Adding 4035580k swap on /dev/sda3.  Priority:-1 extents:1 across:4035580k FS
+[   18.577307] uvcvideo: Found UVC 1.00 device Integrated Camera (05ca:1823)
+[   18.579044] input: Integrated Camera as /devices/pci0000:00/0000:00:1d.0/usb2/2-1/2-1.6/2-1.6:1.0/input/input12
+[   18.579098] usbcore: registered new interface driver uvcvideo
+[   18.579099] USB Video Class driver (1.1.1)
+[   18.791635] cfg80211: World regulatory domain updated:
+[   18.791640] cfg80211:  DFS Master region: unset
+[   18.791641] cfg80211:   (start_freq - end_freq @ bandwidth), (max_antenna_gain, max_eirp), (dfs_cac_time)
+[   18.791643] cfg80211:   (2402000 KHz - 2472000 KHz @ 40000 KHz), (N/A, 2000 mBm), (N/A)
+[   18.791645] cfg80211:   (2457000 KHz - 2482000 KHz @ 40000 KHz), (N/A, 2000 mBm), (N/A)
+[   18.791646] cfg80211:   (2474000 KHz - 2494000 KHz @ 20000 KHz), (N/A, 2000 mBm), (N/A)
+[   18.791648] cfg80211:   (5170000 KHz - 5250000 KHz @ 80000 KHz, 160000 KHz AUTO), (N/A, 2000 mBm), (N/A)
+[   18.791650] cfg80211:   (5250000 KHz - 5330000 KHz @ 80000 KHz, 160000 KHz AUTO), (N/A, 2000 mBm), (0 s)
+[   18.791651] cfg80211:   (5490000 KHz - 5730000 KHz @ 160000 KHz), (N/A, 2000 mBm), (0 s)
+[   18.791652] cfg80211:   (5735000 KHz - 5835000 KHz @ 80000 KHz), (N/A, 2000 mBm), (N/A)
+[   18.791653] cfg80211:   (57240000 KHz - 63720000 KHz @ 2160000 KHz), (N/A, 0 mBm), (N/A)
+[   26.184034] audit: type=1400 audit(1468573259.033:2): apparmor="STATUS" operation="profile_load" profile="unconfined" name="/usr/bin/ubuntu-core-launcher" pid=711 comm="apparmor_parser"
+[   26.184765] audit: type=1400 audit(1468573259.033:3): apparmor="STATUS" operation="profile_load" profile="unconfined" name="/usr/sbin/cups-browsed" pid=712 comm="apparmor_parser"
+[   26.185739] audit: type=1400 audit(1468573259.037:4): apparmor="STATUS" operation="profile_load" profile="unconfined" name="/sbin/dhclient" pid=709 comm="apparmor_parser"
+[   26.185748] audit: type=1400 audit(1468573259.037:5): apparmor="STATUS" operation="profile_load" profile="unconfined" name="/usr/lib/NetworkManager/nm-dhcp-client.action" pid=709 comm="apparmor_parser"
+[   26.185754] audit: type=1400 audit(1468573259.037:6): apparmor="STATUS" operation="profile_load" profile="unconfined" name="/usr/lib/NetworkManager/nm-dhcp-helper" pid=709 comm="apparmor_parser"
+[   26.185760] audit: type=1400 audit(1468573259.037:7): apparmor="STATUS" operation="profile_load" profile="unconfined" name="/usr/lib/connman/scripts/dhclient-script" pid=709 comm="apparmor_parser"
+[   26.186162] audit: type=1400 audit(1468573259.037:8): apparmor="STATUS" operation="profile_load" profile="unconfined" name="/usr/lib/lightdm/lightdm-guest-session" pid=708 comm="apparmor_parser"
+[   26.186170] audit: type=1400 audit(1468573259.037:9): apparmor="STATUS" operation="profile_load" profile="unconfined" name="/usr/lib/lightdm/lightdm-guest-session//chromium" pid=708 comm="apparmor_parser"
+[   26.186189] audit: type=1400 audit(1468573259.037:10): apparmor="STATUS" operation="profile_load" profile="unconfined" name="/usr/sbin/ntpd" pid=714 comm="apparmor_parser"
+[   26.187238] audit: type=1400 audit(1468573259.037:11): apparmor="STATUS" operation="profile_load" profile="unconfined" name="/usr/lib/cups/backend/cups-pdf" pid=713 comm="apparmor_parser"
+[   26.821733] Bluetooth: BNEP (Ethernet Emulation) ver 1.3
+[   26.821736] Bluetooth: BNEP filters: protocol multicast
+[   26.821739] Bluetooth: BNEP socket layer initialized
+[   29.676202] IPv6: ADDRCONF(NETDEV_UP): wlp3s0: link is not ready
+[   29.676356] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[   29.684185] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[   29.684274] iwlwifi 0000:03:00.0: Radio type=0x2-0x0-0x0
+[   29.928647] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[   29.936505] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[   29.936604] iwlwifi 0000:03:00.0: Radio type=0x2-0x0-0x0
+[   29.992757] IPv6: ADDRCONF(NETDEV_UP): wlp3s0: link is not ready
+[   29.995555] IPv6: ADDRCONF(NETDEV_UP): enp12s0: link is not ready
+[   30.451920] r8169 0000:0c:00.0 enp12s0: link down
+[   30.451985] IPv6: ADDRCONF(NETDEV_UP): enp12s0: link is not ready
+[   31.163518] IPv6: ADDRCONF(NETDEV_UP): wlp3s0: link is not ready
+[   40.116771] wlp3s0: authenticate with 84:d4:7e:13:10:60
+[   40.123286] wlp3s0: send auth to 84:d4:7e:13:10:60 (try 1/3)
+[   40.139511] wlp3s0: authenticated
+[   40.142164] wlp3s0: associate with 84:d4:7e:13:10:60 (try 1/3)
+[   40.160126] wlp3s0: RX AssocResp from 84:d4:7e:13:10:60 (capab=0x431 status=0 aid=1)
+[   40.191333] wlp3s0: associated
+[   40.191382] IPv6: ADDRCONF(NETDEV_CHANGE): wlp3s0: link becomes ready
+[   43.434818] Bluetooth: RFCOMM TTY layer initialized
+[   43.434826] Bluetooth: RFCOMM socket layer initialized
+[   43.434832] Bluetooth: RFCOMM ver 1.11
+[  111.808802] wlp3s0: deauthenticating from 84:d4:7e:13:10:60 by local choice (Reason: 3=DEAUTH_LEAVING)
+[  111.863198] cfg80211: World regulatory domain updated:
+[  111.863202] cfg80211:  DFS Master region: unset
+[  111.863203] cfg80211:   (start_freq - end_freq @ bandwidth), (max_antenna_gain, max_eirp), (dfs_cac_time)
+[  111.863205] cfg80211:   (2402000 KHz - 2472000 KHz @ 40000 KHz), (N/A, 2000 mBm), (N/A)
+[  111.863206] cfg80211:   (2457000 KHz - 2482000 KHz @ 40000 KHz), (N/A, 2000 mBm), (N/A)
+[  111.863207] cfg80211:   (2474000 KHz - 2494000 KHz @ 20000 KHz), (N/A, 2000 mBm), (N/A)
+[  111.863209] cfg80211:   (5170000 KHz - 5250000 KHz @ 80000 KHz, 160000 KHz AUTO), (N/A, 2000 mBm), (N/A)
+[  111.863210] cfg80211:   (5250000 KHz - 5330000 KHz @ 80000 KHz, 160000 KHz AUTO), (N/A, 2000 mBm), (0 s)
+[  111.863211] cfg80211:   (5490000 KHz - 5730000 KHz @ 160000 KHz), (N/A, 2000 mBm), (0 s)
+[  111.863212] cfg80211:   (5735000 KHz - 5835000 KHz @ 80000 KHz), (N/A, 2000 mBm), (N/A)
+[  111.863214] cfg80211:   (57240000 KHz - 63720000 KHz @ 2160000 KHz), (N/A, 0 mBm), (N/A)
+[  112.331514] PM: Syncing filesystems ... done.
+[  112.645826] PM: Preparing system for sleep (mem)
+[  112.646385] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[  112.648330] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[  112.649550] PM: Suspending system (mem)
+[  112.649576] Suspending console(s) (use no_console_suspend to debug)
+[  112.836250] sd 0:0:0:0: [sda] Synchronizing SCSI cache
+[  112.836598] sd 0:0:0:0: [sda] Stopping disk
+[  113.321838] PM: suspend of devices complete after 671.987 msecs
+[  113.337858] PM: late suspend of devices complete after 16.010 msecs
+[  113.339500] ehci-pci 0000:00:1d.0: System wakeup enabled by ACPI
+[  113.339799] ehci-pci 0000:00:1a.0: System wakeup enabled by ACPI
+[  113.339894] xhci_hcd 0000:00:14.0: System wakeup enabled by ACPI
+[  113.353856] PM: noirq suspend of devices complete after 15.992 msecs
+[  113.354251] ACPI: Preparing to enter system sleep state S3
+[  113.469658] ACPI : EC: EC stopped
+[  113.469659] PM: Saving platform NVS memory
+[  113.469664] Disabling non-boot CPUs ...
+[  113.469916] Broke affinity for irq 16
+[  113.469920] Broke affinity for irq 23
+[  113.469927] Broke affinity for irq 28
+[  113.470950] smpboot: CPU 1 is now offline
+[  113.486271] Broke affinity for irq 16
+[  113.486278] Broke affinity for irq 23
+[  113.486286] Broke affinity for irq 28
+[  113.486289] Broke affinity for irq 30
+[  113.487328] smpboot: CPU 2 is now offline
+[  113.498311] Broke affinity for irq 1
+[  113.498320] Broke affinity for irq 9
+[  113.498324] Broke affinity for irq 12
+[  113.498329] Broke affinity for irq 16
+[  113.498334] Broke affinity for irq 23
+[  113.498338] Broke affinity for irq 26
+[  113.498340] Broke affinity for irq 28
+[  113.498342] Broke affinity for irq 30
+[  113.499371] smpboot: CPU 3 is now offline
+[  113.515184] ACPI: Low-level resume complete
+[  113.515226] ACPI : EC: EC started
+[  113.515226] PM: Restoring platform NVS memory
+[  113.516189] microcode: CPU0 microcode updated early to revision 0x1c, date = 2015-02-26
+[  113.516247] Enabling non-boot CPUs ...
+[  113.535315] x86: Booting SMP configuration:
+[  113.535317] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  113.538555]  cache: parent cpu1 should not be sleeping
+[  113.538684] CPU1 is up
+[  113.555396] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  113.556235] microcode: CPU2 microcode updated early to revision 0x1c, date = 2015-02-26
+[  113.558987]  cache: parent cpu2 should not be sleeping
+[  113.559141] CPU2 is up
+[  113.579426] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  113.582757]  cache: parent cpu3 should not be sleeping
+[  113.582886] CPU3 is up
+[  113.585934] ACPI: Waking up from system sleep state S3
+[  114.151434] ehci-pci 0000:00:1d.0: System wakeup disabled by ACPI
+[  114.151789] xhci_hcd 0000:00:14.0: System wakeup disabled by ACPI
+[  114.151983] ehci-pci 0000:00:1a.0: System wakeup disabled by ACPI
+[  114.152157] PM: noirq resume of devices complete after 17.033 msecs
+[  114.152561] PM: early resume of devices complete after 0.370 msecs
+[  114.153697] rtc_cmos 00:01: System wakeup disabled by ACPI
+[  114.167207] sd 0:0:0:0: [sda] Starting disk
+[  114.383180] usb 1-1.3: reset full-speed USB device number 3 using ehci-pci
+[  114.391123] usb 2-1.6: reset high-speed USB device number 3 using ehci-pci
+[  114.503141] ata2: SATA link up 1.5 Gbps (SStatus 113 SControl 300)
+[  114.503166] ata5: SATA link down (SStatus 0 SControl 300)
+[  114.509432] ata2.00: configured for UDMA/33
+[  114.547148] usb 1-1.4: reset full-speed USB device number 4 using ehci-pci
+[  114.640404] PM: resume of devices complete after 487.814 msecs
+[  114.640949] PM: Finishing wakeup.
+[  114.640952] Restarting tasks ... done.
+[  114.719833] psmouse serio1: synaptics: queried max coordinates: x [..5702], y [..4828]
+[  114.774495] psmouse serio1: synaptics: queried min coordinates: x [1240..], y [1026..]
+[  116.399245] ata1: SATA link up 3.0 Gbps (SStatus 123 SControl 300)
+[  116.400379] ata1.00: ACPI cmd ef/02:00:00:00:00:a0 (SET FEATURES) succeeded
+[  116.400386] ata1.00: ACPI cmd f5/00:00:00:00:00:a0 (SECURITY FREEZE LOCK) filtered out
+[  116.400390] ata1.00: ACPI cmd ef/10:03:00:00:00:a0 (SET FEATURES) filtered out
+[  116.402456] ata1.00: ACPI cmd ef/02:00:00:00:00:a0 (SET FEATURES) succeeded
+[  116.402475] ata1.00: ACPI cmd f5/00:00:00:00:00:a0 (SECURITY FREEZE LOCK) filtered out
+[  116.402478] ata1.00: ACPI cmd ef/10:03:00:00:00:a0 (SET FEATURES) filtered out
+[  116.403455] ata1.00: configured for UDMA/133
+[  116.677209] IPv6: ADDRCONF(NETDEV_UP): wlp3s0: link is not ready
+[  116.677425] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[  116.685294] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[  116.685388] iwlwifi 0000:03:00.0: Radio type=0x2-0x0-0x0
+[  116.930712] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[  116.938573] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[  116.938677] iwlwifi 0000:03:00.0: Radio type=0x2-0x0-0x0
+[  116.995367] IPv6: ADDRCONF(NETDEV_UP): wlp3s0: link is not ready
+[  116.997246] IPv6: ADDRCONF(NETDEV_UP): enp12s0: link is not ready
+[  117.113375] r8169 0000:0c:00.0 enp12s0: link down
+[  117.113443] IPv6: ADDRCONF(NETDEV_UP): enp12s0: link is not ready
+[  117.156219] IPv6: ADDRCONF(NETDEV_UP): wlp3s0: link is not ready
+[  117.539563] wlp3s0: authenticate with 84:d4:7e:13:10:60
+[  117.542216] wlp3s0: send auth to 84:d4:7e:13:10:60 (try 1/3)
+[  117.544903] wlp3s0: authenticated
+[  117.547292] wlp3s0: associate with 84:d4:7e:13:10:60 (try 1/3)
+[  117.563328] wlp3s0: RX AssocResp from 84:d4:7e:13:10:60 (capab=0x431 status=0 aid=1)
+[  117.587799] wlp3s0: associated
+[  117.587897] IPv6: ADDRCONF(NETDEV_CHANGE): wlp3s0: link becomes ready
+[  151.107126] wlp3s0: deauthenticating from 84:d4:7e:13:10:60 by local choice (Reason: 3=DEAUTH_LEAVING)
+[  151.156814] cfg80211: World regulatory domain updated:
+[  151.156817] cfg80211:  DFS Master region: unset
+[  151.156819] cfg80211:   (start_freq - end_freq @ bandwidth), (max_antenna_gain, max_eirp), (dfs_cac_time)
+[  151.156821] cfg80211:   (2402000 KHz - 2472000 KHz @ 40000 KHz), (N/A, 2000 mBm), (N/A)
+[  151.156822] cfg80211:   (2457000 KHz - 2482000 KHz @ 40000 KHz), (N/A, 2000 mBm), (N/A)
+[  151.156823] cfg80211:   (2474000 KHz - 2494000 KHz @ 20000 KHz), (N/A, 2000 mBm), (N/A)
+[  151.156844] cfg80211:   (5170000 KHz - 5250000 KHz @ 80000 KHz, 160000 KHz AUTO), (N/A, 2000 mBm), (N/A)
+[  151.156852] cfg80211:   (5250000 KHz - 5330000 KHz @ 80000 KHz, 160000 KHz AUTO), (N/A, 2000 mBm), (0 s)
+[  151.156856] cfg80211:   (5490000 KHz - 5730000 KHz @ 160000 KHz), (N/A, 2000 mBm), (0 s)
+[  151.156861] cfg80211:   (5735000 KHz - 5835000 KHz @ 80000 KHz), (N/A, 2000 mBm), (N/A)
+[  151.156863] cfg80211:   (57240000 KHz - 63720000 KHz @ 2160000 KHz), (N/A, 0 mBm), (N/A)
+[  151.295086] PM: Syncing filesystems ... done.
+[  151.629978] PM: Preparing system for sleep (mem)
+[  151.630376] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[  151.632347] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[  151.633762] PM: Suspending system (mem)
+[  151.633787] Suspending console(s) (use no_console_suspend to debug)
+[  151.850281] sd 0:0:0:0: [sda] Synchronizing SCSI cache
+[  151.850436] sd 0:0:0:0: [sda] Stopping disk
+[  152.333038] PM: suspend of devices complete after 699.006 msecs
+[  152.349087] PM: late suspend of devices complete after 16.037 msecs
+[  152.350770] ehci-pci 0000:00:1d.0: System wakeup enabled by ACPI
+[  152.351032] ehci-pci 0000:00:1a.0: System wakeup enabled by ACPI
+[  152.351035] xhci_hcd 0000:00:14.0: System wakeup enabled by ACPI
+[  152.365134] PM: noirq suspend of devices complete after 16.041 msecs
+[  152.365586] ACPI: Preparing to enter system sleep state S3
+[  152.480956] ACPI : EC: EC stopped
+[  152.480956] PM: Saving platform NVS memory
+[  152.480963] Disabling non-boot CPUs ...
+[  152.481332] Broke affinity for irq 16
+[  152.481338] Broke affinity for irq 23
+[  152.481346] Broke affinity for irq 28
+[  152.482386] smpboot: CPU 1 is now offline
+[  152.493834] Broke affinity for irq 16
+[  152.493839] Broke affinity for irq 23
+[  152.493847] Broke affinity for irq 28
+[  152.493850] Broke affinity for irq 30
+[  152.494884] smpboot: CPU 2 is now offline
+[  152.509635] Broke affinity for irq 1
+[  152.509644] Broke affinity for irq 9
+[  152.509648] Broke affinity for irq 12
+[  152.509653] Broke affinity for irq 16
+[  152.509657] Broke affinity for irq 23
+[  152.509662] Broke affinity for irq 26
+[  152.509664] Broke affinity for irq 28
+[  152.509666] Broke affinity for irq 30
+[  152.510689] smpboot: CPU 3 is now offline
+[  152.522465] ACPI: Low-level resume complete
+[  152.522505] ACPI : EC: EC started
+[  152.522506] PM: Restoring platform NVS memory
+[  152.523457] microcode: CPU0 microcode updated early to revision 0x1c, date = 2015-02-26
+[  152.523515] Enabling non-boot CPUs ...
+[  152.542581] x86: Booting SMP configuration:
+[  152.542582] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  152.545816]  cache: parent cpu1 should not be sleeping
+[  152.545946] CPU1 is up
+[  152.562658] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  152.563486] microcode: CPU2 microcode updated early to revision 0x1c, date = 2015-02-26
+[  152.566240]  cache: parent cpu2 should not be sleeping
+[  152.566405] CPU2 is up
+[  152.586695] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  152.590024]  cache: parent cpu3 should not be sleeping
+[  152.590156] CPU3 is up
+[  152.593213] ACPI: Waking up from system sleep state S3
+[  153.159453] ehci-pci 0000:00:1d.0: System wakeup disabled by ACPI
+[  153.160419] xhci_hcd 0000:00:14.0: System wakeup disabled by ACPI
+[  153.160610] ehci-pci 0000:00:1a.0: System wakeup disabled by ACPI
+[  153.160664] PM: noirq resume of devices complete after 18.275 msecs
+[  153.161012] PM: early resume of devices complete after 0.317 msecs
+[  153.162136] rtc_cmos 00:01: System wakeup disabled by ACPI
+[  153.174458] sd 0:0:0:0: [sda] Starting disk
+[  153.394398] usb 2-1.6: reset high-speed USB device number 3 using ehci-pci
+[  153.394404] usb 1-1.4: reset full-speed USB device number 4 using ehci-pci
+[  153.502406] ata2: SATA link up 1.5 Gbps (SStatus 113 SControl 300)
+[  153.508217] ata2.00: configured for UDMA/33
+[  153.510407] ata5: SATA link down (SStatus 0 SControl 300)
+[  153.558428] usb 1-1.3: reset full-speed USB device number 3 using ehci-pci
+[  153.653733] PM: resume of devices complete after 492.693 msecs
+[  153.654243] PM: Finishing wakeup.
+[  153.654244] Restarting tasks ... done.
+[  153.717683] psmouse serio1: synaptics: queried max coordinates: x [..5702], y [..4828]
+[  153.776988] psmouse serio1: synaptics: queried min coordinates: x [1240..], y [1026..]
+[  155.350500] ata1: SATA link up 3.0 Gbps (SStatus 123 SControl 300)
+[  155.351606] ata1.00: ACPI cmd ef/02:00:00:00:00:a0 (SET FEATURES) succeeded
+[  155.351613] ata1.00: ACPI cmd f5/00:00:00:00:00:a0 (SECURITY FREEZE LOCK) filtered out
+[  155.351616] ata1.00: ACPI cmd ef/10:03:00:00:00:a0 (SET FEATURES) filtered out
+[  155.353843] ata1.00: ACPI cmd ef/02:00:00:00:00:a0 (SET FEATURES) succeeded
+[  155.353850] ata1.00: ACPI cmd f5/00:00:00:00:00:a0 (SECURITY FREEZE LOCK) filtered out
+[  155.353853] ata1.00: ACPI cmd ef/10:03:00:00:00:a0 (SET FEATURES) filtered out
+[  155.354889] ata1.00: configured for UDMA/133
+[  155.532731] IPv6: ADDRCONF(NETDEV_UP): wlp3s0: link is not ready
+[  155.532884] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[  155.540752] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[  155.540841] iwlwifi 0000:03:00.0: Radio type=0x2-0x0-0x0
+[  155.785656] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[  155.793511] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[  155.793602] iwlwifi 0000:03:00.0: Radio type=0x2-0x0-0x0
+[  155.850724] IPv6: ADDRCONF(NETDEV_UP): wlp3s0: link is not ready
+[  155.852742] IPv6: ADDRCONF(NETDEV_UP): enp12s0: link is not ready
+[  155.952624] r8169 0000:0c:00.0 enp12s0: link down
+[  155.952719] IPv6: ADDRCONF(NETDEV_UP): enp12s0: link is not ready
+[  156.021004] IPv6: ADDRCONF(NETDEV_UP): wlp3s0: link is not ready
+[  156.544213] wlp3s0: authenticate with 84:d4:7e:13:10:60
+[  156.546317] wlp3s0: send auth to 84:d4:7e:13:10:60 (try 1/3)
+[  156.555899] wlp3s0: authenticated
+[  156.558549] wlp3s0: associate with 84:d4:7e:13:10:60 (try 1/3)
+[  156.562021] wlp3s0: RX AssocResp from 84:d4:7e:13:10:60 (capab=0x431 status=0 aid=1)
+[  156.583779] wlp3s0: associated
+[  156.583832] IPv6: ADDRCONF(NETDEV_CHANGE): wlp3s0: link becomes ready
+[  879.363410] wlp3s0: deauthenticating from 84:d4:7e:13:10:60 by local choice (Reason: 3=DEAUTH_LEAVING)
+[  879.425144] cfg80211: World regulatory domain updated:
+[  879.425148] cfg80211:  DFS Master region: unset
+[  879.425149] cfg80211:   (start_freq - end_freq @ bandwidth), (max_antenna_gain, max_eirp), (dfs_cac_time)
+[  879.425151] cfg80211:   (2402000 KHz - 2472000 KHz @ 40000 KHz), (N/A, 2000 mBm), (N/A)
+[  879.425152] cfg80211:   (2457000 KHz - 2482000 KHz @ 40000 KHz), (N/A, 2000 mBm), (N/A)
+[  879.425153] cfg80211:   (2474000 KHz - 2494000 KHz @ 20000 KHz), (N/A, 2000 mBm), (N/A)
+[  879.425155] cfg80211:   (5170000 KHz - 5250000 KHz @ 80000 KHz, 160000 KHz AUTO), (N/A, 2000 mBm), (N/A)
+[  879.425156] cfg80211:   (5250000 KHz - 5330000 KHz @ 80000 KHz, 160000 KHz AUTO), (N/A, 2000 mBm), (0 s)
+[  879.425158] cfg80211:   (5490000 KHz - 5730000 KHz @ 160000 KHz), (N/A, 2000 mBm), (0 s)
+[  879.425159] cfg80211:   (5735000 KHz - 5835000 KHz @ 80000 KHz), (N/A, 2000 mBm), (N/A)
+[  879.425160] cfg80211:   (57240000 KHz - 63720000 KHz @ 2160000 KHz), (N/A, 0 mBm), (N/A)
+[  879.553678] PM: Syncing filesystems ... done.
+[  879.784040] PM: Preparing system for sleep (mem)
+[  879.784463] Freezing user space processes ... (elapsed 0.002 seconds) done.
+[  879.786489] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[  879.787789] PM: Suspending system (mem)
+[  879.787814] Suspending console(s) (use no_console_suspend to debug)
+[  880.006084] sd 0:0:0:0: [sda] Synchronizing SCSI cache
+[  880.006324] sd 0:0:0:0: [sda] Stopping disk
+[  880.493008] PM: suspend of devices complete after 704.949 msecs
+[  880.509043] PM: late suspend of devices complete after 16.022 msecs
+[  880.510522] ehci-pci 0000:00:1d.0: System wakeup enabled by ACPI
+[  880.510806] ehci-pci 0000:00:1a.0: System wakeup enabled by ACPI
+[  880.510822] xhci_hcd 0000:00:14.0: System wakeup enabled by ACPI
+[  880.525087] PM: noirq suspend of devices complete after 16.036 msecs
+[  880.525527] ACPI: Preparing to enter system sleep state S3
+[  880.640907] ACPI : EC: EC stopped
+[  880.640908] PM: Saving platform NVS memory
+[  880.640914] Disabling non-boot CPUs ...
+[  880.641294] Broke affinity for irq 16
+[  880.641300] Broke affinity for irq 23
+[  880.641308] Broke affinity for irq 28
+[  880.642345] smpboot: CPU 1 is now offline
+[  880.653822] Broke affinity for irq 16
+[  880.653827] Broke affinity for irq 23
+[  880.653835] Broke affinity for irq 28
+[  880.653837] Broke affinity for irq 30
+[  880.654864] smpboot: CPU 2 is now offline
+[  880.665553] Broke affinity for irq 1
+[  880.665562] Broke affinity for irq 9
+[  880.665567] Broke affinity for irq 12
+[  880.665572] Broke affinity for irq 16
+[  880.665576] Broke affinity for irq 23
+[  880.665582] Broke affinity for irq 26
+[  880.665583] Broke affinity for irq 28
+[  880.665585] Broke affinity for irq 30
+[  880.666618] smpboot: CPU 3 is now offline
+[  880.682522] ACPI: Low-level resume complete
+[  880.682564] ACPI : EC: EC started
+[  880.682564] PM: Restoring platform NVS memory
+[  880.683551] microcode: CPU0 microcode updated early to revision 0x1c, date = 2015-02-26
+[  880.683572] Enabling non-boot CPUs ...
+[  880.702494] x86: Booting SMP configuration:
+[  880.702495] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  880.705388]  cache: parent cpu1 should not be sleeping
+[  880.705518] CPU1 is up
+[  880.722673] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  880.723504] microcode: CPU2 microcode updated early to revision 0x1c, date = 2015-02-26
+[  880.726256]  cache: parent cpu2 should not be sleeping
+[  880.726426] CPU2 is up
+[  880.746715] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  880.750050]  cache: parent cpu3 should not be sleeping
+[  880.750180] CPU3 is up
+[  880.753239] ACPI: Waking up from system sleep state S3
+[  881.318640] ehci-pci 0000:00:1d.0: System wakeup disabled by ACPI
+[  881.318682] ehci-pci 0000:00:1a.0: System wakeup disabled by ACPI
+[  881.318691] xhci_hcd 0000:00:14.0: System wakeup disabled by ACPI
+[  881.320072] PM: noirq resume of devices complete after 17.661 msecs
+[  881.320543] PM: early resume of devices complete after 0.447 msecs
+[  881.322246] rtc_cmos 00:01: System wakeup disabled by ACPI
+[  881.329333] sd 0:0:0:0: [sda] Starting disk
+[  881.550399] usb 2-1.6: reset high-speed USB device number 3 using ehci-pci
+[  881.550492] usb 1-1.3: reset full-speed USB device number 3 using ehci-pci
+[  881.654430] ata2: SATA link up 1.5 Gbps (SStatus 113 SControl 300)
+[  881.660131] ata2.00: configured for UDMA/33
+[  881.662424] ata5: SATA link down (SStatus 0 SControl 300)
+[  881.714464] usb 1-1.4: reset full-speed USB device number 4 using ehci-pci
+[  881.807605] PM: resume of devices complete after 487.033 msecs
+[  881.808325] PM: Finishing wakeup.
+[  881.808327] Restarting tasks ... done.
+[  881.902171] psmouse serio1: synaptics: queried max coordinates: x [..5702], y [..4828]
+[  881.955039] psmouse serio1: synaptics: queried min coordinates: x [1240..], y [1026..]
+[  883.510549] ata1: SATA link up 3.0 Gbps (SStatus 123 SControl 300)
+[  883.511671] ata1.00: ACPI cmd ef/02:00:00:00:00:a0 (SET FEATURES) succeeded
+[  883.511677] ata1.00: ACPI cmd f5/00:00:00:00:00:a0 (SECURITY FREEZE LOCK) filtered out
+[  883.511680] ata1.00: ACPI cmd ef/10:03:00:00:00:a0 (SET FEATURES) filtered out
+[  883.513808] ata1.00: ACPI cmd ef/02:00:00:00:00:a0 (SET FEATURES) succeeded
+[  883.513814] ata1.00: ACPI cmd f5/00:00:00:00:00:a0 (SECURITY FREEZE LOCK) filtered out
+[  883.513817] ata1.00: ACPI cmd ef/10:03:00:00:00:a0 (SET FEATURES) filtered out
+[  883.514810] ata1.00: configured for UDMA/133
+[  883.593142] IPv6: ADDRCONF(NETDEV_UP): wlp3s0: link is not ready
+[  883.593386] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[  883.601277] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[  883.601367] iwlwifi 0000:03:00.0: Radio type=0x2-0x0-0x0
+[  883.854820] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[  883.862713] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[  883.862804] iwlwifi 0000:03:00.0: Radio type=0x2-0x0-0x0
+[  883.922977] IPv6: ADDRCONF(NETDEV_UP): wlp3s0: link is not ready
+[  883.925042] IPv6: ADDRCONF(NETDEV_UP): enp12s0: link is not ready
+[  884.048670] r8169 0000:0c:00.0 enp12s0: link down
+[  884.048739] IPv6: ADDRCONF(NETDEV_UP): enp12s0: link is not ready
+[  884.096257] IPv6: ADDRCONF(NETDEV_UP): wlp3s0: link is not ready
+[  884.587337] wlp3s0: authenticate with 84:d4:7e:13:10:60
+[  884.589479] wlp3s0: send auth to 84:d4:7e:13:10:60 (try 1/3)
+[  884.591916] wlp3s0: authenticated
+[  884.594605] wlp3s0: associate with 84:d4:7e:13:10:60 (try 1/3)
+[  884.598179] wlp3s0: RX AssocResp from 84:d4:7e:13:10:60 (capab=0x431 status=0 aid=1)
+[  884.617599] wlp3s0: associated
+[  884.617662] IPv6: ADDRCONF(NETDEV_CHANGE): wlp3s0: link becomes ready
+[ 1059.355702] wlp3s0: deauthenticating from 84:d4:7e:13:10:60 by local choice (Reason: 3=DEAUTH_LEAVING)
+[ 1059.405633] cfg80211: World regulatory domain updated:
+[ 1059.405637] cfg80211:  DFS Master region: unset
+[ 1059.405638] cfg80211:   (start_freq - end_freq @ bandwidth), (max_antenna_gain, max_eirp), (dfs_cac_time)
+[ 1059.405640] cfg80211:   (2402000 KHz - 2472000 KHz @ 40000 KHz), (N/A, 2000 mBm), (N/A)
+[ 1059.405641] cfg80211:   (2457000 KHz - 2482000 KHz @ 40000 KHz), (N/A, 2000 mBm), (N/A)
+[ 1059.405642] cfg80211:   (2474000 KHz - 2494000 KHz @ 20000 KHz), (N/A, 2000 mBm), (N/A)
+[ 1059.405644] cfg80211:   (5170000 KHz - 5250000 KHz @ 80000 KHz, 160000 KHz AUTO), (N/A, 2000 mBm), (N/A)
+[ 1059.405646] cfg80211:   (5250000 KHz - 5330000 KHz @ 80000 KHz, 160000 KHz AUTO), (N/A, 2000 mBm), (0 s)
+[ 1059.405647] cfg80211:   (5490000 KHz - 5730000 KHz @ 160000 KHz), (N/A, 2000 mBm), (0 s)
+[ 1059.405648] cfg80211:   (5735000 KHz - 5835000 KHz @ 80000 KHz), (N/A, 2000 mBm), (N/A)
+[ 1059.405649] cfg80211:   (57240000 KHz - 63720000 KHz @ 2160000 KHz), (N/A, 0 mBm), (N/A)
+[ 1059.556837] PM: Syncing filesystems ... done.
+[ 1059.709305] PM: Preparing system for sleep (mem)
+[ 1059.709665] Freezing user space processes ... (elapsed 0.002 seconds) done.
+[ 1059.711683] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 1059.713137] PM: Suspending system (mem)
+[ 1059.713164] Suspending console(s) (use no_console_suspend to debug)
+[ 1059.901912] sd 0:0:0:0: [sda] Synchronizing SCSI cache
+[ 1059.902094] sd 0:0:0:0: [sda] Stopping disk
+[ 1060.390982] PM: suspend of devices complete after 677.572 msecs
+[ 1060.406994] PM: late suspend of devices complete after 16.004 msecs
+[ 1060.408689] ehci-pci 0000:00:1d.0: System wakeup enabled by ACPI
+[ 1060.408743] ehci-pci 0000:00:1a.0: System wakeup enabled by ACPI
+[ 1060.408882] xhci_hcd 0000:00:14.0: System wakeup enabled by ACPI
+[ 1060.423084] PM: noirq suspend of devices complete after 16.085 msecs
+[ 1060.423477] ACPI: Preparing to enter system sleep state S3
+[ 1060.538923] ACPI : EC: EC stopped
+[ 1060.538924] PM: Saving platform NVS memory
+[ 1060.538930] Disabling non-boot CPUs ...
+[ 1060.539265] Broke affinity for irq 16
+[ 1060.539277] Broke affinity for irq 28
+[ 1060.540313] smpboot: CPU 1 is now offline
+[ 1060.551721] Broke affinity for irq 16
+[ 1060.551734] Broke affinity for irq 28
+[ 1060.551736] Broke affinity for irq 30
+[ 1060.552775] smpboot: CPU 2 is now offline
+[ 1060.567557] Broke affinity for irq 1
+[ 1060.567566] Broke affinity for irq 9
+[ 1060.567570] Broke affinity for irq 12
+[ 1060.567575] Broke affinity for irq 16
+[ 1060.567580] Broke affinity for irq 23
+[ 1060.567585] Broke affinity for irq 26
+[ 1060.567587] Broke affinity for irq 28
+[ 1060.567588] Broke affinity for irq 30
+[ 1060.568620] smpboot: CPU 3 is now offline
+[ 1060.584525] ACPI: Low-level resume complete
+[ 1060.584567] ACPI : EC: EC started
+[ 1060.584567] PM: Restoring platform NVS memory
+[ 1060.585521] microcode: CPU0 microcode updated early to revision 0x1c, date = 2015-02-26
+[ 1060.585545] Enabling non-boot CPUs ...
+[ 1060.604581] x86: Booting SMP configuration:
+[ 1060.604583] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[ 1060.607771]  cache: parent cpu1 should not be sleeping
+[ 1060.607900] CPU1 is up
+[ 1060.624666] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[ 1060.625495] microcode: CPU2 microcode updated early to revision 0x1c, date = 2015-02-26
+[ 1060.628244]  cache: parent cpu2 should not be sleeping
+[ 1060.628391] CPU2 is up
+[ 1060.652579] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[ 1060.655594]  cache: parent cpu3 should not be sleeping
+[ 1060.655721] CPU3 is up
+[ 1060.658778] ACPI: Waking up from system sleep state S3
+[ 1061.225327] ehci-pci 0000:00:1d.0: System wakeup disabled by ACPI
+[ 1061.225971] xhci_hcd 0000:00:14.0: System wakeup disabled by ACPI
+[ 1061.226566] ehci-pci 0000:00:1a.0: System wakeup disabled by ACPI
+[ 1061.226767] PM: noirq resume of devices complete after 18.376 msecs
+[ 1061.227223] PM: early resume of devices complete after 0.431 msecs
+[ 1061.231582] rtc_cmos 00:01: System wakeup disabled by ACPI
+[ 1061.240440] sd 0:0:0:0: [sda] Starting disk
+[ 1061.456406] usb 1-1.3: reset full-speed USB device number 3 using ehci-pci
+[ 1061.456410] usb 2-1.6: reset high-speed USB device number 3 using ehci-pci
+[ 1061.568607] ata2: SATA link up 1.5 Gbps (SStatus 113 SControl 300)
+[ 1061.574538] ata2.00: configured for UDMA/33
+[ 1061.576394] ata5: SATA link down (SStatus 0 SControl 300)
+[ 1061.620450] usb 1-1.4: reset full-speed USB device number 4 using ehci-pci
+[ 1061.713380] PM: resume of devices complete after 486.128 msecs
+[ 1061.714061] PM: Finishing wakeup.
+[ 1061.714063] Restarting tasks ... done.
+[ 1061.813716] psmouse serio1: synaptics: queried max coordinates: x [..5702], y [..4828]
+[ 1061.873616] psmouse serio1: synaptics: queried min coordinates: x [1240..], y [1026..]
+[ 1063.416502] ata1: SATA link up 3.0 Gbps (SStatus 123 SControl 300)
+[ 1063.417761] ata1.00: ACPI cmd ef/02:00:00:00:00:a0 (SET FEATURES) succeeded
+[ 1063.417769] ata1.00: ACPI cmd f5/00:00:00:00:00:a0 (SECURITY FREEZE LOCK) filtered out
+[ 1063.417773] ata1.00: ACPI cmd ef/10:03:00:00:00:a0 (SET FEATURES) filtered out
+[ 1063.419895] ata1.00: ACPI cmd ef/02:00:00:00:00:a0 (SET FEATURES) succeeded
+[ 1063.419902] ata1.00: ACPI cmd f5/00:00:00:00:00:a0 (SECURITY FREEZE LOCK) filtered out
+[ 1063.419906] ata1.00: ACPI cmd ef/10:03:00:00:00:a0 (SET FEATURES) filtered out
+[ 1063.420910] ata1.00: configured for UDMA/133
+[ 1063.515054] IPv6: ADDRCONF(NETDEV_UP): wlp3s0: link is not ready
+[ 1063.515314] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[ 1063.523218] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[ 1063.523315] iwlwifi 0000:03:00.0: Radio type=0x2-0x0-0x0
+[ 1063.768025] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[ 1063.775889] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[ 1063.775978] iwlwifi 0000:03:00.0: Radio type=0x2-0x0-0x0
+[ 1063.832878] IPv6: ADDRCONF(NETDEV_UP): wlp3s0: link is not ready
+[ 1063.834239] IPv6: ADDRCONF(NETDEV_UP): enp12s0: link is not ready
+[ 1063.950607] r8169 0000:0c:00.0 enp12s0: link down
+[ 1063.950668] IPv6: ADDRCONF(NETDEV_UP): enp12s0: link is not ready
+[ 1063.997689] IPv6: ADDRCONF(NETDEV_UP): wlp3s0: link is not ready
+[ 1064.490344] wlp3s0: authenticate with 84:d4:7e:13:10:60
+[ 1064.492600] wlp3s0: send auth to 84:d4:7e:13:10:60 (try 1/3)
+[ 1064.499481] wlp3s0: authenticated
+[ 1064.500525] wlp3s0: associate with 84:d4:7e:13:10:60 (try 1/3)
+[ 1064.509334] wlp3s0: RX AssocResp from 84:d4:7e:13:10:60 (capab=0x431 status=0 aid=2)
+[ 1064.528823] wlp3s0: associated
+[ 1064.528881] IPv6: ADDRCONF(NETDEV_CHANGE): wlp3s0: link becomes ready
+[ 1886.779206] wlp3s0: deauthenticating from 84:d4:7e:13:10:60 by local choice (Reason: 3=DEAUTH_LEAVING)
+[ 1886.863753] cfg80211: World regulatory domain updated:
+[ 1886.863757] cfg80211:  DFS Master region: unset
+[ 1886.863758] cfg80211:   (start_freq - end_freq @ bandwidth), (max_antenna_gain, max_eirp), (dfs_cac_time)
+[ 1886.863761] cfg80211:   (2402000 KHz - 2472000 KHz @ 40000 KHz), (N/A, 2000 mBm), (N/A)
+[ 1886.863763] cfg80211:   (2457000 KHz - 2482000 KHz @ 40000 KHz), (N/A, 2000 mBm), (N/A)
+[ 1886.863765] cfg80211:   (2474000 KHz - 2494000 KHz @ 20000 KHz), (N/A, 2000 mBm), (N/A)
+[ 1886.863767] cfg80211:   (5170000 KHz - 5250000 KHz @ 80000 KHz, 160000 KHz AUTO), (N/A, 2000 mBm), (N/A)
+[ 1886.863770] cfg80211:   (5250000 KHz - 5330000 KHz @ 80000 KHz, 160000 KHz AUTO), (N/A, 2000 mBm), (0 s)
+[ 1886.863772] cfg80211:   (5490000 KHz - 5730000 KHz @ 160000 KHz), (N/A, 2000 mBm), (0 s)
+[ 1886.863774] cfg80211:   (5735000 KHz - 5835000 KHz @ 80000 KHz), (N/A, 2000 mBm), (N/A)
+[ 1886.863776] cfg80211:   (57240000 KHz - 63720000 KHz @ 2160000 KHz), (N/A, 0 mBm), (N/A)
+[ 1886.995740] PM: Syncing filesystems ... done.
+[ 1887.192258] PM: Preparing system for sleep (mem)
+[ 1887.192651] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[ 1887.194355] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 1887.195656] PM: Suspending system (mem)
+[ 1887.195679] Suspending console(s) (use no_console_suspend to debug)
+[ 1887.383600] sd 0:0:0:0: [sda] Synchronizing SCSI cache
+[ 1887.383814] sd 0:0:0:0: [sda] Stopping disk
+[ 1888.079750] PM: suspend of devices complete after 883.828 msecs
+[ 1888.095804] PM: late suspend of devices complete after 16.044 msecs
+[ 1888.097656] ehci-pci 0000:00:1d.0: System wakeup enabled by ACPI
+[ 1888.097793] ehci-pci 0000:00:1a.0: System wakeup enabled by ACPI
+[ 1888.097831] xhci_hcd 0000:00:14.0: System wakeup enabled by ACPI
+[ 1888.111813] PM: noirq suspend of devices complete after 16.002 msecs
+[ 1888.112264] ACPI: Preparing to enter system sleep state S3
+[ 1888.227626] ACPI : EC: EC stopped
+[ 1888.227627] PM: Saving platform NVS memory
+[ 1888.227633] Disabling non-boot CPUs ...
+[ 1888.227995] Broke affinity for irq 16
+[ 1888.228008] Broke affinity for irq 28
+[ 1888.229042] smpboot: CPU 1 is now offline
+[ 1888.244484] Broke affinity for irq 16
+[ 1888.244499] Broke affinity for irq 28
+[ 1888.244501] Broke affinity for irq 30
+[ 1888.245533] smpboot: CPU 2 is now offline
+[ 1888.256245] Broke affinity for irq 1
+[ 1888.256253] Broke affinity for irq 9
+[ 1888.256258] Broke affinity for irq 12
+[ 1888.256262] Broke affinity for irq 16
+[ 1888.256266] Broke affinity for irq 23
+[ 1888.256271] Broke affinity for irq 26
+[ 1888.256272] Broke affinity for irq 28
+[ 1888.256274] Broke affinity for irq 30
+[ 1888.257300] smpboot: CPU 3 is now offline
+[ 1888.269154] ACPI: Low-level resume complete
+[ 1888.269196] ACPI : EC: EC started
+[ 1888.269196] PM: Restoring platform NVS memory
+[ 1888.270191] microcode: CPU0 microcode updated early to revision 0x1c, date = 2015-02-26
+[ 1888.270215] Enabling non-boot CPUs ...
+[ 1888.289257] x86: Booting SMP configuration:
+[ 1888.289258] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[ 1888.292444]  cache: parent cpu1 should not be sleeping
+[ 1888.292574] CPU1 is up
+[ 1888.309342] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[ 1888.310181] microcode: CPU2 microcode updated early to revision 0x1c, date = 2015-02-26
+[ 1888.312929]  cache: parent cpu2 should not be sleeping
+[ 1888.313079] CPU2 is up
+[ 1888.345361] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[ 1888.348636]  cache: parent cpu3 should not be sleeping
+[ 1888.348765] CPU3 is up
+[ 1888.352601] ACPI: Waking up from system sleep state S3
+[ 1888.917764] ehci-pci 0000:00:1d.0: System wakeup disabled by ACPI
+[ 1888.918042] ehci-pci 0000:00:1a.0: System wakeup disabled by ACPI
+[ 1888.918048] xhci_hcd 0000:00:14.0: System wakeup disabled by ACPI
+[ 1888.918683] PM: noirq resume of devices complete after 17.612 msecs
+[ 1888.918983] PM: early resume of devices complete after 0.275 msecs
+[ 1888.920299] rtc_cmos 00:01: System wakeup disabled by ACPI
+[ 1888.925122] sd 0:0:0:0: [sda] Starting disk
+[ 1889.149078] usb 2-1.6: reset high-speed USB device number 3 using ehci-pci
+[ 1889.149114] usb 1-1.3: reset full-speed USB device number 3 using ehci-pci
+[ 1889.245071] ata2: SATA link up 1.5 Gbps (SStatus 113 SControl 300)
+[ 1889.251453] ata2.00: configured for UDMA/33
+[ 1889.253085] ata5: SATA link down (SStatus 0 SControl 300)
+[ 1889.313128] usb 1-1.4: reset full-speed USB device number 4 using ehci-pci
+[ 1889.405951] PM: resume of devices complete after 486.939 msecs
+[ 1889.406700] PM: Finishing wakeup.
+[ 1889.406703] Restarting tasks ... done.
+[ 1889.479532] psmouse serio1: synaptics: queried max coordinates: x [..5702], y [..4828]
+[ 1889.543260] psmouse serio1: synaptics: queried min coordinates: x [1240..], y [1026..]
+[ 1891.149185] ata1: SATA link up 3.0 Gbps (SStatus 123 SControl 300)
+[ 1891.150332] ata1.00: ACPI cmd ef/02:00:00:00:00:a0 (SET FEATURES) succeeded
+[ 1891.150339] ata1.00: ACPI cmd f5/00:00:00:00:00:a0 (SECURITY FREEZE LOCK) filtered out
+[ 1891.150343] ata1.00: ACPI cmd ef/10:03:00:00:00:a0 (SET FEATURES) filtered out
+[ 1891.152476] ata1.00: ACPI cmd ef/02:00:00:00:00:a0 (SET FEATURES) succeeded
+[ 1891.152483] ata1.00: ACPI cmd f5/00:00:00:00:00:a0 (SECURITY FREEZE LOCK) filtered out
+[ 1891.152486] ata1.00: ACPI cmd ef/10:03:00:00:00:a0 (SET FEATURES) filtered out
+[ 1891.153448] ata1.00: configured for UDMA/133
+[ 1891.263852] IPv6: ADDRCONF(NETDEV_UP): wlp3s0: link is not ready
+[ 1891.264102] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[ 1891.272020] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[ 1891.272116] iwlwifi 0000:03:00.0: Radio type=0x2-0x0-0x0
+[ 1891.516911] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[ 1891.524787] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[ 1891.524878] iwlwifi 0000:03:00.0: Radio type=0x2-0x0-0x0
+[ 1891.581428] IPv6: ADDRCONF(NETDEV_UP): wlp3s0: link is not ready
+[ 1891.583156] IPv6: ADDRCONF(NETDEV_UP): enp12s0: link is not ready
+[ 1891.695303] r8169 0000:0c:00.0 enp12s0: link down
+[ 1891.695381] IPv6: ADDRCONF(NETDEV_UP): enp12s0: link is not ready
+[ 1891.729921] IPv6: ADDRCONF(NETDEV_UP): wlp3s0: link is not ready
+[ 1892.218620] wlp3s0: authenticate with 84:d4:7e:13:10:60
+[ 1892.220782] wlp3s0: send auth to 84:d4:7e:13:10:60 (try 1/3)
+[ 1892.223255] wlp3s0: authenticated
+[ 1892.225258] wlp3s0: associate with 84:d4:7e:13:10:60 (try 1/3)
+[ 1892.228869] wlp3s0: RX AssocResp from 84:d4:7e:13:10:60 (capab=0x431 status=0 aid=2)
+[ 1892.248514] wlp3s0: associated
+[ 1892.248563] IPv6: ADDRCONF(NETDEV_CHANGE): wlp3s0: link becomes ready
+[ 4512.323077] wlp3s0: deauthenticating from 84:d4:7e:13:10:60 by local choice (Reason: 3=DEAUTH_LEAVING)
+[ 4512.373837] cfg80211: World regulatory domain updated:
+[ 4512.373842] cfg80211:  DFS Master region: unset
+[ 4512.373843] cfg80211:   (start_freq - end_freq @ bandwidth), (max_antenna_gain, max_eirp), (dfs_cac_time)
+[ 4512.373846] cfg80211:   (2402000 KHz - 2472000 KHz @ 40000 KHz), (N/A, 2000 mBm), (N/A)
+[ 4512.373848] cfg80211:   (2457000 KHz - 2482000 KHz @ 40000 KHz), (N/A, 2000 mBm), (N/A)
+[ 4512.373850] cfg80211:   (2474000 KHz - 2494000 KHz @ 20000 KHz), (N/A, 2000 mBm), (N/A)
+[ 4512.373853] cfg80211:   (5170000 KHz - 5250000 KHz @ 80000 KHz, 160000 KHz AUTO), (N/A, 2000 mBm), (N/A)
+[ 4512.373855] cfg80211:   (5250000 KHz - 5330000 KHz @ 80000 KHz, 160000 KHz AUTO), (N/A, 2000 mBm), (0 s)
+[ 4512.373857] cfg80211:   (5490000 KHz - 5730000 KHz @ 160000 KHz), (N/A, 2000 mBm), (0 s)
+[ 4512.373859] cfg80211:   (5735000 KHz - 5835000 KHz @ 80000 KHz), (N/A, 2000 mBm), (N/A)
+[ 4512.373860] cfg80211:   (57240000 KHz - 63720000 KHz @ 2160000 KHz), (N/A, 0 mBm), (N/A)
+[ 4512.506979] PM: Syncing filesystems ... done.
+[ 4512.654715] PM: Preparing system for sleep (mem)
+[ 4512.655169] Freezing user space processes ... (elapsed 0.002 seconds) done.
+[ 4512.657243] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 4512.658621] PM: Suspending system (mem)
+[ 4512.658647] Suspending console(s) (use no_console_suspend to debug)
+[ 4512.844004] sd 0:0:0:0: [sda] Synchronizing SCSI cache
+[ 4512.844174] sd 0:0:0:0: [sda] Stopping disk
+[ 4513.345662] PM: suspend of devices complete after 686.768 msecs
+[ 4513.361602] PM: late suspend of devices complete after 15.932 msecs
+[ 4513.363143] ehci-pci 0000:00:1d.0: System wakeup enabled by ACPI
+[ 4513.363408] ehci-pci 0000:00:1a.0: System wakeup enabled by ACPI
+[ 4513.363422] xhci_hcd 0000:00:14.0: System wakeup enabled by ACPI
+[ 4513.377725] PM: noirq suspend of devices complete after 16.117 msecs
+[ 4513.378142] ACPI: Preparing to enter system sleep state S3
+[ 4513.493564] ACPI : EC: EC stopped
+[ 4513.493564] PM: Saving platform NVS memory
+[ 4513.493571] Disabling non-boot CPUs ...
+[ 4513.493916] Broke affinity for irq 16
+[ 4513.493929] Broke affinity for irq 28
+[ 4513.494968] smpboot: CPU 1 is now offline
+[ 4513.510438] Broke affinity for irq 16
+[ 4513.510451] Broke affinity for irq 28
+[ 4513.510453] Broke affinity for irq 30
+[ 4513.511492] smpboot: CPU 2 is now offline
+[ 4513.526279] Broke affinity for irq 1
+[ 4513.526288] Broke affinity for irq 9
+[ 4513.526292] Broke affinity for irq 12
+[ 4513.526296] Broke affinity for irq 16
+[ 4513.526301] Broke affinity for irq 23
+[ 4513.526305] Broke affinity for irq 26
+[ 4513.526307] Broke affinity for irq 28
+[ 4513.526308] Broke affinity for irq 30
+[ 4513.527337] smpboot: CPU 3 is now offline
+[ 4513.543103] ACPI: Low-level resume complete
+[ 4513.543142] ACPI : EC: EC started
+[ 4513.543142] PM: Restoring platform NVS memory
+[ 4513.544095] microcode: CPU0 microcode updated early to revision 0x1c, date = 2015-02-26
+[ 4513.544119] Enabling non-boot CPUs ...
+[ 4513.563190] x86: Booting SMP configuration:
+[ 4513.563191] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[ 4513.566380]  cache: parent cpu1 should not be sleeping
+[ 4513.566511] CPU1 is up
+[ 4513.583272] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[ 4513.584197] microcode: CPU2 microcode updated early to revision 0x1c, date = 2015-02-26
+[ 4513.586957]  cache: parent cpu2 should not be sleeping
+[ 4513.587089] CPU2 is up
+[ 4513.607309] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[ 4513.610640]  cache: parent cpu3 should not be sleeping
+[ 4513.610769] CPU3 is up
+[ 4513.613828] ACPI: Waking up from system sleep state S3
+[ 4514.556432] ehci-pci 0000:00:1d.0: System wakeup disabled by ACPI
+[ 4514.557069] ehci-pci 0000:00:1a.0: System wakeup disabled by ACPI
+[ 4514.557139] xhci_hcd 0000:00:14.0: System wakeup disabled by ACPI
+[ 4514.557299] PM: noirq resume of devices complete after 18.264 msecs
+[ 4514.557711] PM: early resume of devices complete after 0.378 msecs
+[ 4514.559440] rtc_cmos 00:01: System wakeup disabled by ACPI
+[ 4514.559595] sd 0:0:0:0: [sda] Starting disk
+[ 4514.787048] usb 1-1.3: reset full-speed USB device number 3 using ehci-pci
+[ 4514.791031] usb 2-1.6: reset high-speed USB device number 3 using ehci-pci
+[ 4514.887045] ata2: SATA link up 1.5 Gbps (SStatus 113 SControl 300)
+[ 4514.892362] ata2.00: configured for UDMA/33
+[ 4514.895062] ata5: SATA link down (SStatus 0 SControl 300)
+[ 4514.951064] usb 1-1.4: reset full-speed USB device number 4 using ehci-pci
+[ 4515.044258] PM: resume of devices complete after 486.513 msecs
+[ 4515.044891] PM: Finishing wakeup.
+[ 4515.044893] Restarting tasks ... done.
+[ 4515.112914] psmouse serio1: synaptics: queried max coordinates: x [..5702], y [..4828]
+[ 4515.165664] psmouse serio1: synaptics: queried min coordinates: x [1240..], y [1026..]
+[ 4516.391121] ata1: SATA link up 3.0 Gbps (SStatus 123 SControl 300)
+[ 4516.392263] ata1.00: ACPI cmd ef/02:00:00:00:00:a0 (SET FEATURES) succeeded
+[ 4516.392270] ata1.00: ACPI cmd f5/00:00:00:00:00:a0 (SECURITY FREEZE LOCK) filtered out
+[ 4516.392274] ata1.00: ACPI cmd ef/10:03:00:00:00:a0 (SET FEATURES) filtered out
+[ 4516.394365] ata1.00: ACPI cmd ef/02:00:00:00:00:a0 (SET FEATURES) succeeded
+[ 4516.394372] ata1.00: ACPI cmd f5/00:00:00:00:00:a0 (SECURITY FREEZE LOCK) filtered out
+[ 4516.394375] ata1.00: ACPI cmd ef/10:03:00:00:00:a0 (SET FEATURES) filtered out
+[ 4516.395354] ata1.00: configured for UDMA/133
+[ 4516.517590] IPv6: ADDRCONF(NETDEV_UP): wlp3s0: link is not ready
+[ 4516.517857] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[ 4516.526803] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[ 4516.526899] iwlwifi 0000:03:00.0: Radio type=0x2-0x0-0x0
+[ 4516.770890] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[ 4516.778754] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[ 4516.778845] iwlwifi 0000:03:00.0: Radio type=0x2-0x0-0x0
+[ 4516.839590] IPv6: ADDRCONF(NETDEV_UP): wlp3s0: link is not ready
+[ 4516.842092] IPv6: ADDRCONF(NETDEV_UP): enp12s0: link is not ready
+[ 4516.945202] r8169 0000:0c:00.0 enp12s0: link down
+[ 4516.945263] IPv6: ADDRCONF(NETDEV_UP): enp12s0: link is not ready
+[ 4516.988555] IPv6: ADDRCONF(NETDEV_UP): wlp3s0: link is not ready
+[ 4517.487462] wlp3s0: authenticate with 84:d4:7e:13:10:60
+[ 4517.489659] wlp3s0: send auth to 84:d4:7e:13:10:60 (try 1/3)
+[ 4517.491704] wlp3s0: authenticated
+[ 4517.495148] wlp3s0: associate with 84:d4:7e:13:10:60 (try 1/3)
+[ 4517.498844] wlp3s0: RX AssocResp from 84:d4:7e:13:10:60 (capab=0x431 status=0 aid=1)
+[ 4517.518409] wlp3s0: associated
+[ 4517.518518] IPv6: ADDRCONF(NETDEV_CHANGE): wlp3s0: link becomes ready
+[ 7193.238247] show_signal_msg: 9 callbacks suppressed
+[ 7193.238285] mydate[7993]: segfault at 400899 ip 00007fc79aa95cf9 sp 00007ffdaf5c0818 error 7 in libc-2.23.so[7fc79aa08000+1c0000]
+[ 7223.119865] mydate[8018]: segfault at 400866 ip 00007f06b47c3cf9 sp 00007ffee4650968 error 7 in libc-2.23.so[7f06b4736000+1c0000]
+[ 7300.801219] mydate[8040]: segfault at 400846 ip 00007fc72ce7fcf9 sp 00007fff8cf7bdf8 error 7 in libc-2.23.so[7fc72cdf2000+1c0000]
+[ 7367.817970] mydate[8099]: segfault at 40086f ip 00007f3f51edccf9 sp 00007fffbefeea78 error 7 in libc-2.23.so[7f3f51e4f000+1c0000]
+[ 7384.402299] mydate[8115]: segfault at 40086f ip 00007fe063971cf9 sp 00007ffc1df5c0f8 error 7 in libc-2.23.so[7fe0638e4000+1c0000]
+[ 7419.231061] mydate[8137]: segfault at 40085f ip 00007f7e63ca4cf9 sp 00007ffdccfa59f8 error 7 in libc-2.23.so[7f7e63c17000+1c0000]
+[ 7536.277298] mydate[8186]: segfault at 40085f ip 00007ff811cefcf9 sp 00007fff0e36a118 error 7 in libc-2.23.so[7ff811c62000+1c0000]
+[ 7653.720450] mydate[8216]: segfault at 40085f ip 00007f399c3b6cf9 sp 00007ffc5ee86e58 error 7 in libc-2.23.so[7f399c329000+1c0000]
+[ 7704.063363] mydate[8253]: segfault at 40085f ip 00007f11beba4cf9 sp 00007ffeaeced368 error 7 in libc-2.23.so[7f11beb17000+1c0000]
+[12775.649634] wlp3s0: deauthenticating from 84:d4:7e:13:10:60 by local choice (Reason: 3=DEAUTH_LEAVING)
+[12775.709018] cfg80211: World regulatory domain updated:
+[12775.709022] cfg80211:  DFS Master region: unset
+[12775.709024] cfg80211:   (start_freq - end_freq @ bandwidth), (max_antenna_gain, max_eirp), (dfs_cac_time)
+[12775.709027] cfg80211:   (2402000 KHz - 2472000 KHz @ 40000 KHz), (N/A, 2000 mBm), (N/A)
+[12775.709029] cfg80211:   (2457000 KHz - 2482000 KHz @ 40000 KHz), (N/A, 2000 mBm), (N/A)
+[12775.709030] cfg80211:   (2474000 KHz - 2494000 KHz @ 20000 KHz), (N/A, 2000 mBm), (N/A)
+[12775.709033] cfg80211:   (5170000 KHz - 5250000 KHz @ 80000 KHz, 160000 KHz AUTO), (N/A, 2000 mBm), (N/A)
+[12775.709035] cfg80211:   (5250000 KHz - 5330000 KHz @ 80000 KHz, 160000 KHz AUTO), (N/A, 2000 mBm), (0 s)
+[12775.709037] cfg80211:   (5490000 KHz - 5730000 KHz @ 160000 KHz), (N/A, 2000 mBm), (0 s)
+[12775.709039] cfg80211:   (5735000 KHz - 5835000 KHz @ 80000 KHz), (N/A, 2000 mBm), (N/A)
+[12775.709041] cfg80211:   (57240000 KHz - 63720000 KHz @ 2160000 KHz), (N/A, 0 mBm), (N/A)
+[12775.807177] r8169 0000:0c:00.0 enp12s0: rtl_counters_cond == 1 (loop: 1000, delay: 10).
+[12775.831345] r8169 0000:0c:00.0 enp12s0: rtl_counters_cond == 1 (loop: 1000, delay: 10).
+[12775.855334] r8169 0000:0c:00.0 enp12s0: rtl_counters_cond == 1 (loop: 1000, delay: 10).
+[12775.879695] r8169 0000:0c:00.0 enp12s0: rtl_counters_cond == 1 (loop: 1000, delay: 10).
+[12775.948544] r8169 0000:0c:00.0 enp12s0: rtl_eriar_cond == 1 (loop: 100, delay: 100).
+[12776.040056] PM: Syncing filesystems ... done.
+[12776.281320] PM: Preparing system for sleep (mem)
+[12776.281813] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[12776.283637] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[12776.284916] PM: Suspending system (mem)
+[12776.284941] Suspending console(s) (use no_console_suspend to debug)
+[12776.465205] sd 0:0:0:0: [sda] Synchronizing SCSI cache
+[12776.471250] sd 0:0:0:0: [sda] Stopping disk
+[12776.955004] PM: suspend of devices complete after 669.819 msecs
+[12776.971060] PM: late suspend of devices complete after 16.046 msecs
+[12776.972918] ehci-pci 0000:00:1d.0: System wakeup enabled by ACPI
+[12776.973225] ehci-pci 0000:00:1a.0: System wakeup enabled by ACPI
+[12776.973228] xhci_hcd 0000:00:14.0: System wakeup enabled by ACPI
+[12776.987112] PM: noirq suspend of devices complete after 16.045 msecs
+[12776.987530] ACPI: Preparing to enter system sleep state S3
+[12777.094924] ACPI : EC: EC stopped
+[12777.094925] PM: Saving platform NVS memory
+[12777.094931] Disabling non-boot CPUs ...
+[12777.095291] Broke affinity for irq 16
+[12777.095297] Broke affinity for irq 23
+[12777.095305] Broke affinity for irq 28
+[12777.096341] smpboot: CPU 1 is now offline
+[12777.107735] Broke affinity for irq 16
+[12777.107740] Broke affinity for irq 23
+[12777.107748] Broke affinity for irq 28
+[12777.107750] Broke affinity for irq 30
+[12777.108775] smpboot: CPU 2 is now offline
+[12777.119564] Broke affinity for irq 1
+[12777.119573] Broke affinity for irq 9
+[12777.119578] Broke affinity for irq 12
+[12777.119583] Broke affinity for irq 16
+[12777.119587] Broke affinity for irq 23
+[12777.119592] Broke affinity for irq 26
+[12777.119594] Broke affinity for irq 28
+[12777.119596] Broke affinity for irq 30
+[12777.120625] smpboot: CPU 3 is now offline
+[12777.132478] ACPI: Low-level resume complete
+[12777.132520] ACPI : EC: EC started
+[12777.132520] PM: Restoring platform NVS memory
+[12777.133512] microcode: CPU0 microcode updated early to revision 0x1c, date = 2015-02-26
+[12777.133542] Enabling non-boot CPUs ...
+[12777.152581] x86: Booting SMP configuration:
+[12777.152582] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[12777.155773]  cache: parent cpu1 should not be sleeping
+[12777.155903] CPU1 is up
+[12777.172661] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[12777.173490] microcode: CPU2 microcode updated early to revision 0x1c, date = 2015-02-26
+[12777.176234]  cache: parent cpu2 should not be sleeping
+[12777.176404] CPU2 is up
+[12777.200693] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[12777.204019]  cache: parent cpu3 should not be sleeping
+[12777.204147] CPU3 is up
+[12777.207200] ACPI: Waking up from system sleep state S3
+[12777.757248] xhci_hcd 0000:00:14.0: System wakeup disabled by ACPI
+[12777.758215] ehci-pci 0000:00:1d.0: System wakeup disabled by ACPI
+[12777.758309] ehci-pci 0000:00:1a.0: System wakeup disabled by ACPI
+[12777.758375] PM: noirq resume of devices complete after 17.982 msecs
+[12777.758701] PM: early resume of devices complete after 0.310 msecs
+[12777.760562] rtc_cmos 00:01: System wakeup disabled by ACPI
+[12777.762938] sd 0:0:0:0: [sda] Starting disk
+[12777.992426] usb 2-1.6: reset high-speed USB device number 3 using ehci-pci
+[12777.992429] usb 1-1.4: reset full-speed USB device number 4 using ehci-pci
+[12778.088415] ata2: SATA link up 1.5 Gbps (SStatus 113 SControl 300)
+[12778.093810] ata2.00: configured for UDMA/33
+[12778.096387] ata5: SATA link down (SStatus 0 SControl 300)
+[12778.156453] usb 1-1.3: reset full-speed USB device number 3 using ehci-pci
+[12778.252258] PM: resume of devices complete after 493.531 msecs
+[12778.252863] PM: Finishing wakeup.
+[12778.252866] Restarting tasks ... done.
+[12778.284764] psmouse serio1: synaptics: queried max coordinates: x [..5702], y [..4828]
+[12778.330950] psmouse serio1: synaptics: queried min coordinates: x [1240..], y [1026..]
+[12780.000510] ata1: SATA link up 3.0 Gbps (SStatus 123 SControl 300)
+[12780.001648] ata1.00: ACPI cmd ef/02:00:00:00:00:a0 (SET FEATURES) succeeded
+[12780.001655] ata1.00: ACPI cmd f5/00:00:00:00:00:a0 (SECURITY FREEZE LOCK) filtered out
+[12780.001658] ata1.00: ACPI cmd ef/10:03:00:00:00:a0 (SET FEATURES) filtered out
+[12780.003869] ata1.00: ACPI cmd ef/02:00:00:00:00:a0 (SET FEATURES) succeeded
+[12780.003875] ata1.00: ACPI cmd f5/00:00:00:00:00:a0 (SECURITY FREEZE LOCK) filtered out
+[12780.003878] ata1.00: ACPI cmd ef/10:03:00:00:00:a0 (SET FEATURES) filtered out
+[12780.004825] ata1.00: configured for UDMA/133
+[12780.124290] IPv6: ADDRCONF(NETDEV_UP): wlp3s0: link is not ready
+[12780.127020] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[12780.134862] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[12780.134957] iwlwifi 0000:03:00.0: Radio type=0x2-0x0-0x0
+[12780.379963] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[12780.387818] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[12780.387916] iwlwifi 0000:03:00.0: Radio type=0x2-0x0-0x0
+[12780.445769] IPv6: ADDRCONF(NETDEV_UP): wlp3s0: link is not ready
+[12780.449446] IPv6: ADDRCONF(NETDEV_UP): enp12s0: link is not ready
+[12780.554646] r8169 0000:0c:00.0 enp12s0: link down
+[12780.554741] IPv6: ADDRCONF(NETDEV_UP): enp12s0: link is not ready
+[12780.593399] IPv6: ADDRCONF(NETDEV_UP): wlp3s0: link is not ready
+[12781.424572] wlp3s0: authenticate with 84:d4:7e:13:24:c0
+[12781.444001] wlp3s0: send auth to 84:d4:7e:13:24:c0 (try 1/3)
+[12781.546417] wlp3s0: authenticated
+[12781.548566] wlp3s0: associate with 84:d4:7e:13:24:c0 (try 1/3)
+[12781.594406] wlp3s0: RX AssocResp from 84:d4:7e:13:24:c0 (capab=0x431 status=0 aid=1)
+[12781.611459] wlp3s0: associated
+[12781.611508] IPv6: ADDRCONF(NETDEV_CHANGE): wlp3s0: link becomes ready
+[12855.504194] r8169 0000:0c:00.0 enp12s0: link up
+[12855.504212] IPv6: ADDRCONF(NETDEV_CHANGE): enp12s0: link becomes ready
+[12883.286728] wlp3s0: deauthenticating from 84:d4:7e:13:24:c0 by local choice (Reason: 3=DEAUTH_LEAVING)
+[12883.383067] cfg80211: World regulatory domain updated:
+[12883.383071] cfg80211:  DFS Master region: unset
+[12883.383073] cfg80211:   (start_freq - end_freq @ bandwidth), (max_antenna_gain, max_eirp), (dfs_cac_time)
+[12883.383075] cfg80211:   (2402000 KHz - 2472000 KHz @ 40000 KHz), (N/A, 2000 mBm), (N/A)
+[12883.383077] cfg80211:   (2457000 KHz - 2482000 KHz @ 40000 KHz), (N/A, 2000 mBm), (N/A)
+[12883.383078] cfg80211:   (2474000 KHz - 2494000 KHz @ 20000 KHz), (N/A, 2000 mBm), (N/A)
+[12883.383080] cfg80211:   (5170000 KHz - 5250000 KHz @ 80000 KHz, 160000 KHz AUTO), (N/A, 2000 mBm), (N/A)
+[12883.383082] cfg80211:   (5250000 KHz - 5330000 KHz @ 80000 KHz, 160000 KHz AUTO), (N/A, 2000 mBm), (0 s)
+[12883.383084] cfg80211:   (5490000 KHz - 5730000 KHz @ 160000 KHz), (N/A, 2000 mBm), (0 s)
+[12883.383085] cfg80211:   (5735000 KHz - 5835000 KHz @ 80000 KHz), (N/A, 2000 mBm), (N/A)
+[12883.383087] cfg80211:   (57240000 KHz - 63720000 KHz @ 2160000 KHz), (N/A, 0 mBm), (N/A)
+[12964.663391] r8169 0000:0c:00.0 enp12s0: link down
+[12964.663463] r8169 0000:0c:00.0 enp12s0: link down
+[12964.663506] IPv6: ADDRCONF(NETDEV_UP): enp12s0: link is not ready
+[12967.392401] r8169 0000:0c:00.0 enp12s0: link up
+[12967.392417] IPv6: ADDRCONF(NETDEV_CHANGE): enp12s0: link becomes ready
+[13002.788209] r8169 0000:0c:00.0 enp12s0: link down
+[13406.594562] PM: Syncing filesystems ... done.
+[13406.761935] PM: Preparing system for sleep (mem)
+[13406.762310] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[13406.763909] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[13406.765125] PM: Suspending system (mem)
+[13406.765150] Suspending console(s) (use no_console_suspend to debug)
+[13406.954622] sd 0:0:0:0: [sda] Synchronizing SCSI cache
+[13406.954778] sd 0:0:0:0: [sda] Stopping disk
+[13407.434389] PM: suspend of devices complete after 668.996 msecs
+[13407.450396] PM: late suspend of devices complete after 15.997 msecs
+[13407.451979] ehci-pci 0000:00:1d.0: System wakeup enabled by ACPI
+[13407.452203] ehci-pci 0000:00:1a.0: System wakeup enabled by ACPI
+[13407.452290] xhci_hcd 0000:00:14.0: System wakeup enabled by ACPI
+[13407.466447] PM: noirq suspend of devices complete after 16.046 msecs
+[13407.466854] ACPI: Preparing to enter system sleep state S3
+[13407.582282] ACPI : EC: EC stopped
+[13407.582283] PM: Saving platform NVS memory
+[13407.582289] Disabling non-boot CPUs ...
+[13407.582655] Broke affinity for irq 16
+[13407.582670] Broke affinity for irq 28
+[13407.583709] smpboot: CPU 1 is now offline
+[13407.599206] Broke affinity for irq 16
+[13407.599220] Broke affinity for irq 28
+[13407.599222] Broke affinity for irq 30
+[13407.600254] smpboot: CPU 2 is now offline
+[13407.610969] Broke affinity for irq 1
+[13407.610978] Broke affinity for irq 9
+[13407.610982] Broke affinity for irq 12
+[13407.610987] Broke affinity for irq 16
+[13407.610992] Broke affinity for irq 23
+[13407.610996] Broke affinity for irq 26
+[13407.610998] Broke affinity for irq 28
+[13407.611000] Broke affinity for irq 30
+[13407.612022] smpboot: CPU 3 is now offline
+[13407.623880] ACPI: Low-level resume complete
+[13407.623919] ACPI : EC: EC started
+[13407.623919] PM: Restoring platform NVS memory
+[13407.624909] microcode: CPU0 microcode updated early to revision 0x1c, date = 2015-02-26
+[13407.624936] Enabling non-boot CPUs ...
+[13407.643967] x86: Booting SMP configuration:
+[13407.643969] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[13407.647156]  cache: parent cpu1 should not be sleeping
+[13407.647284] CPU1 is up
+[13407.664050] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[13407.664878] microcode: CPU2 microcode updated early to revision 0x1c, date = 2015-02-26
+[13407.667629]  cache: parent cpu2 should not be sleeping
+[13407.667779] CPU2 is up
+[13407.692081] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[13407.695419]  cache: parent cpu3 should not be sleeping
+[13407.695544] CPU3 is up
+[13407.698597] ACPI: Waking up from system sleep state S3
+[13409.116292] ehci-pci 0000:00:1d.0: System wakeup disabled by ACPI
+[13409.116324] xhci_hcd 0000:00:14.0: System wakeup disabled by ACPI
+[13409.117745] ehci-pci 0000:00:1a.0: System wakeup disabled by ACPI
+[13409.118096] PM: noirq resume of devices complete after 18.277 msecs
+[13409.118437] PM: early resume of devices complete after 0.316 msecs
+[13409.119632] rtc_cmos 00:01: System wakeup disabled by ACPI
+[13409.131885] sd 0:0:0:0: [sda] Starting disk
+[13409.347835] usb 1-1.3: reset full-speed USB device number 3 using ehci-pci
+[13409.351823] usb 2-1.6: reset high-speed USB device number 3 using ehci-pci
+[13409.459842] ata2: SATA link up 1.5 Gbps (SStatus 113 SControl 300)
+[13409.465870] ata2.00: configured for UDMA/33
+[13409.467838] ata5: SATA link down (SStatus 0 SControl 300)
+[13409.511865] usb 1-1.4: reset full-speed USB device number 4 using ehci-pci
+[13409.605093] PM: resume of devices complete after 486.627 msecs
+[13409.605796] PM: Finishing wakeup.
+[13409.605798] Restarting tasks ... done.
+[13409.679694] psmouse serio1: synaptics: queried max coordinates: x [..5702], y [..4828]
+[13409.735390] psmouse serio1: synaptics: queried min coordinates: x [1240..], y [1026..]
+[13410.420725] ata1: SATA link up 3.0 Gbps (SStatus 123 SControl 300)
+[13410.421854] ata1.00: ACPI cmd ef/02:00:00:00:00:a0 (SET FEATURES) succeeded
+[13410.421875] ata1.00: ACPI cmd f5/00:00:00:00:00:a0 (SECURITY FREEZE LOCK) filtered out
+[13410.421878] ata1.00: ACPI cmd ef/10:03:00:00:00:a0 (SET FEATURES) filtered out
+[13410.423963] ata1.00: ACPI cmd ef/02:00:00:00:00:a0 (SET FEATURES) succeeded
+[13410.423970] ata1.00: ACPI cmd f5/00:00:00:00:00:a0 (SECURITY FREEZE LOCK) filtered out
+[13410.423976] ata1.00: ACPI cmd ef/10:03:00:00:00:a0 (SET FEATURES) filtered out
+[13410.424949] ata1.00: configured for UDMA/133
+[13410.538464] IPv6: ADDRCONF(NETDEV_UP): wlp3s0: link is not ready
+[13410.539903] IPv6: ADDRCONF(NETDEV_UP): enp12s0: link is not ready
+[13410.653955] r8169 0000:0c:00.0 enp12s0: link down
+[13410.654049] IPv6: ADDRCONF(NETDEV_UP): enp12s0: link is not ready
+[13419.975847] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[13419.983710] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[13419.983815] iwlwifi 0000:03:00.0: Radio type=0x2-0x0-0x0
+[13420.227974] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[13420.235832] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[13420.235934] iwlwifi 0000:03:00.0: Radio type=0x2-0x0-0x0
+[13420.293155] IPv6: ADDRCONF(NETDEV_UP): wlp3s0: link is not ready
+[13420.326864] IPv6: ADDRCONF(NETDEV_UP): wlp3s0: link is not ready
+[13420.800783] wlp3s0: authenticate with 84:d4:7e:13:10:60
+[13420.803579] wlp3s0: send auth to 84:d4:7e:13:10:60 (try 1/3)
+[13420.806182] wlp3s0: authenticated
+[13420.808370] wlp3s0: associate with 84:d4:7e:13:10:60 (try 1/3)
+[13420.814387] wlp3s0: RX AssocResp from 84:d4:7e:13:10:60 (capab=0x431 status=0 aid=1)
+[13420.834837] wlp3s0: associated
+[13420.834899] IPv6: ADDRCONF(NETDEV_CHANGE): wlp3s0: link becomes ready
+[14161.222495] wlp3s0: deauthenticating from 84:d4:7e:13:10:60 by local choice (Reason: 3=DEAUTH_LEAVING)
+[14161.274159] cfg80211: World regulatory domain updated:
+[14161.274163] cfg80211:  DFS Master region: unset
+[14161.274164] cfg80211:   (start_freq - end_freq @ bandwidth), (max_antenna_gain, max_eirp), (dfs_cac_time)
+[14161.274166] cfg80211:   (2402000 KHz - 2472000 KHz @ 40000 KHz), (N/A, 2000 mBm), (N/A)
+[14161.274167] cfg80211:   (2457000 KHz - 2482000 KHz @ 40000 KHz), (N/A, 2000 mBm), (N/A)
+[14161.274168] cfg80211:   (2474000 KHz - 2494000 KHz @ 20000 KHz), (N/A, 2000 mBm), (N/A)
+[14161.274170] cfg80211:   (5170000 KHz - 5250000 KHz @ 80000 KHz, 160000 KHz AUTO), (N/A, 2000 mBm), (N/A)
+[14161.274171] cfg80211:   (5250000 KHz - 5330000 KHz @ 80000 KHz, 160000 KHz AUTO), (N/A, 2000 mBm), (0 s)
+[14161.274173] cfg80211:   (5490000 KHz - 5730000 KHz @ 160000 KHz), (N/A, 2000 mBm), (0 s)
+[14161.274174] cfg80211:   (5735000 KHz - 5835000 KHz @ 80000 KHz), (N/A, 2000 mBm), (N/A)
+[14161.274175] cfg80211:   (57240000 KHz - 63720000 KHz @ 2160000 KHz), (N/A, 0 mBm), (N/A)
+[14161.487741] PM: Syncing filesystems ... done.
+[14161.704888] PM: Preparing system for sleep (mem)
+[14161.705318] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[14161.707307] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[14161.708633] PM: Suspending system (mem)
+[14161.708659] Suspending console(s) (use no_console_suspend to debug)
+[14161.927162] sd 0:0:0:0: [sda] Synchronizing SCSI cache
+[14161.927312] sd 0:0:0:0: [sda] Stopping disk
+[14162.411623] PM: suspend of devices complete after 702.719 msecs
+[14162.427649] PM: late suspend of devices complete after 16.018 msecs
+[14162.429350] ehci-pci 0000:00:1d.0: System wakeup enabled by ACPI
+[14162.429502] ehci-pci 0000:00:1a.0: System wakeup enabled by ACPI
+[14162.429648] xhci_hcd 0000:00:14.0: System wakeup enabled by ACPI
+[14162.443748] PM: noirq suspend of devices complete after 16.094 msecs
+[14162.444165] ACPI: Preparing to enter system sleep state S3
+[14162.559565] ACPI : EC: EC stopped
+[14162.559566] PM: Saving platform NVS memory
+[14162.559572] Disabling non-boot CPUs ...
+[14162.559932] Broke affinity for irq 16
+[14162.559944] Broke affinity for irq 28
+[14162.560979] smpboot: CPU 1 is now offline
+[14162.572482] Broke affinity for irq 16
+[14162.572495] Broke affinity for irq 28
+[14162.572498] Broke affinity for irq 30
+[14162.573525] smpboot: CPU 2 is now offline
+[14162.584222] Broke affinity for irq 1
+[14162.584232] Broke affinity for irq 9
+[14162.584236] Broke affinity for irq 12
+[14162.584241] Broke affinity for irq 16
+[14162.584245] Broke affinity for irq 23
+[14162.584250] Broke affinity for irq 26
+[14162.584252] Broke affinity for irq 28
+[14162.584254] Broke affinity for irq 30
+[14162.585284] smpboot: CPU 3 is now offline
+[14162.597113] ACPI: Low-level resume complete
+[14162.597153] ACPI : EC: EC started
+[14162.597153] PM: Restoring platform NVS memory
+[14162.598116] microcode: CPU0 microcode updated early to revision 0x1c, date = 2015-02-26
+[14162.598142] Enabling non-boot CPUs ...
+[14162.617218] x86: Booting SMP configuration:
+[14162.617219] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[14162.620411]  cache: parent cpu1 should not be sleeping
+[14162.620541] CPU1 is up
+[14162.637301] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[14162.638129] microcode: CPU2 microcode updated early to revision 0x1c, date = 2015-02-26
+[14162.640882]  cache: parent cpu2 should not be sleeping
+[14162.641047] CPU2 is up
+[14162.665335] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[14162.668669]  cache: parent cpu3 should not be sleeping
+[14162.668798] CPU3 is up
+[14162.671846] ACPI: Waking up from system sleep state S3
+[14163.237394] ehci-pci 0000:00:1a.0: System wakeup disabled by ACPI
+[14163.237972] ehci-pci 0000:00:1d.0: System wakeup disabled by ACPI
+[14163.237975] xhci_hcd 0000:00:14.0: System wakeup disabled by ACPI
+[14163.238190] PM: noirq resume of devices complete after 17.144 msecs
+[14163.238643] PM: early resume of devices complete after 0.414 msecs
+[14163.239602] sd 0:0:0:0: [sda] Starting disk
+[14163.239924] rtc_cmos 00:01: System wakeup disabled by ACPI
+[14163.469057] usb 2-1.6: reset high-speed USB device number 3 using ehci-pci
+[14163.469076] usb 1-1.3: reset full-speed USB device number 3 using ehci-pci
+[14163.565051] ata2: SATA link up 1.5 Gbps (SStatus 113 SControl 300)
+[14163.570747] ata2.00: configured for UDMA/33
+[14163.573046] ata5: SATA link down (SStatus 0 SControl 300)
+[14163.633061] usb 1-1.4: reset full-speed USB device number 4 using ehci-pci
+[14163.726247] PM: resume of devices complete after 487.562 msecs
+[14163.726787] PM: Finishing wakeup.
+[14163.726789] Restarting tasks ... done.
+[14163.824045] psmouse serio1: synaptics: queried max coordinates: x [..5702], y [..4828]
+[14163.874658] psmouse serio1: synaptics: queried min coordinates: x [1240..], y [1026..]
+[14165.593153] ata1: SATA link up 3.0 Gbps (SStatus 123 SControl 300)
+[14165.595505] ata1.00: ACPI cmd ef/02:00:00:00:00:a0 (SET FEATURES) succeeded
+[14165.595512] ata1.00: ACPI cmd f5/00:00:00:00:00:a0 (SECURITY FREEZE LOCK) filtered out
+[14165.595516] ata1.00: ACPI cmd ef/10:03:00:00:00:a0 (SET FEATURES) filtered out
+[14165.600438] ata1.00: ACPI cmd ef/02:00:00:00:00:a0 (SET FEATURES) succeeded
+[14165.600458] ata1.00: ACPI cmd f5/00:00:00:00:00:a0 (SECURITY FREEZE LOCK) filtered out
+[14165.600462] ata1.00: ACPI cmd ef/10:03:00:00:00:a0 (SET FEATURES) filtered out
+[14165.602821] ata1.00: configured for UDMA/133
+[14165.691195] IPv6: ADDRCONF(NETDEV_UP): wlp3s0: link is not ready
+[14165.691442] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[14165.699303] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[14165.699399] iwlwifi 0000:03:00.0: Radio type=0x2-0x0-0x0
+[14165.947167] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[14165.955025] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[14165.955116] iwlwifi 0000:03:00.0: Radio type=0x2-0x0-0x0
+[14166.013315] IPv6: ADDRCONF(NETDEV_UP): wlp3s0: link is not ready
+[14166.015071] IPv6: ADDRCONF(NETDEV_UP): enp12s0: link is not ready
+[14166.131206] r8169 0000:0c:00.0 enp12s0: link down
+[14166.131294] IPv6: ADDRCONF(NETDEV_UP): enp12s0: link is not ready
+[14166.182620] IPv6: ADDRCONF(NETDEV_UP): wlp3s0: link is not ready
+[14166.624941] wlp3s0: authenticate with 84:d4:7e:13:10:60
+[14166.627378] wlp3s0: send auth to 84:d4:7e:13:10:60 (try 1/3)
+[14166.641390] wlp3s0: authenticated
+[14166.645177] wlp3s0: associate with 84:d4:7e:13:10:60 (try 1/3)
+[14166.650144] wlp3s0: RX AssocResp from 84:d4:7e:13:10:60 (capab=0x431 status=0 aid=1)
+[14166.672203] wlp3s0: associated
+[14166.672262] IPv6: ADDRCONF(NETDEV_CHANGE): wlp3s0: link becomes ready
+[18583.701496] wlp3s0: deauthenticating from 84:d4:7e:13:10:60 by local choice (Reason: 3=DEAUTH_LEAVING)
+[18583.768986] cfg80211: World regulatory domain updated:
+[18583.768992] cfg80211:  DFS Master region: unset
+[18583.768994] cfg80211:   (start_freq - end_freq @ bandwidth), (max_antenna_gain, max_eirp), (dfs_cac_time)
+[18583.768997] cfg80211:   (2402000 KHz - 2472000 KHz @ 40000 KHz), (N/A, 2000 mBm), (N/A)
+[18583.769000] cfg80211:   (2457000 KHz - 2482000 KHz @ 40000 KHz), (N/A, 2000 mBm), (N/A)
+[18583.769002] cfg80211:   (2474000 KHz - 2494000 KHz @ 20000 KHz), (N/A, 2000 mBm), (N/A)
+[18583.769005] cfg80211:   (5170000 KHz - 5250000 KHz @ 80000 KHz, 160000 KHz AUTO), (N/A, 2000 mBm), (N/A)
+[18583.769008] cfg80211:   (5250000 KHz - 5330000 KHz @ 80000 KHz, 160000 KHz AUTO), (N/A, 2000 mBm), (0 s)
+[18583.769011] cfg80211:   (5490000 KHz - 5730000 KHz @ 160000 KHz), (N/A, 2000 mBm), (0 s)
+[18583.769013] cfg80211:   (5735000 KHz - 5835000 KHz @ 80000 KHz), (N/A, 2000 mBm), (N/A)
+[18583.769015] cfg80211:   (57240000 KHz - 63720000 KHz @ 2160000 KHz), (N/A, 0 mBm), (N/A)
+[18584.206428] wlp3s0: authenticate with 84:d4:7e:13:10:61
+[18584.208715] wlp3s0: send auth to 84:d4:7e:13:10:61 (try 1/3)
+[18584.211149] wlp3s0: authenticated
+[18584.214832] wlp3s0: associate with 84:d4:7e:13:10:61 (try 1/3)
+[18584.228460] wlp3s0: RX AssocResp from 84:d4:7e:13:10:61 (capab=0x431 status=0 aid=26)
+[18584.251165] wlp3s0: associated
+[18777.180950] wlp3s0: deauthenticating from 84:d4:7e:13:10:61 by local choice (Reason: 3=DEAUTH_LEAVING)
+[18777.251454] cfg80211: World regulatory domain updated:
+[18777.251458] cfg80211:  DFS Master region: unset
+[18777.251460] cfg80211:   (start_freq - end_freq @ bandwidth), (max_antenna_gain, max_eirp), (dfs_cac_time)
+[18777.251463] cfg80211:   (2402000 KHz - 2472000 KHz @ 40000 KHz), (N/A, 2000 mBm), (N/A)
+[18777.251465] cfg80211:   (2457000 KHz - 2482000 KHz @ 40000 KHz), (N/A, 2000 mBm), (N/A)
+[18777.251467] cfg80211:   (2474000 KHz - 2494000 KHz @ 20000 KHz), (N/A, 2000 mBm), (N/A)
+[18777.251470] cfg80211:   (5170000 KHz - 5250000 KHz @ 80000 KHz, 160000 KHz AUTO), (N/A, 2000 mBm), (N/A)
+[18777.251472] cfg80211:   (5250000 KHz - 5330000 KHz @ 80000 KHz, 160000 KHz AUTO), (N/A, 2000 mBm), (0 s)
+[18777.251475] cfg80211:   (5490000 KHz - 5730000 KHz @ 160000 KHz), (N/A, 2000 mBm), (0 s)
+[18777.251477] cfg80211:   (5735000 KHz - 5835000 KHz @ 80000 KHz), (N/A, 2000 mBm), (N/A)
+[18777.251479] cfg80211:   (57240000 KHz - 63720000 KHz @ 2160000 KHz), (N/A, 0 mBm), (N/A)
+[18777.370329] PM: Syncing filesystems ... done.
+[18778.020323] PM: Preparing system for sleep (mem)
+[18778.020823] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[18778.022597] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[18778.023811] PM: Suspending system (mem)
+[18778.023833] Suspending console(s) (use no_console_suspend to debug)
+[18778.249710] sd 0:0:0:0: [sda] Synchronizing SCSI cache
+[18778.250055] sd 0:0:0:0: [sda] Stopping disk
+[18778.762673] PM: suspend of devices complete after 738.632 msecs
+[18778.778589] PM: late suspend of devices complete after 15.907 msecs
+[18778.780217] ehci-pci 0000:00:1d.0: System wakeup enabled by ACPI
+[18778.780407] ehci-pci 0000:00:1a.0: System wakeup enabled by ACPI
+[18778.780454] xhci_hcd 0000:00:14.0: System wakeup enabled by ACPI
+[18778.794682] PM: noirq suspend of devices complete after 16.077 msecs
+[18778.795071] ACPI: Preparing to enter system sleep state S3
+[18778.910521] ACPI : EC: EC stopped
+[18778.910522] PM: Saving platform NVS memory
+[18778.910528] Disabling non-boot CPUs ...
+[18778.910896] Broke affinity for irq 16
+[18778.910909] Broke affinity for irq 28
+[18778.911942] smpboot: CPU 1 is now offline
+[18778.923322] Broke affinity for irq 16
+[18778.923335] Broke affinity for irq 28
+[18778.923337] Broke affinity for irq 30
+[18778.924377] smpboot: CPU 2 is now offline
+[18778.939246] Broke affinity for irq 1
+[18778.939255] Broke affinity for irq 9
+[18778.939259] Broke affinity for irq 12
+[18778.939263] Broke affinity for irq 16
+[18778.939268] Broke affinity for irq 23
+[18778.939273] Broke affinity for irq 26
+[18778.939275] Broke affinity for irq 28
+[18778.939276] Broke affinity for irq 30
+[18778.940306] smpboot: CPU 3 is now offline
+[18778.956056] ACPI: Low-level resume complete
+[18778.956097] ACPI : EC: EC started
+[18778.956097] PM: Restoring platform NVS memory
+[18778.957231] microcode: CPU0 microcode updated early to revision 0x1c, date = 2015-02-26
+[18778.957272] Enabling non-boot CPUs ...
+[18778.976151] x86: Booting SMP configuration:
+[18778.976152] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[18778.979344]  cache: parent cpu1 should not be sleeping
+[18778.979473] CPU1 is up
+[18778.996237] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[18778.997065] microcode: CPU2 microcode updated early to revision 0x1c, date = 2015-02-26
+[18778.999812]  cache: parent cpu2 should not be sleeping
+[18778.999988] CPU2 is up
+[18779.024165] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[18779.027205]  cache: parent cpu3 should not be sleeping
+[18779.027334] CPU3 is up
+[18779.030384] ACPI: Waking up from system sleep state S3
+[18779.596971] ehci-pci 0000:00:1a.0: System wakeup disabled by ACPI
+[18779.598126] ehci-pci 0000:00:1d.0: System wakeup disabled by ACPI
+[18779.598464] xhci_hcd 0000:00:14.0: System wakeup disabled by ACPI
+[18779.598555] PM: noirq resume of devices complete after 18.591 msecs
+[18779.598971] PM: early resume of devices complete after 0.392 msecs
+[18779.600104] rtc_cmos 00:01: System wakeup disabled by ACPI
+[18779.612115] sd 0:0:0:0: [sda] Starting disk
+[18779.827975] usb 1-1.3: reset full-speed USB device number 3 using ehci-pci
+[18779.831942] usb 2-1.6: reset high-speed USB device number 3 using ehci-pci
+[18779.939980] ata5: SATA link down (SStatus 0 SControl 300)
+[18779.947982] ata2: SATA link up 1.5 Gbps (SStatus 113 SControl 300)
+[18779.953363] ata2.00: configured for UDMA/33
+[18779.992013] usb 1-1.4: reset full-speed USB device number 4 using ehci-pci
+[18780.084915] PM: resume of devices complete after 485.914 msecs
+[18780.085668] PM: Finishing wakeup.
+[18780.085671] Restarting tasks ... done.
+[18780.195556] psmouse serio1: synaptics: queried max coordinates: x [..5702], y [..4828]
+[18780.250584] psmouse serio1: synaptics: queried min coordinates: x [1240..], y [1026..]
+[18781.843996] ata1: SATA link up 3.0 Gbps (SStatus 123 SControl 300)
+[18781.845103] ata1.00: ACPI cmd ef/02:00:00:00:00:a0 (SET FEATURES) succeeded
+[18781.845111] ata1.00: ACPI cmd f5/00:00:00:00:00:a0 (SECURITY FREEZE LOCK) filtered out
+[18781.845116] ata1.00: ACPI cmd ef/10:03:00:00:00:a0 (SET FEATURES) filtered out
+[18781.847270] ata1.00: ACPI cmd ef/02:00:00:00:00:a0 (SET FEATURES) succeeded
+[18781.847275] ata1.00: ACPI cmd f5/00:00:00:00:00:a0 (SECURITY FREEZE LOCK) filtered out
+[18781.847279] ata1.00: ACPI cmd ef/10:03:00:00:00:a0 (SET FEATURES) filtered out
+[18781.848527] ata1.00: configured for UDMA/133
+[18781.946449] IPv6: ADDRCONF(NETDEV_UP): wlp3s0: link is not ready
+[18781.946678] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[18781.955516] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[18781.955611] iwlwifi 0000:03:00.0: Radio type=0x2-0x0-0x0
+[18782.199399] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[18782.207262] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[18782.207352] iwlwifi 0000:03:00.0: Radio type=0x2-0x0-0x0
+[18782.263573] IPv6: ADDRCONF(NETDEV_UP): wlp3s0: link is not ready
+[18782.265882] IPv6: ADDRCONF(NETDEV_UP): enp12s0: link is not ready
+[18782.394079] r8169 0000:0c:00.0 enp12s0: link down
+[18782.394140] IPv6: ADDRCONF(NETDEV_UP): enp12s0: link is not ready
+[18782.456705] IPv6: ADDRCONF(NETDEV_UP): wlp3s0: link is not ready
+[18782.936605] wlp3s0: authenticate with 84:d4:7e:13:10:61
+[18782.940632] wlp3s0: send auth to 84:d4:7e:13:10:61 (try 1/3)
+[18782.943429] wlp3s0: authenticated
+[18782.944021] wlp3s0: associate with 84:d4:7e:13:10:61 (try 1/3)
+[18782.947775] wlp3s0: RX AssocResp from 84:d4:7e:13:10:61 (capab=0x431 status=0 aid=32)
+[18782.970255] wlp3s0: associated
+[18782.970311] IPv6: ADDRCONF(NETDEV_CHANGE): wlp3s0: link becomes ready
+[18954.418354] wlp3s0: deauthenticating from 84:d4:7e:13:10:61 by local choice (Reason: 3=DEAUTH_LEAVING)
+[18954.489415] cfg80211: World regulatory domain updated:
+[18954.489419] cfg80211:  DFS Master region: unset
+[18954.489421] cfg80211:   (start_freq - end_freq @ bandwidth), (max_antenna_gain, max_eirp), (dfs_cac_time)
+[18954.489423] cfg80211:   (2402000 KHz - 2472000 KHz @ 40000 KHz), (N/A, 2000 mBm), (N/A)
+[18954.489425] cfg80211:   (2457000 KHz - 2482000 KHz @ 40000 KHz), (N/A, 2000 mBm), (N/A)
+[18954.489427] cfg80211:   (2474000 KHz - 2494000 KHz @ 20000 KHz), (N/A, 2000 mBm), (N/A)
+[18954.489429] cfg80211:   (5170000 KHz - 5250000 KHz @ 80000 KHz, 160000 KHz AUTO), (N/A, 2000 mBm), (N/A)
+[18954.489431] cfg80211:   (5250000 KHz - 5330000 KHz @ 80000 KHz, 160000 KHz AUTO), (N/A, 2000 mBm), (0 s)
+[18954.489433] cfg80211:   (5490000 KHz - 5730000 KHz @ 160000 KHz), (N/A, 2000 mBm), (0 s)
+[18954.489434] cfg80211:   (5735000 KHz - 5835000 KHz @ 80000 KHz), (N/A, 2000 mBm), (N/A)
+[18954.489436] cfg80211:   (57240000 KHz - 63720000 KHz @ 2160000 KHz), (N/A, 0 mBm), (N/A)
+[18954.707762] PM: Syncing filesystems ... done.
+[18955.119274] PM: Preparing system for sleep (mem)
+[18955.119834] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[18955.121827] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[18955.123208] PM: Suspending system (mem)
+[18955.123234] Suspending console(s) (use no_console_suspend to debug)
+[18955.313389] sd 0:0:0:0: [sda] Synchronizing SCSI cache
+[18955.313930] sd 0:0:0:0: [sda] Stopping disk
+[18955.807819] PM: suspend of devices complete after 684.340 msecs
+[18955.823861] PM: late suspend of devices complete after 16.032 msecs
+[18955.825310] ehci-pci 0000:00:1d.0: System wakeup enabled by ACPI
+[18955.825539] ehci-pci 0000:00:1a.0: System wakeup enabled by ACPI
+[18955.825571] xhci_hcd 0000:00:14.0: System wakeup enabled by ACPI
+[18955.839918] PM: noirq suspend of devices complete after 16.051 msecs
+[18955.840359] ACPI: Preparing to enter system sleep state S3
+[18955.955723] ACPI : EC: EC stopped
+[18955.955724] PM: Saving platform NVS memory
+[18955.955731] Disabling non-boot CPUs ...
+[18955.956101] Broke affinity for irq 16
+[18955.956115] Broke affinity for irq 28
+[18955.957145] smpboot: CPU 1 is now offline
+[18955.968610] Broke affinity for irq 16
+[18955.968622] Broke affinity for irq 28
+[18955.968625] Broke affinity for irq 30
+[18955.969664] smpboot: CPU 2 is now offline
+[18955.988402] Broke affinity for irq 1
+[18955.988411] Broke affinity for irq 9
+[18955.988415] Broke affinity for irq 12
+[18955.988420] Broke affinity for irq 16
+[18955.988425] Broke affinity for irq 23
+[18955.988430] Broke affinity for irq 26
+[18955.988432] Broke affinity for irq 28
+[18955.988434] Broke affinity for irq 30
+[18955.989468] smpboot: CPU 3 is now offline
+[18956.005327] ACPI: Low-level resume complete
+[18956.005365] ACPI : EC: EC started
+[18956.005365] PM: Restoring platform NVS memory
+[18956.006344] microcode: CPU0 microcode updated early to revision 0x1c, date = 2015-02-26
+[18956.006376] Enabling non-boot CPUs ...
+[18956.025388] x86: Booting SMP configuration:
+[18956.025389] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[18956.028581]  cache: parent cpu1 should not be sleeping
+[18956.028711] CPU1 is up
+[18956.045466] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[18956.046290] microcode: CPU2 microcode updated early to revision 0x1c, date = 2015-02-26
+[18956.049047]  cache: parent cpu2 should not be sleeping
+[18956.049193] CPU2 is up
+[18956.073481] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[18956.076761]  cache: parent cpu3 should not be sleeping
+[18956.076893] CPU3 is up
+[18956.079946] ACPI: Waking up from system sleep state S3
+[18956.646107] xhci_hcd 0000:00:14.0: System wakeup disabled by ACPI
+[18956.647022] ehci-pci 0000:00:1d.0: System wakeup disabled by ACPI
+[18956.647044] ehci-pci 0000:00:1a.0: System wakeup disabled by ACPI
+[18956.647240] PM: noirq resume of devices complete after 18.048 msecs
+[18956.647535] PM: early resume of devices complete after 0.270 msecs
+[18956.648853] rtc_cmos 00:01: System wakeup disabled by ACPI
+[18956.661289] sd 0:0:0:0: [sda] Starting disk
+[18956.877204] usb 1-1.3: reset full-speed USB device number 3 using ehci-pci
+[18956.889194] usb 2-1.6: reset high-speed USB device number 3 using ehci-pci
+[18956.993208] ata5: SATA link down (SStatus 0 SControl 300)
+[18956.997209] ata2: SATA link up 1.5 Gbps (SStatus 113 SControl 300)
+[18957.002538] ata2.00: configured for UDMA/33
+[18957.041239] usb 1-1.4: reset full-speed USB device number 4 using ehci-pci
+[18957.134155] PM: resume of devices complete after 486.592 msecs
+[18957.134756] PM: Finishing wakeup.
+[18957.134758] Restarting tasks ... done.
+[18957.250247] psmouse serio1: synaptics: queried max coordinates: x [..5702], y [..4828]
+[18957.300973] psmouse serio1: synaptics: queried min coordinates: x [1240..], y [1026..]
+[18958.845272] ata1: SATA link up 3.0 Gbps (SStatus 123 SControl 300)
+[18958.846297] ata1.00: ACPI cmd ef/02:00:00:00:00:a0 (SET FEATURES) succeeded
+[18958.846300] ata1.00: ACPI cmd f5/00:00:00:00:00:a0 (SECURITY FREEZE LOCK) filtered out
+[18958.846301] ata1.00: ACPI cmd ef/10:03:00:00:00:a0 (SET FEATURES) filtered out
+[18958.848347] ata1.00: ACPI cmd ef/02:00:00:00:00:a0 (SET FEATURES) succeeded
+[18958.848350] ata1.00: ACPI cmd f5/00:00:00:00:00:a0 (SECURITY FREEZE LOCK) filtered out
+[18958.848352] ata1.00: ACPI cmd ef/10:03:00:00:00:a0 (SET FEATURES) filtered out
+[18958.849400] ata1.00: configured for UDMA/133
+[18958.989213] IPv6: ADDRCONF(NETDEV_UP): wlp3s0: link is not ready
+[18958.989411] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[18958.997248] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[18958.997348] iwlwifi 0000:03:00.0: Radio type=0x2-0x0-0x0
+[18959.240441] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[18959.248305] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[18959.248397] iwlwifi 0000:03:00.0: Radio type=0x2-0x0-0x0
+[18959.305382] IPv6: ADDRCONF(NETDEV_UP): wlp3s0: link is not ready
+[18959.307232] IPv6: ADDRCONF(NETDEV_UP): enp12s0: link is not ready
+[18959.435392] r8169 0000:0c:00.0 enp12s0: link down
+[18959.435461] IPv6: ADDRCONF(NETDEV_UP): enp12s0: link is not ready
+[18959.490080] IPv6: ADDRCONF(NETDEV_UP): wlp3s0: link is not ready
+[18959.974583] wlp3s0: authenticate with 84:d4:7e:13:10:61
+[18959.978218] wlp3s0: send auth to 84:d4:7e:13:10:61 (try 1/3)
+[18959.981841] wlp3s0: authenticated
+[18959.985564] wlp3s0: associate with 84:d4:7e:13:10:61 (try 1/3)
+[18959.989218] wlp3s0: RX AssocResp from 84:d4:7e:13:10:61 (capab=0x431 status=0 aid=2)
+[18960.008631] wlp3s0: associated
+[18960.008691] IPv6: ADDRCONF(NETDEV_CHANGE): wlp3s0: link becomes ready
+[18981.235634] wlp3s0: deauthenticating from 84:d4:7e:13:10:61 by local choice (Reason: 3=DEAUTH_LEAVING)
+[18981.310927] cfg80211: World regulatory domain updated:
+[18981.310932] cfg80211:  DFS Master region: unset
+[18981.310934] cfg80211:   (start_freq - end_freq @ bandwidth), (max_antenna_gain, max_eirp), (dfs_cac_time)
+[18981.310938] cfg80211:   (2402000 KHz - 2472000 KHz @ 40000 KHz), (N/A, 2000 mBm), (N/A)
+[18981.310941] cfg80211:   (2457000 KHz - 2482000 KHz @ 40000 KHz), (N/A, 2000 mBm), (N/A)
+[18981.310943] cfg80211:   (2474000 KHz - 2494000 KHz @ 20000 KHz), (N/A, 2000 mBm), (N/A)
+[18981.310946] cfg80211:   (5170000 KHz - 5250000 KHz @ 80000 KHz, 160000 KHz AUTO), (N/A, 2000 mBm), (N/A)
+[18981.310949] cfg80211:   (5250000 KHz - 5330000 KHz @ 80000 KHz, 160000 KHz AUTO), (N/A, 2000 mBm), (0 s)
+[18981.310952] cfg80211:   (5490000 KHz - 5730000 KHz @ 160000 KHz), (N/A, 2000 mBm), (0 s)
+[18981.310954] cfg80211:   (5735000 KHz - 5835000 KHz @ 80000 KHz), (N/A, 2000 mBm), (N/A)
+[18981.310957] cfg80211:   (57240000 KHz - 63720000 KHz @ 2160000 KHz), (N/A, 0 mBm), (N/A)
+[18981.709236] wlp3s0: authenticate with 84:d4:7e:13:10:60
+[18981.712126] wlp3s0: send auth to 84:d4:7e:13:10:60 (try 1/3)
+[18981.714631] wlp3s0: authenticated
+[18981.718483] wlp3s0: associate with 84:d4:7e:13:10:60 (try 1/3)
+[18981.723812] wlp3s0: RX AssocResp from 84:d4:7e:13:10:60 (capab=0x431 status=0 aid=2)
+[18981.748582] wlp3s0: associated
+[19851.479665] wlp3s0: deauthenticating from 84:d4:7e:13:10:60 by local choice (Reason: 3=DEAUTH_LEAVING)
+[19851.542061] cfg80211: World regulatory domain updated:
+[19851.542065] cfg80211:  DFS Master region: unset
+[19851.542066] cfg80211:   (start_freq - end_freq @ bandwidth), (max_antenna_gain, max_eirp), (dfs_cac_time)
+[19851.542068] cfg80211:   (2402000 KHz - 2472000 KHz @ 40000 KHz), (N/A, 2000 mBm), (N/A)
+[19851.542069] cfg80211:   (2457000 KHz - 2482000 KHz @ 40000 KHz), (N/A, 2000 mBm), (N/A)
+[19851.542070] cfg80211:   (2474000 KHz - 2494000 KHz @ 20000 KHz), (N/A, 2000 mBm), (N/A)
+[19851.542072] cfg80211:   (5170000 KHz - 5250000 KHz @ 80000 KHz, 160000 KHz AUTO), (N/A, 2000 mBm), (N/A)
+[19851.542073] cfg80211:   (5250000 KHz - 5330000 KHz @ 80000 KHz, 160000 KHz AUTO), (N/A, 2000 mBm), (0 s)
+[19851.542075] cfg80211:   (5490000 KHz - 5730000 KHz @ 160000 KHz), (N/A, 2000 mBm), (0 s)
+[19851.542076] cfg80211:   (5735000 KHz - 5835000 KHz @ 80000 KHz), (N/A, 2000 mBm), (N/A)
+[19851.542077] cfg80211:   (57240000 KHz - 63720000 KHz @ 2160000 KHz), (N/A, 0 mBm), (N/A)
+[19851.717108] PM: Syncing filesystems ... done.
+[19852.108881] PM: Preparing system for sleep (mem)
+[19852.109346] Freezing user space processes ... (elapsed 0.002 seconds) done.
+[19852.111368] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[19852.112720] PM: Suspending system (mem)
+[19852.112746] Suspending console(s) (use no_console_suspend to debug)
+[19852.301087] sd 0:0:0:0: [sda] Synchronizing SCSI cache
+[19852.305122] sd 0:0:0:0: [sda] Stopping disk
+[19852.775814] PM: suspend of devices complete after 662.825 msecs
+[19852.791841] PM: late suspend of devices complete after 16.007 msecs
+[19852.793272] ehci-pci 0000:00:1d.0: System wakeup enabled by ACPI
+[19852.793594] ehci-pci 0000:00:1a.0: System wakeup enabled by ACPI
+[19852.793602] xhci_hcd 0000:00:14.0: System wakeup enabled by ACPI
+[19852.807874] PM: noirq suspend of devices complete after 16.026 msecs
+[19852.808237] ACPI: Preparing to enter system sleep state S3
+[19852.923715] ACPI : EC: EC stopped
+[19852.923716] PM: Saving platform NVS memory
+[19852.923723] Disabling non-boot CPUs ...
+[19852.924099] Broke affinity for irq 16
+[19852.924112] Broke affinity for irq 28
+[19852.925147] smpboot: CPU 1 is now offline
+[19852.936482] Broke affinity for irq 16
+[19852.936497] Broke affinity for irq 28
+[19852.936499] Broke affinity for irq 30
+[19852.937542] smpboot: CPU 2 is now offline
+[19852.948432] Broke affinity for irq 1
+[19852.948440] Broke affinity for irq 9
+[19852.948445] Broke affinity for irq 12
+[19852.948449] Broke affinity for irq 16
+[19852.948454] Broke affinity for irq 23
+[19852.948459] Broke affinity for irq 26
+[19852.948460] Broke affinity for irq 28
+[19852.948462] Broke affinity for irq 30
+[19852.949493] smpboot: CPU 3 is now offline
+[19852.965241] ACPI: Low-level resume complete
+[19852.965282] ACPI : EC: EC started
+[19852.965282] PM: Restoring platform NVS memory
+[19852.966251] microcode: CPU0 microcode updated early to revision 0x1c, date = 2015-02-26
+[19852.966282] Enabling non-boot CPUs ...
+[19852.985340] x86: Booting SMP configuration:
+[19852.985341] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[19852.988536]  cache: parent cpu1 should not be sleeping
+[19852.988666] CPU1 is up
+[19853.005421] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[19853.006346] microcode: CPU2 microcode updated early to revision 0x1c, date = 2015-02-26
+[19853.009113]  cache: parent cpu2 should not be sleeping
+[19853.009244] CPU2 is up
+[19853.029462] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[19853.032793]  cache: parent cpu3 should not be sleeping
+[19853.032932] CPU3 is up
+[19853.035984] ACPI: Waking up from system sleep state S3
+[19853.765613] ehci-pci 0000:00:1d.0: System wakeup disabled by ACPI
+[19853.766899] ehci-pci 0000:00:1a.0: System wakeup disabled by ACPI
+[19853.766982] xhci_hcd 0000:00:14.0: System wakeup disabled by ACPI
+[19853.767486] PM: noirq resume of devices complete after 18.324 msecs
+[19853.768033] PM: early resume of devices complete after 0.522 msecs
+[19853.777207] rtc_cmos 00:01: System wakeup disabled by ACPI
+[19853.781260] sd 0:0:0:0: [sda] Starting disk
+[19853.997186] usb 1-1.3: reset full-speed USB device number 3 using ehci-pci
+[19854.005165] usb 2-1.6: reset high-speed USB device number 3 using ehci-pci
+[19854.109173] ata2: SATA link up 1.5 Gbps (SStatus 113 SControl 300)
+[19854.114495] ata2.00: configured for UDMA/33
+[19854.117166] ata5: SATA link down (SStatus 0 SControl 300)
+[19854.161206] usb 1-1.4: reset full-speed USB device number 4 using ehci-pci
+[19854.254670] PM: resume of devices complete after 486.609 msecs
+[19854.255517] PM: Finishing wakeup.
+[19854.255519] Restarting tasks ... done.
+[19854.303581] psmouse serio1: synaptics: queried max coordinates: x [..5702], y [..4828]
+[19854.350726] psmouse serio1: synaptics: queried min coordinates: x [1240..], y [1026..]
+[19855.789276] ata1: SATA link up 3.0 Gbps (SStatus 123 SControl 300)
+[19855.790429] ata1.00: ACPI cmd ef/02:00:00:00:00:a0 (SET FEATURES) succeeded
+[19855.790437] ata1.00: ACPI cmd f5/00:00:00:00:00:a0 (SECURITY FREEZE LOCK) filtered out
+[19855.790441] ata1.00: ACPI cmd ef/10:03:00:00:00:a0 (SET FEATURES) filtered out
+[19855.792779] ata1.00: ACPI cmd ef/02:00:00:00:00:a0 (SET FEATURES) succeeded
+[19855.792787] ata1.00: ACPI cmd f5/00:00:00:00:00:a0 (SECURITY FREEZE LOCK) filtered out
+[19855.792791] ata1.00: ACPI cmd ef/10:03:00:00:00:a0 (SET FEATURES) filtered out
+[19855.794027] ata1.00: configured for UDMA/133
+[19855.915663] IPv6: ADDRCONF(NETDEV_UP): wlp3s0: link is not ready
+[19855.915898] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[19855.927992] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[19855.928086] iwlwifi 0000:03:00.0: Radio type=0x2-0x0-0x0
+[19856.171842] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[19856.179678] iwlwifi 0000:03:00.0: L1 Enabled - LTR Disabled
+[19856.179767] iwlwifi 0000:03:00.0: Radio type=0x2-0x0-0x0
+[19856.239518] IPv6: ADDRCONF(NETDEV_UP): wlp3s0: link is not ready
+[19856.261111] r8169 0000:0c:00.0 enp12s0: rtl_counters_cond == 1 (loop: 1000, delay: 10).
+[19856.272414] r8169 0000:0c:00.0 enp12s0: rtl_eriar_cond == 1 (loop: 100, delay: 100).
+[19856.272479] IPv6: ADDRCONF(NETDEV_UP): enp12s0: link is not ready
+[19856.411326] r8169 0000:0c:00.0 enp12s0: link down
+[19856.411400] IPv6: ADDRCONF(NETDEV_UP): enp12s0: link is not ready
+[19856.457015] IPv6: ADDRCONF(NETDEV_UP): wlp3s0: link is not ready
+[19856.978935] wlp3s0: authenticate with 84:d4:7e:13:10:60
+[19856.983608] wlp3s0: send auth to 84:d4:7e:13:10:60 (try 1/3)
+[19856.990080] wlp3s0: authenticated
+[19856.993336] wlp3s0: associate with 84:d4:7e:13:10:60 (try 1/3)
+[19857.007525] wlp3s0: RX AssocResp from 84:d4:7e:13:10:60 (capab=0x431 status=0 aid=1)
+[19857.013880] wlp3s0: associated
+[19857.013948] IPv6: ADDRCONF(NETDEV_CHANGE): wlp3s0: link becomes ready
