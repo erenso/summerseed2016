@@ -1,0 +1,11 @@
+1) modify smac with your own mac address, (learn from cat /sys/class/net/mon0/address)
+
+2) for announcement, only send your nickname as payload
+
+3) get announcement packets and learn other's NAME & MAC ADDR INFO 
+
+4) send data to others (but your friends MAC addr to dmac)
+
+5) to receive data fromo others, filter your own smac as dmac
+
+
