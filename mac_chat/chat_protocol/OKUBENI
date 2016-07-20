@@ -1,5 +1,10 @@
 1) modify smac with your own mac address, (learn from cat /sys/class/net/mon0/address)
 
+for mac addr 60:36:DD:50:A0:DC
+modify your code as following
+
+static const char *smac = "\x60\x36\xdd\x50\xa0\xdc";
+
 2) for announcement, only send your nickname as payload
 
 3) get announcement packets and learn other's NAME & MAC ADDR INFO 
