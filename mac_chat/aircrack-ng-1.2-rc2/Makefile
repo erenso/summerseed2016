@@ -3,7 +3,7 @@ ok := $(filter $(need),$(firstword $(sort $(MAKE_VERSION) \
 	$(need))))
        
 ifndef ok
-    $(error fatal error... Need make $(need) but using $(MAKE_VERSION), please upgrade)
+	$(error fatal error... Need make $(need) but using $(MAKE_VERSION), please upgrade)
 endif
 
 AC_ROOT		= .
