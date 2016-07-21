@@ -89,6 +89,14 @@ ile ilişkilendirmemiz lazim
  sudo ./listen_ann wlan0(kendi wireless lan ismi.konsola 'ifcongfig' yazarak bakabilirsiniz) 
  sudo ./send_ann  wlan0 "my_message"
  
+ 
+ Onemli not: bu dosyalari "summerseed2016/mac_chat/aircrack-ng-1.2-rc2/src/osdep/" altina yapistirip 
+ calistimamiz lazim.Sebebi yukardaki kodlardan kullandigim bazi kutuphanelerin burda olmasi .Eger boyle
+ yapmazsaniz proje calismaz.
+ 
+ 
+
+ 
  Osman AKBACI
  Gebze Teknik Üniversitesi
  
