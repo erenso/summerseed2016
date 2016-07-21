@@ -1,0 +1,83 @@
+Proje Accesspointsiz MAC adresleri üzerinden iletisim
+
+içerdiği moduller;
+1-) List_announcment.c
+2-) Send_announcmet.c
+3-) list_message.c
+4-) send_message.c
+
+Konu :
+  Accesspointlerle iletisimimizi kesip MAC addreslerimiz uzerinden data alip/verme yapiyoruz.Bunun icin bilgisayarimizda 
+  bir kac tane ayar yapmamiz lazim.
+  A-)ilk olarak wi-fi disable ediyoruz.Daha sonra terminal(konsol) e rfkill list yapip hardware ve software durumlarini
+  goruntuluyoruz.
+      0: sony-wifi: Wireless LAN
+      	Soft blocked: no
+      	Hard blocked: yes
+      1: sony-bluetooth: Bluetooth
+      	Soft blocked: no
+      	Hard blocked: no
+      2: phy0: Wireless LAN
+      	Soft blocked: no
+      	Hard blocked: yes
+      3: hci0: Bluetooth
+      	Soft blocked: no
+      	Hard blocked: no
+  2-) olarak yukardaki 'yes' yazan LAN lari unblock etmemiz lazim bunuda 'rfkill unblock all' komutunu terminale yazip 
+    calistiriyoryz.
+      0: sony-wifi: Wireless LAN
+      	Soft blocked: no
+      	Hard blocked: no
+      1: sony-bluetooth: Bluetooth
+      	Soft blocked: no
+      	Hard blocked: no
+      2: phy0: Wireless LAN
+      	Soft blocked: no
+      	Hard blocked: no
+      3: hci0: Bluetooth
+      	Soft blocked: no
+      	Hard blocked: no
+  Ve unblock ediyoruz şuan mac addresleri uzerinden iletisim yapabiliyoruz.
+  
+-------------------------------------------------------------------------------------------------------------------------  
+Paket Formati :
+  Şimdi kısaca progralamayi özetlemek gerekirse elimizde bir paket var ve bunu formati ;
+  |filter_mac_addr(4 byte) | bssid_addres("chat0" or "chat1")(6 byte) |source address(6 byte) | destination address(6 byte)| 
+  |message(24 byte)|
+  Bu paketi herkese/ozel birine gonderecez.
+
+Adres tutucular :
+  //wi-fi addresses
+  static const char *bssid_announcment = "\x00" "chat0";    //Announce ileti alıp/göndermek için 'chat0' belirleyici
+  static const char *bssid = "\x00" "chat1" "\x55";   //Specific ileti alıp/göndermek için
+  static const char *smac = "\x94\x39\xe5\xa1\xda\xf5";//"\x94\x39\xe5\xa1\xda\xf5";//source address(kendi mac adressin)
+  static const char *dmac = "\x60\x36\xdd\x50\xa0\xdc";  //Destination address(göndereceğin kisinin mac adresi)
+
+
+Şimdi öncelikle çalıştırmak istediğimiz modulleri derlemek gerekmemiz gerek bunu da asagıdaki gibi yapiyoruz
+
+gcc -c list_announcment.c
+gcc -c send_announcment.c
+gcc -c list_message.c
+gcc -c send_message.c
+
+daha sonra link etmemiz gerekir ama dikkat edeceğimiz bir husus var link ederken
+daha önce bilgisyara aşagıdaki kodlarla indirdiğimiz kütüphaneleri oluşan object dosyalari ile ilişkilendirmemiz lazim
+
+'sudo apt-get install libnl-genl-3-dev
+ sudo apt-get install libssl-dev'
+ 
+ şunu da şöyle yapıyoruz 'libosdep.a -lnl-3 -lnl-genl-3' link ederken sona ekliyoruz aşağıdaki gibi;
+ gcc listen_announcment.o -o list_ann libosdep.a -lnl-3 -lnl-genl-3
+ gcc send_announcment.o -o send_ann libosdep.a -lnl-3 -lnl-genl-3
+ gcc listen_message.o -o list_message libosdep.a -lnl-3 -lnl-genl-3
+ gcc send_message.o -o send_message libosdep.a -lnl-3 -lnl-genl-3
+ 
+ 
+ Modulleri Calistirirken ornegin announcmentleri ;
+ sudo ./listen_ann wlan0(kendi wireless lan ismi.konsola 'ifcongfig' yazarak bakabilirsiniz) 
+ sudo ./send_ann  wlan0 "my_message"
+ 
+ Osman AKBACI
+ Gebze Teknik Üniversitesi
+ 
