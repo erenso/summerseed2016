@@ -2,13 +2,15 @@
 
 while  true ; do
 	echo "Osman Request"
+	MY_IP=$(echo "172.16.5.187")
+	MY_NICK_NAME=$(echo "OSMAN")
 	PACKET=$(nc -l 10000)
 	ADDRESS=$(echo $PACKET | cut -d ',' -f1)
 	NICK=$(echo $PACKET |cut -d ',' -f2)
 	echo "ADDRESS = $ADDRESS"
 	echo "NICK = $PACKET"
 	
-	#http://stackoverflow.com/questions/2480584/how-do-i-use-a-file-grep-comparison-inside-a-bash-if-else-statement
+	echo "$MY_IP,$MY_NICK_NAME" | nc $ADDRESS 10001
 	if grep --quiet "$ADDRESS"  requestID.txt; then
 	  echo "exists"
 	else
