@@ -55,19 +55,6 @@ int main() {
     while(childpid = wait(NULL) )
         if ((childpid == -1) && (errno != EINTR))
             break;
-/*
-    int x;
-    int childpid1;
-    x = fork();
-    if(x =! 0)    
-        listenRequest();
-    //listenResponce();
-    listenMessage();
-
-    while(childpid1 = wait(NULL) )
-        if ((childpid1 == -1) && (errno != EINTR))
-            break;
-*/
 
         return 0;
 }
