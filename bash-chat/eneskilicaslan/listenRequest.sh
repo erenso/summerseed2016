@@ -1,11 +1,4 @@
-#!/bin/bash
-#filename="requests.txt"
 
-#if [ -e $filename ]; then
- # echo "File $1 already exists!"
-#else
-#  echo >> $filename
-#touch /home/parallels/Desktop/requests.txt
 echo -e "\c" > /home/parallels/Desktop/addressBook.txt
 cat /home/parallels/Desktop/addressBook.txt
 my_ip=$(ifconfig | awk '/inet addr/{print substr($2,6)}' | grep 172)
