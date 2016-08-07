@@ -1,7 +1,3 @@
-//
-// Created by parallels on 7/14/16.
-//
-
 #include "mainHeader.h"
 
 //discover function takes one argument which is i, last part of ip address
