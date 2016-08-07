@@ -2,9 +2,7 @@
 #include "mainHeader.h"
 #include <fcntl.h>
 
-
 int main() {
-
     int fd;
 
     if(( fd = open(FILE_NAME, O_WRONLY | O_CREAT | O_TRUNC)) == -1 ) 
@@ -14,7 +12,6 @@ int main() {
     }
 
     close(fd);
-
     
     int i=1;
     int childpid;
@@ -48,13 +45,11 @@ int main() {
             listenMessage();
         else if((childpid == 0) && (i == 258))
             responceMessage();
-
-
     }
 
     while(childpid = wait(NULL) )
         if ((childpid == -1) && (errno != EINTR))
             break;
-
-        return 0;
+            
+    return 0;
 }
